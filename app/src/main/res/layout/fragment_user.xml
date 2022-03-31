@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/user_profile"
+        android:layout_width="145dp"
+        android:layout_height="148dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/user_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="80dp"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:text="Username" />
+
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="120dp"
+        android:textStyle="normal"
+        android:textSize="18dp"
+        android:text="Email" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="250dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/user_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bookmark" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/user_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Review" />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+</FrameLayout>

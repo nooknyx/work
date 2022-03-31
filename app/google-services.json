@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "939769017758",
+    "project_id": "storytellerdb-2ff7a",
+    "storage_bucket": "storytellerdb-2ff7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939769017758:android:36e4981ed1a7f8840e128f",
+        "android_client_info": {
+          "package_name": "com.example.work"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939769017758-cn80ol86ldtbebg69bfhqhdl41bn9me0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTFNKPJYpC7FBxWKQ7CsqM3ldOX9cKcbQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "939769017758-cn80ol86ldtbebg69bfhqhdl41bn9me0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

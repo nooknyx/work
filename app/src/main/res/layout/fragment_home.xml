@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/homeseeall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="100dp"
+        android:text="See all >" />
+
+    <TextView
+        android:id="@+id/newseeall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="340dp"
+        android:text="See all >" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/poplist"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
+        android:layout_marginTop="140dp"
+        tools:listitem="@layout/homelist" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newlist"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
+        android:layout_marginTop="380dp"
+        tools:listitem="@layout/homelist"/>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        tools:srcCompat="@drawable/popbook" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        tools:srcCompat="@drawable/newbook" />
+
+</FrameLayout>
