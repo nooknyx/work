@@ -1,6 +1,7 @@
 package com.example.work
 
 import android.content.Intent
+import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -48,11 +49,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun setCurrentFragment(fragment:Fragment) =
-                supportFragmentManager.beginTransaction().apply {
-                replace(R.id.mainFragment, fragment)
-                commit()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.mainFragment, fragment)
+            commit()
 
-    }
+        }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

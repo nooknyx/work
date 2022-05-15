@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.work.data.bookdata
+import com.example.work.data.Bookdata
 import com.example.work.R
 
 
-class BookAdapter(private val bookdatalist: ArrayList<bookdata> )
+class BookAdapter(private val bookdatalist: ArrayList<Bookdata> )
         : RecyclerView.Adapter<BookAdapter.MyViewHolder>()
 
 {
@@ -30,7 +30,7 @@ class BookAdapter(private val bookdatalist: ArrayList<bookdata> )
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        val data: bookdata = bookdatalist[position]
+        val data: Bookdata = bookdatalist[position]
         holder.name.text = data.name
         holder.author.text = data.author
 

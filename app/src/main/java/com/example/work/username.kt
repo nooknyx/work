@@ -3,23 +3,32 @@ package com.example.work
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.UserHandle
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import com.example.work.data.UserData
+import com.example.work.ui.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 
 //this one is for sign up page
 class username : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    var rootNode = Firebase.database
+    //var myRef = rootNode.getReference("users")
+
+    //myRef.setValue("Hello, World!")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-
         auth = FirebaseAuth.getInstance()
-
-        val userforsign = findViewById<EditText>(R.id.usernamsign)
+        val userforsign = findViewById<EditText>(R.id.usernamesign)
         val passforsign = findViewById<EditText>(R.id.passsign)
         val emailsign = findViewById<EditText>(R.id.emailsign)
         val passconsign = findViewById<EditText>(R.id.passconsign)
@@ -78,6 +87,19 @@ class username : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(emailsign.text.toString(),passforsign.text.toString()).addOnSuccessListener {
                     Toast.makeText(applicationContext, "Sign Up Successful!", Toast.LENGTH_SHORT)
                         .show()
+                    rootNode = FirebaseDatabase.getInstance()
+                    var myRef = rootNode.getReference("users")
+
+                    //get user info
+                    val dbusername = userforsign.text.toString()
+                    val dbemail = emailsign.text.toString()
+                    val dbpassword = passconsign.text.toString()
+
+                    val userinfo = UserData(dbusername, dbemail, dbpassword)
+                    val currentuser = FirebaseAuth.getInstance().currentUser
+                    val userid = currentuser?.uid
+                    myRef.child(userid.toString()).setValue(userinfo)
+
                     val intent = Intent(this, login::class.java)
                     startActivity(intent)
                     finish()

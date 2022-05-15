@@ -2,12 +2,19 @@ package com.example.work.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import com.example.work.Adapter.BookAdapter
 import com.example.work.R
+import com.example.work.data.Bookdata
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class bookdetail : AppCompatActivity() {
+    lateinit var bookReference: FirebaseFirestore
+    lateinit var bookList: MutableList<Bookdata>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bookdetail)
@@ -30,5 +37,25 @@ class bookdetail : AppCompatActivity() {
         bookinfo.text = booksinfo
 
 
+    }
+
+    private fun readFirestoreData(){
+        var db = bookReference.collection("book")
+        db.orderBy("bookID").get()
+            .addOnSuccessListener { snapshot -> //or [it] is fine
+                if (snapshot != null){
+                    bookList.clear()
+                    val books = snapshot.toObjects(Bookdata::class.java)
+                    for (book in books){
+                        bookList.add(book)
+                    }
+                    //val adapter = BookAdapter(bookList)
+                    //listView.adapter = adapter
+                    Log.d("Firestore Read",books.toString())
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(applicationContext,"Fail to get the book data", Toast.LENGTH_SHORT).show()
+            }
     }
 }

@@ -3,7 +3,7 @@ package com.example.work.ui.booklist
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.work.data.bookdata
+import com.example.work.data.Bookdata
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.work.Adapter.BookAdapter
@@ -13,7 +13,7 @@ import com.google.firebase.firestore.*
 class popular : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var popularlist : ArrayList<bookdata>
+    private lateinit var popularlist : ArrayList<Bookdata>
     private lateinit var popularadapter : BookAdapter
     private lateinit var db : FirebaseFirestore
 
@@ -50,7 +50,7 @@ class popular : AppCompatActivity() {
                 {
                     if(dc.type == DocumentChange.Type.ADDED)
                     {
-                        popularlist.add(dc.document.toObject(bookdata::class.java))
+                        popularlist.add(dc.document.toObject(Bookdata::class.java))
                     }
                 }
                 popularadapter.notifyDataSetChanged()
