@@ -4,9 +4,12 @@ import android.content.Intent
 import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.format.DateFormat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.example.work.ui.*
+import java.sql.Timestamp
+import java.util.*
 import com.example.work.ui.Search as Search
 
 
@@ -57,6 +60,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    companion object
+    {
+        fun formatTimeStamp(timestamp: Long) : String{
+            val cal = Calendar.getInstance(Locale.ENGLISH)
+            cal.timeInMillis = timestamp
+
+            return DateFormat.format("dd/MM/yyyy",cal).toString()
+        }
     }
 
 }
