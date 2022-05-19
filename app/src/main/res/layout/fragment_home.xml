@@ -42,13 +42,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        tools:srcCompat="@drawable/popbook" />
+        tools:src="@drawable/popbook" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="320dp"
-        tools:srcCompat="@drawable/newbook" />
+        tools:src="@drawable/newbook" />
 
 </FrameLayout>

@@ -25,7 +25,10 @@ class User:Fragment(R.layout.fragment_user)
         return binding.root
         //showAllUserData();
 
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun showAllUserData() {
