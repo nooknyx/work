@@ -3,6 +3,7 @@ package com.example.work
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -24,7 +25,7 @@ class login : AppCompatActivity() {
         //set up image button1234567890
         val signin = findViewById<ImageButton>(R.id.loginloginbt)
         val signup = findViewById<ImageButton>(R.id.signuploginbt)
-
+        val guestlog = findViewById<ImageButton>(R.id.guestloginbt)
 
         val forgetpass = findViewById<ImageButton>(R.id.forgetlogin)
 
@@ -65,6 +66,8 @@ class login : AppCompatActivity() {
             }.addOnFailureListener {
                 Toast.makeText(applicationContext, "Failed to Login!", Toast.LENGTH_SHORT).show()
             }
+
+
         }
 
         //setting sign up button
@@ -78,15 +81,34 @@ class login : AppCompatActivity() {
                 applicationContext, "Check your email", Toast.LENGTH_SHORT).show()
         }
 
+        guestlog.setOnClickListener{
+            auth.signInAnonymously()
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        //Log.d(TAG, "signInAnonymously:success")
+                        Toast.makeText(applicationContext, "Login as guest.",
+                            Toast.LENGTH_SHORT).show()
+                        val user = auth.currentUser
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        //Log.w(TAG, "signInAnonymously:failure", task.exception)
+                        Toast.makeText(applicationContext, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
     }
     //if the user already sign in, go to MainActivity
-    override fun onStart() {
+    /*override fun onStart() {
         super.onStart()
         if(FirebaseAuth.getInstance().currentUser != null){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
-    }
+    }*/
 
 }

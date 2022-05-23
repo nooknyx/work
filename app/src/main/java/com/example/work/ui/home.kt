@@ -23,6 +23,8 @@ import com.google.firebase.ktx.Firebase
 
 class Home:Fragment(R.layout.fragment_home)
 {
+    private lateinit var popimage: ImageView
+    private lateinit var newimage: ImageView
     private lateinit var binding: FragmentHomeBinding
     //private var db = Firebase.firestore
     //private lateinit var dbref : DatabaseReference
@@ -39,13 +41,14 @@ class Home:Fragment(R.layout.fragment_home)
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        val popimage = binding.imageView3
-        val newimage = binding.imageView4
+        popimage = binding.imageView3
+        newimage = binding.imageView4
         popimage.visibility = View.VISIBLE
         newimage.visibility = View.VISIBLE
+        getpopBookData()
         popBookRecyclerView = binding.poplist
         popBookRecyclerView.layoutManager = LinearLayoutManager(context)
-        //popBookRecyclerView.setHasFixedSize(true)
+        popBookRecyclerView.setHasFixedSize(true)
 
         popBookArrayList = arrayListOf<Bookdata>()
         getpopBookData()
@@ -124,6 +127,7 @@ class Home:Fragment(R.layout.fragment_home)
                     }
 
                     popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
+
                 }
 
             }
