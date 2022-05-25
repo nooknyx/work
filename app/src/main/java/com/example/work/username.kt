@@ -96,25 +96,7 @@ class username : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(emailsign.text.toString(),passforsign.text.toString()).addOnSuccessListener {
                     Toast.makeText(applicationContext, "Sign Up Successful!", Toast.LENGTH_SHORT)
                         .show()
-
-                    /*
-                    //get u/ser info
-                    rootNode = FirebaseDatabase.getInstance()
-                    var myRef = rootNode.getReference("users")
-                    val dbusername = userforsign.text.toString()
-                    val dbemail = emailsign.text.toString()
-                    val dbpassword = passconsign.text.toString()
-
-                    val userinfo = UserData(dbusername, dbemail, dbpassword)
-                    val currentuser = FirebaseAuth.getInstance().currentUser
-                    val userid = currentuser?.uid
-                    myRef.child(userid.toString()).setValue(userinfo)
-                    */
                     updateUserInfo()
-
-                    /*val intent = Intent(this, login::class.java)
-                    startActivity(intent)
-                    finish()*/
                 }.addOnFailureListener {
                     Toast.makeText(applicationContext, "Sign Up Failed!", Toast.LENGTH_SHORT).show()
                 }
@@ -149,7 +131,7 @@ class username : AppCompatActivity() {
         hashMap["userType"] = "user"
         hashMap["timestamp"] = timestamp
 
-        val myRef = FirebaseDatabase.getInstance().getReference("users")
+        val myRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         myRef.child(uid!!)
             .setValue(hashMap)
             .addOnSuccessListener {

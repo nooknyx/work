@@ -114,7 +114,7 @@ class Home:Fragment(R.layout.fragment_home)
     }
 
     private fun getpopBookData() {
-        val bRef = FirebaseDatabase.getInstance().getReference("Books")
+        val bRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
 
         bRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
