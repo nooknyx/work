@@ -84,6 +84,8 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
     }
 
     private fun deleteCommentDialog(model: ModelComment, holder: AdapterComment.HolderComment) {
+
+        //alert dialog
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Delete Comment")
             .setMessage("Are you sure?")
@@ -95,15 +97,17 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 ref.child(model.bookId).child("comments").child(commentId)
                     .removeValue()
                     .addOnSuccessListener {
-
+                        Toast.makeText(context,"Comment is deleted", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener{
+                        // failed to delete
                         Toast.makeText(context,"Failed to delete comment", Toast.LENGTH_SHORT).show()
                     }
             }
             .setNegativeButton("Cancle"){d,e->
                 d.dismiss()
             }
+            .show()
     }
 
     private fun loadUserDetails(model: ModelComment, holder: AdapterComment.HolderComment)
@@ -119,12 +123,12 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                     val profileImage = "${snapshot.child("profileImage").value}"
 
                     //setting data
-
                     holder.nameTv.text = name
+
                     try{
                         Glide.with(context)
                             .load(profileImage)
-                            .placeholder(R.drawable.ic_baseline_person_24)
+                            //.placeholder(R.drawable.ic_baseline_person_24)
                             .into(holder.profileIv)
                     }
                     catch (e: Exception){
@@ -135,11 +139,10 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+
                 }
             })
     }
-
 
     override fun getItemCount(): Int {
        return commentArrayList.size
@@ -152,12 +155,6 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         val dateTv: TextView = binding.dateTv
         val commentTv: TextView = binding.commentTv
 
-
-
-
     }
-
-
-
 
 }

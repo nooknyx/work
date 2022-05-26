@@ -13,7 +13,6 @@ class ModelComment {
     var uid = ""
 
     //constructor for firebase
-    constructor()
 
     constructor(id: String, bookId: String, timestamp: String, comment: String, uid: String) {
 

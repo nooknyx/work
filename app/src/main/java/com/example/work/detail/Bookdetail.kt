@@ -7,13 +7,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.work.Adapter.AdapterComment
 import com.example.work.R
 import com.example.work.data.Bookdata
 import com.example.work.Model.ModelComment
 import com.example.work.databinding.ActivityBookdetailBinding
 import com.example.work.databinding.AddCommentBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -27,7 +31,12 @@ class bookdetail : AppCompatActivity() {
     private lateinit var progressDialog: ProgressDialog
     private lateinit var binding: ActivityBookdetailBinding
 
+
+    //arraylist holding comment
     private lateinit var commentArrayList: ArrayList<ModelComment>
+
+    //adapter to set comment into recycleview
+    private lateinit var adapterComment: AdapterComment
 
     //get bookId from intent
     private var bookId = ""
@@ -60,7 +69,7 @@ class bookdetail : AppCompatActivity() {
         bookcovers.setImageResource(coverId)
         bookinfo.text = booksinfo*/
 
-        showComment
+        showComments()
 
 
         binding.addCommnetBtn.setOnClickListener{
@@ -74,6 +83,37 @@ class bookdetail : AppCompatActivity() {
                 addCommentDialog()
             }
         }
+    }
+
+    private fun showComments() {
+        //init arraylist
+        commentArrayList = ArrayList()
+
+        //path to db, loading comment
+        val ref = FirebaseDatabase.getInstance().getReference("Book")
+        ref.child(bookId).child("Comment")
+            .addValueEventListener(object : ValueEventListener{
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //clear list
+                    commentArrayList.clear()
+                    for (ds in snapshot.children){
+                        //get data ss model
+                        val model = ds.getValue(ModelComment::class.java)
+                        //add to list
+                        commentArrayList.add(model!!)
+                    }
+                    //setup adapter
+                    adapterComment = AdapterComment(this@bookdetail, commentArrayList)
+                    //set adapter to recycleview
+                    binding.commentRv.adapter = adapterComment
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
     }
 
     private var comment = ""
