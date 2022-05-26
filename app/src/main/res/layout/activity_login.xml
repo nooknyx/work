@@ -133,7 +133,7 @@
         android:id="@+id/userlogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
+        android:text="Email"
         android:textColor="#FF5722"
         android:background="@android:color/transparent"
         android:textSize="20sp"
