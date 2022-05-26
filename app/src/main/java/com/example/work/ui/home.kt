@@ -47,7 +47,7 @@ class Home:Fragment(R.layout.fragment_home)
         popBookRecyclerView = binding.poplist
         popBookRecyclerView.layoutManager = LinearLayoutManager(context)
         popBookRecyclerView.setHasFixedSize(true)
-
+// testing
         popBookArrayList = arrayListOf<Bookdata>()
         getpopBookData()
 
