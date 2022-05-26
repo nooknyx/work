@@ -23,8 +23,7 @@ import com.google.firebase.ktx.Firebase
 
 class Home:Fragment(R.layout.fragment_home)
 {
-    private lateinit var popimage: ImageView
-    private lateinit var newimage: ImageView
+
     private lateinit var binding: FragmentHomeBinding
     //private var db = Firebase.firestore
     //private lateinit var dbref : DatabaseReference
@@ -40,14 +39,11 @@ class Home:Fragment(R.layout.fragment_home)
     ): View? {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
-
-        popimage.visibility = View.VISIBLE
-        newimage.visibility = View.VISIBLE
         getpopBookData()
         popBookRecyclerView = binding.poplist
         popBookRecyclerView.layoutManager = LinearLayoutManager(context)
         popBookRecyclerView.setHasFixedSize(true)
-// testing
+
         popBookArrayList = arrayListOf<Bookdata>()
         getpopBookData()
 
