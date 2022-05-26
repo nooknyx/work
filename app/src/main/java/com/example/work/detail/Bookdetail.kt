@@ -50,7 +50,13 @@ class bookdetail : AppCompatActivity() {
         binding = ActivityBookdetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        //get bookid from intent
         bookId = intent.getStringExtra("bookId")!!
+
+        //handle backbutton click, go back
+
+        //inding.backBtnb
 
         /*val booksname = findViewById<TextView>(R.id.bookname)
         val authors = findViewById<TextView>(R.id.authors)

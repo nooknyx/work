@@ -41,8 +41,6 @@ class Home:Fragment(R.layout.fragment_home)
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        popimage = binding.imageView3
-        newimage = binding.imageView4
         popimage.visibility = View.VISIBLE
         newimage.visibility = View.VISIBLE
         getpopBookData()

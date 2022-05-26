@@ -8,6 +8,9 @@
     android:background="#FFFFFF"
     tools:context=".detail.bookdetail">
 
+
+
+
     <ImageView
         android:id="@+id/bookcovers"
         android:layout_width="wrap_content"

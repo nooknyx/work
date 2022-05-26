@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 
 class login : AppCompatActivity() {
@@ -25,7 +22,7 @@ class login : AppCompatActivity() {
         //set up image button1234567890
         val signin = findViewById<ImageButton>(R.id.loginloginbt)
         val signup = findViewById<ImageButton>(R.id.signuploginbt)
-        val guestlog = findViewById<ImageButton>(R.id.guestloginbt)
+        val guestlog = findViewById<TextView>(R.id.guestloginbt)
 
         val forgetpass = findViewById<ImageButton>(R.id.forgetlogin)
 
@@ -102,13 +99,13 @@ class login : AppCompatActivity() {
         }
     }
     //if the user already sign in, go to MainActivity
-    /*override fun onStart() {
+    override fun onStart() {
         super.onStart()
         if(FirebaseAuth.getInstance().currentUser != null){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
-    }*/
+    }
 
 }

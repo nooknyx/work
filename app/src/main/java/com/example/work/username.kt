@@ -118,7 +118,6 @@ class username : AppCompatActivity() {
 
         val emailsign = findViewById<EditText>(R.id.emailsign)
 
-
         val timestamp = System.currentTimeMillis()
 
         val uid = auth.uid
