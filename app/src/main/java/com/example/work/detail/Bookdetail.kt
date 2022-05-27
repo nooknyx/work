@@ -1,6 +1,7 @@
 package com.example.work.detail
 
 import android.app.ProgressDialog
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -37,6 +38,9 @@ class bookdetail : AppCompatActivity() {
     //adapter to set comment into recycleview
     private lateinit var adapterComment: AdapterComment
 
+    //hold boolean for favourtie value
+    private var isInMyFavourite = false
+
     //get bookId from intent
     private var bookId = ""
 
@@ -49,6 +53,14 @@ class bookdetail : AppCompatActivity() {
         binding = ActivityBookdetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        //init firebase authen
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        if(firebaseAuth.currentUser!=null){
+            //check for faveourtie for logged in user
+            checkIsFavourite()
+        }
 
         //get bookid from intent
         bookId = intent.getStringExtra("bookId")!!
@@ -71,6 +83,22 @@ class bookdetail : AppCompatActivity() {
                 addCommentDialog()
             }
         }
+
+        //handle click, add/remove favourite
+        binding.favebtn.setOnClickListener(){
+            //only login user can add favourite
+
+            //checking if user is login or not
+            if(firebaseAuth.currentUser != null){
+                //not login, user can't do fav
+                Toast.makeText(this"You are not logged in",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                // login user can fave function
+
+            }
+
+        }
     }
 
    private fun loadBookDetails(){
@@ -81,7 +109,14 @@ class bookdetail : AppCompatActivity() {
            .addListenerForSingleValueEvent(object: ValueEventListener{
                override fun onDataChange(snapshot: DataSnapshot) {
                    //get data
-                   val Author = snapshot.child("Author").value
+                   val Author = "${snapshot.child("Author").value}"
+                   val BookTitle = "${snapshot.child("BookTitle").value}"
+                   val Image = "${snapshot.child("Image").value}"
+
+                   //set data
+                   binding.authors.text = Author
+                   binding.bookname.text = BookTitle
+                   //set bookcover
 
                }
 
@@ -205,6 +240,54 @@ class bookdetail : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Toast.makeText(applicationContext,"Fail to get the book data", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun checkIsFavourite(){
+        
+
+    }
+
+    private fun addToFavourite(){
+
+        val timestamp = System.currentTimeMillis()
+
+        //set up data to add in db
+        val hashMap = HashMap<String,Any>()
+        hashMap["bookId"] = bookId
+        hashMap["timestamp"] = timestamp
+
+        //save to db
+        val ref = FirebaseDatabase.getInstance().getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                //add to fav
+                Log.d(TAG, "addToFavourite: Added to fav")
+            }
+            .addOnFailureListener{
+                //failed to add
+                Log.d(TAG, "addToFavourite: Failed to add to fav")
+                Toast.makeText(this,"Failed to add to fave",Toast.LENGTH_SHORT).show()
+            }
+
+
+    }
+
+    private fun removeFromFavourite(){
+
+        Log.d(TAG,"removeFromFavourite: Removing from fav")
+
+        //database ref
+        val ref = FirebaseDatabase.getInstance().getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
+            .removeValue()
+            .addOnSuccessListener {
+                Log.d((TAG,"Removed from favourite")
+            }
+            .addOnFailureListener{  e->
+                Log.d(TAG, "removeFromFavourite: Failed to remove")
+                Toast.makeText(this, "Failed to remove from favourite", Toast.LENGTH_LONG).show()
             }
     }
 
