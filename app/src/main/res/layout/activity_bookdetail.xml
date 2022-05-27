@@ -8,60 +8,129 @@
     android:background="#FFFFFF"
     tools:context=".detail.bookdetail">
 
+<!--Toolbar-->
+    <RelativeLayout
+        android:id="@+id/toolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@drawable/shape_toolbar_02">
+
+        <!--back button-->
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backbtn"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"/>
 
 
+        <!--book title-->
 
-    <ImageView
-        android:id="@+id/bookcovers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/book1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bookname"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:id="@+id/bookname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bookcovers"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="Book Title"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        android:textStyle="bold" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/authors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bookcovers"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:text="author"
-        android:textColor="@color/black"
-        android:textSize="23sp"
-        android:textStyle="italic" />
-
-    <TextView
-        android:id="@+id/bookdes"
+    <ScrollView
+        android:id="@+id/scoll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/authors"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="20dp"
-        android:text="bookinfo"
-        android:textAlignment="viewStart" />
+        android:layout_below="@+id/toolbarRl"
+        android:padding="10dp" >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--book cover-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp">
+
+                <ImageView
+
+                    android:id="@+id/bookcovers"
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/book1" />
+
+                <TextView
+                    android:id="@+id/bookname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_toEndOf="@+id/bookcovers"
+                    android:text="Book Title"
+                    android:textColor="@color/black"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/authors"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_toEndOf="@+id/bookcovers"
+                    android:text="author"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"
+                    android:textStyle="italic" />
+
+                <ImageButton
+                    android:id="@+id/user_bookmark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="180dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toEndOf="@+id/bookcovers"
+                    android:background="@android:color/black"
+                    android:src="@drawable/bookmark" />
+
+
+
+                <TextView
+                    android:id="@+id/bookdes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bookcovers"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="bookinfo"
+                    android:textAlignment="viewStart" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
     <!--comment section-->
 
     <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bookdes"
+        android:layout_below="@+id/scoll"
         android:layout_marginTop="10dp">
 
         <TextView
@@ -87,14 +156,19 @@
         <!--Recycleview for comment-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/commentRv"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/addCommnetBtn"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/row_comment" />
 
-
     </RelativeLayout>
+
+
+
 
 
 </RelativeLayout>
