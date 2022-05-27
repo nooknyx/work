@@ -30,6 +30,8 @@ class bookdetail : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var progressDialog: ProgressDialog
+
+    //view binding
     private lateinit var binding: ActivityBookdetailBinding
 
     //arraylist holding comment
@@ -46,6 +48,11 @@ class bookdetail : AppCompatActivity() {
 
     //get data from firebase
     private var bookTitle = ""
+
+    private companion object{
+        //TAG
+        const val TAG = "BOOK_DETAIL_TAG"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -95,6 +102,14 @@ class bookdetail : AppCompatActivity() {
             }
             else{
                 // login user can fave function
+                if(isInMyFavourite){
+                    //already in remove
+                    removeFromFavourite()
+                }
+                else{
+                    //add to fav
+                    addToFavourite()
+                }
 
             }
 
@@ -244,7 +259,31 @@ class bookdetail : AppCompatActivity() {
     }
 
     private fun checkIsFavourite(){
-        
+
+        Log.d(TAG, "checkIsFavourite :Checking if book is in fav or not")
+
+        val ref = FirebaseDatabase.getInstance().getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
+            .addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    isInMyFavourite = snapshot.exists()
+                    if(isInMyFavourite){
+                        //available in favourite
+                        binding.favebtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_red,0,0)
+                        binding.favebtn.text = "Remove from favourite"
+                    }
+                    else{
+                        //not available
+                        binding.favebtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_white,0,0)
+                        binding.favebtn.text = "Add to favourite"
+
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            }
 
     }
 
