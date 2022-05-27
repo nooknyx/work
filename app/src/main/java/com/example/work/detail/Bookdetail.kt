@@ -57,7 +57,7 @@ class bookdetail : AppCompatActivity() {
         binding.backBtn.setOnClickListener{
             onBackPressed()
         }
-        
+
         showComments()
 
         binding.addCommnetBtn.setOnClickListener{
