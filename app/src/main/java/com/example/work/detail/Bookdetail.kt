@@ -54,28 +54,11 @@ class bookdetail : AppCompatActivity() {
         bookId = intent.getStringExtra("bookId")!!
 
         //handle backbutton click, go back
-
-        //binding.backBtnb
-
-        /*val booksname = findViewById<TextView>(R.id.bookname)
-        val authors = findViewById<TextView>(R.id.authors)
-        val bookcovers = findViewById<ImageView>(R.id.bookcovers)
-        val bookinfo = findViewById<TextView>(R.id.bookdes)
-
-
-        val name = intent.getStringExtra("name")
-        val writer = intent.getStringExtra("writer")
-        val coverId = intent.getIntExtra("coverId", R.drawable.book1)
-        val booksinfo = intent.getStringExtra("bookInfo")
-
-
-        booksname.text = name
-        authors.text = writer
-        bookcovers.setImageResource(coverId)
-        bookinfo.text = booksinfo*/
-
+        binding.backBtn.setOnClickListener{
+            onBackPressed()
+        }
+        
         showComments()
-
 
         binding.addCommnetBtn.setOnClickListener{
 
@@ -89,6 +72,25 @@ class bookdetail : AppCompatActivity() {
             }
         }
     }
+
+   private fun loadBookDetails(){
+
+       //Books > bookId > Detail
+       val ref = FirebaseDatabase.getInstance().getReference("Books")
+       ref.child(bookId)
+           .addListenerForSingleValueEvent(object: ValueEventListener{
+               override fun onDataChange(snapshot: DataSnapshot) {
+                   //get data
+                   val Author = snapshot.child("Author").value
+
+               }
+
+               override fun onCancelled(error: DatabaseError) {
+                   TODO("Not yet implemented")
+               }
+
+           })
+   }
 
     private fun showComments() {
         //init arraylist
