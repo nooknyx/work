@@ -31,7 +31,6 @@ class bookdetail : AppCompatActivity() {
     private lateinit var progressDialog: ProgressDialog
     private lateinit var binding: ActivityBookdetailBinding
 
-
     //arraylist holding comment
     private lateinit var commentArrayList: ArrayList<ModelComment>
 
@@ -56,7 +55,7 @@ class bookdetail : AppCompatActivity() {
 
         //handle backbutton click, go back
 
-        //inding.backBtnb
+        //binding.backBtnb
 
         /*val booksname = findViewById<TextView>(R.id.bookname)
         val authors = findViewById<TextView>(R.id.authors)
