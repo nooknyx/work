@@ -73,7 +73,7 @@
                     android:id="@+id/bookname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerHorizontal="                                                            true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="50dp"
                     android:layout_toEndOf="@+id/bookcovers"
@@ -95,15 +95,18 @@
                     android:textSize="23sp"
                     android:textStyle="italic" />
 
-                <ImageButton
-                    android:id="@+id/user_bookmark"
+                <Button
+                    android:id="@+id/favebtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/authors"
                     android:layout_marginStart="180dp"
                     android:layout_marginTop="20dp"
-                    android:layout_toEndOf="@+id/bookcovers"
-                    android:background="@android:color/black"
-                    android:src="@drawable/bookmark" />
+                    android:background="@drawable/shape_button"
+                    android:drawableEnd="@drawable/favourite_white"
+                    android:src="@drawable/bookmark"
+                    android:text="Add to Favourite"
+                    android:textSize="10dp" />
 
 
 
