@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.net.toUri
 import com.example.work.Adapter.AdapterComment
 import com.example.work.R
 import com.example.work.data.Bookdata
@@ -49,10 +50,6 @@ class bookdetail : AppCompatActivity() {
     //get data from firebase
     private var bookTitle = ""
 
-    private companion object{
-        //TAG
-        const val TAG = "BOOK_DETAIL_TAG"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -98,7 +95,7 @@ class bookdetail : AppCompatActivity() {
             //checking if user is login or not
             if(firebaseAuth.currentUser != null){
                 //not login, user can't do fav
-                Toast.makeText(this"You are not logged in",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"You are not logged in",Toast.LENGTH_SHORT).show()
             }
             else{
                 // login user can fave function
@@ -132,6 +129,7 @@ class bookdetail : AppCompatActivity() {
                    binding.authors.text = Author
                    binding.bookname.text = BookTitle
                    //set bookcover
+                   binding.bookcovers.setImageURI(Image.toUri())
 
                }
 
@@ -283,7 +281,7 @@ class bookdetail : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-            }
+            })
 
     }
 
@@ -322,7 +320,7 @@ class bookdetail : AppCompatActivity() {
         ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
             .removeValue()
             .addOnSuccessListener {
-                Log.d((TAG,"Removed from favourite")
+                Log.d((TAG),"Removed from favourite")
             }
             .addOnFailureListener{  e->
                 Log.d(TAG, "removeFromFavourite: Failed to remove")

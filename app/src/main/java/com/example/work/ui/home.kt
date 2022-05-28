@@ -1,13 +1,10 @@
 package com.example.work.ui
 import android.content.Intent
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentHostCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.work.Adapter.BookAdapter
@@ -29,6 +26,7 @@ class Home:Fragment(R.layout.fragment_home)
     //private lateinit var dbref : DatabaseReference
     private lateinit var popBookRecyclerView: RecyclerView
     private lateinit var popBookArrayList : ArrayList<Bookdata>
+    private lateinit var bookAdapter: BookAdapter
 
 
 
@@ -109,7 +107,7 @@ class Home:Fragment(R.layout.fragment_home)
 
     private fun getpopBookData() {
         val bRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
-
+        //bRef.child()
         bRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
@@ -119,8 +117,9 @@ class Home:Fragment(R.layout.fragment_home)
                         val popBook = popbookSnapshot.getValue(Bookdata::class.java)
                         popBookArrayList.add(popBook!!)
                     }
-
-                    popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
+                    bookAdapter = BookAdapter(context!!, popBookArrayList)
+                    binding.poplist.adapter = bookAdapter
+                    //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                 }
 

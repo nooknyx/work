@@ -26,7 +26,7 @@ class popular : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
 
         popularlist = arrayListOf()
-        popularadapter = BookAdapter(popularlist)
+        popularadapter = BookAdapter(this, popularlist )
         recyclerView.adapter = popularadapter
 
         EventChangeListener()
