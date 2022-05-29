@@ -73,6 +73,9 @@ class bookdetail : AppCompatActivity() {
         //get bookid from intent
         bookId = intent.getStringExtra("bookId")!!
 
+        //load book detail
+        loadBookDetails()
+
         //handle backbutton click, go back
         binding.backBtn.setOnClickListener{
             onBackPressed()
@@ -115,12 +118,14 @@ class bookdetail : AppCompatActivity() {
             }
 
         }
+
+
     }
 
    private fun loadBookDetails(){
 
        //Books > bookId > Detail
-       val ref = FirebaseDatabase.getInstance().getReference("Books")
+       val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
        ref.child(bookId)
            .addListenerForSingleValueEvent(object: ValueEventListener{
                override fun onDataChange(snapshot: DataSnapshot) {
@@ -128,12 +133,12 @@ class bookdetail : AppCompatActivity() {
                    val Author = "${snapshot.child("Author").value}"
                    val BookTitle = "${snapshot.child("BookTitle").value}"
                    val Image = "${snapshot.child("Image").value}"
-
+                   val viewCount = "${snapshot.child("viewCount").value}"
                    //set data
                    binding.authors.text = Author
                    binding.bookname.text = BookTitle
                    //set bookcover
-                   binding.bookcovers.setImageURI(Image.toUri())
+                   //binding.bookcovers.setImageURI(Image.toUri())
                }
 
                override fun onCancelled(error: DatabaseError) {
