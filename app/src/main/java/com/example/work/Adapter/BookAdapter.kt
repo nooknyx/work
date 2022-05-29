@@ -9,6 +9,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.work.FilterSearch
 import com.example.work.data.Bookdata
@@ -53,10 +54,10 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         //get data
 
         val data: Bookdata = bookdatalist[position]
-        holder.BookTitle.text = data.name
-        holder.Author.text = data.author
-        val bookimageuri = data.imagebook
-        holder.imagebook.setImageURI(bookimageuri)
+        holder.BookTitle.text = data.BookTitle
+        holder.Author.text = data.Author
+        //val bookimageuri = data.Image.toString()
+        //holder.imagebook.setImageURI(bookimageuri.toUri())
         val bookId = data.bookId
 
         //handle click

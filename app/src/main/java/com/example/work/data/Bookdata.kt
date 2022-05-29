@@ -4,9 +4,9 @@ import android.net.Uri
 
 class Bookdata
 {
-    var name: String? = ""
-    var author : String? = ""
-    var imagebook: Uri? = Uri.EMPTY
+    var BookTitle: String? = ""
+    var Author : String? = ""
+    var Image: String? = ""
     var bookId : String? = ""
     var viewCount: Long? = 0
 
@@ -19,15 +19,15 @@ class Bookdata
     constructor()
     //constructor /w parameter
     constructor(
-        author: String?,
-        name: String?,
-        imagebook: Uri?,
+        BookTitle: String?,
+        Author: String?,
+        Image: String?,
         bookId: String?,
         viewCount: Long?
     ) {
-        this.author = author
-        this.name = name
-        this.imagebook = imagebook
+        this.BookTitle = BookTitle
+        this.Author = Author
+        this.Image = Image
         this.bookId = bookId
         this.viewCount = viewCount
     }

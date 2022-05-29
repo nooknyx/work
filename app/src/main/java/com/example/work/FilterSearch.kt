@@ -26,11 +26,11 @@ class FilterSearch : Filter {
             constraint = constraint.toString().uppercase()
             val filteredBook = ArrayList<Bookdata>()
             for( i in filterList.indices){
-                if(filterList[i].name!!.uppercase().contains(constraint)){
+                if(filterList[i].BookTitle!!.uppercase().contains(constraint)){
                     //search value matched with title, add to list
                     filteredBook.add(filterList[i])
                 }
-                if(filterList[i].author!!.uppercase().contains(constraint)){
+                if(filterList[i].Author!!.uppercase().contains(constraint)){
                     //search value matched with title, add to list
                     filteredBook.add(filterList[i])
                 }

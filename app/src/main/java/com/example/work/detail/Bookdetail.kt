@@ -50,6 +50,10 @@ class bookdetail : AppCompatActivity() {
     //get data from firebase
     private var bookTitle = ""
 
+    private companion object{
+        //TAG
+        const val TAG = "BOOK_DETAIL_TAG"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -130,7 +134,6 @@ class bookdetail : AppCompatActivity() {
                    binding.bookname.text = BookTitle
                    //set bookcover
                    binding.bookcovers.setImageURI(Image.toUri())
-
                }
 
                override fun onCancelled(error: DatabaseError) {
@@ -320,7 +323,7 @@ class bookdetail : AppCompatActivity() {
         ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
             .removeValue()
             .addOnSuccessListener {
-                Log.d((TAG),"Removed from favourite")
+                Log.d(TAG,"Removed from favourite")
             }
             .addOnFailureListener{  e->
                 Log.d(TAG, "removeFromFavourite: Failed to remove")

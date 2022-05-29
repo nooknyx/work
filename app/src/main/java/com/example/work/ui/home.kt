@@ -115,6 +115,8 @@ class Home:Fragment(R.layout.fragment_home)
 
 
                         val popBook = popbookSnapshot.getValue(Bookdata::class.java)
+                        //val bookimage = "${popbookSnapshot.child("Image").value}"
+
                         popBookArrayList.add(popBook!!)
                     }
                     bookAdapter = BookAdapter(context!!, popBookArrayList)
