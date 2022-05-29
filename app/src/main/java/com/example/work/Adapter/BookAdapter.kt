@@ -35,9 +35,9 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
     }
     override fun onCreateViewHolder( parent: ViewGroup,viewType: Int ): BookAdapter.MyViewHolder
     {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.booklist, parent,false)
+        //val itemView = LayoutInflater.from(parent.context).inflate(R.layout.booklist, parent,false)
         binding = BooklistBinding.inflate(LayoutInflater.from(context), parent, false)
-        return MyViewHolder(itemView)
+        //return MyViewHolder(itemView)
         return MyViewHolder(binding.root)
     }
 
@@ -58,14 +58,15 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         holder.Author.text = data.Author
         //val bookimageuri = data.Image.toString()
         //holder.imagebook.setImageURI(bookimageuri.toUri())
-        val bookId = data.bookId
+        //val bookId = data.bookId
 
         //handle click
         holder.itemView.setOnClickListener {
             val intent = Intent(context, bookdetail::class.java)
-            intent.putExtra("Books", bookId)
+            intent.putExtra("bookId", data.bookId)
             context.startActivity(intent)
         }
+
 
     }
 
@@ -80,4 +81,5 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         }
         return filter as FilterSearch
     }
+
 }
