@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         fun formatTimeStamp(timestamp: Long) : String{
             val cal = Calendar.getInstance(Locale.ENGLISH)
             cal.timeInMillis = timestamp
-
+            //format in dd/mm/yyyy
             return DateFormat.format("dd/MM/yyyy",cal).toString()
         }
     }

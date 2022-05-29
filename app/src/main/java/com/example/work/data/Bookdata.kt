@@ -8,6 +8,7 @@ class Bookdata
     var Author : String? = ""
     var Image: String? = ""
     var bookId : String? = ""
+    var dateAdded : String? = ""
     var viewCount: Long? = 0
 
     /*constructor(name: String?, author: String?, bookid: String?) {
@@ -23,12 +24,14 @@ class Bookdata
         Author: String?,
         Image: String?,
         bookId: String?,
+        dateAdded: String?,
         viewCount: Long?
     ) {
         this.BookTitle = BookTitle
         this.Author = Author
         this.Image = Image
         this.bookId = bookId
+        this.dateAdded = dateAdded
         this.viewCount = viewCount
     }
 

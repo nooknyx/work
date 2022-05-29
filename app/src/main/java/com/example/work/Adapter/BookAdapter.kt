@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.work.FilterSearch
+import com.example.work.MainActivity
 import com.example.work.data.Bookdata
 import com.example.work.R
 import com.example.work.databinding.BooklistBinding
@@ -59,7 +60,6 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         //val bookimageuri = data.Image.toString()
         //holder.imagebook.setImageURI(bookimageuri.toUri())
         //val bookId = data.bookId
-
         //handle click
         holder.itemView.setOnClickListener {
             val intent = Intent(context, bookdetail::class.java)
