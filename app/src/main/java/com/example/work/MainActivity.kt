@@ -8,8 +8,13 @@ import android.text.format.DateFormat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.example.work.ui.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.sql.Timestamp
 import java.util.*
+import kotlin.collections.HashMap
 import com.example.work.ui.Search as Search
 
 
@@ -71,5 +76,8 @@ class MainActivity : AppCompatActivity() {
             return DateFormat.format("dd/MM/yyyy",cal).toString()
         }
     }
+
+
+
 
 }

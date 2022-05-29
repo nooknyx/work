@@ -50,6 +50,9 @@ class bookdetail : AppCompatActivity() {
     //get data from firebase
     private var bookTitle = ""
 
+    //getting view count whenever user access this page
+
+
     private companion object{
         //TAG
         const val TAG = "BOOK_DETAIL_TAG"
@@ -73,6 +76,8 @@ class bookdetail : AppCompatActivity() {
         //get bookid from intent
         bookId = intent.getStringExtra("bookId")!!
 
+        //get view count + getting view count whenever user access this page
+        incrementBookViewCount(bookId)
         //load book detail
         loadBookDetails()
 
@@ -336,5 +341,32 @@ class bookdetail : AppCompatActivity() {
             }
     }
 
+    fun incrementBookViewCount(bookId: String)
+    {
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        ref.child(bookId)
+            .addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //get view, check if there is no view assign, will assign new view here
+                    var viewCount = "${snapshot.child("viewCount").value}"
+                    if (viewCount=="" || viewCount == null){
+                        viewCount = "0"
+                    }
+                    //increment the view count here
+                    val incViewCount = viewCount.toLong() + 1
+                    //pass value to db
+                    val hashMap = HashMap<String, Any>()
+                    hashMap["viewCount"] = incViewCount
+
+                    val dbRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    dbRef.child(bookId).updateChildren(hashMap)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+    }
 
 }

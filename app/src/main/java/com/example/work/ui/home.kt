@@ -17,6 +17,8 @@ import com.example.work.ui.booklist.popular
 import com.google.firebase.database.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Home:Fragment(R.layout.fragment_home)
 {
@@ -27,8 +29,15 @@ class Home:Fragment(R.layout.fragment_home)
     private lateinit var popBookRecyclerView: RecyclerView
     private lateinit var popBookArrayList : ArrayList<Bookdata>
     private lateinit var bookAdapter: BookAdapter
+    //private var category = ""
 
-
+    /*override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val args = arguments
+        if (args != null){
+            category = args.getString("category")!!
+        }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,10 +46,11 @@ class Home:Fragment(R.layout.fragment_home)
     ): View? {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        getpopBookData()
+        //getpopBookData("viewCount")
         popBookRecyclerView = binding.poplist
         popBookRecyclerView.layoutManager = LinearLayoutManager(context)
         popBookRecyclerView.setHasFixedSize(true)
+
 
         popBookArrayList = arrayListOf<Bookdata>()
         getpopBookData()
@@ -106,10 +116,13 @@ class Home:Fragment(R.layout.fragment_home)
     }
 
     private fun getpopBookData() {
+
+        popBookArrayList = ArrayList()
         val bRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
-        //bRef.child()
-        bRef.addValueEventListener(object : ValueEventListener {
+        bRef.orderByChild("viewCount").limitToLast(10)
+        .addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                popBookArrayList.clear()
                 if (snapshot.exists()){
                     for (popbookSnapshot in snapshot.children){
 
@@ -124,7 +137,7 @@ class Home:Fragment(R.layout.fragment_home)
                     //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                 }
-
+                popBookArrayList.reverse()
             }
 
             override fun onCancelled(error: DatabaseError) {
