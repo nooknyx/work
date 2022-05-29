@@ -5,9 +5,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.work.FilterSearch
 import com.example.work.data.Bookdata
 import com.example.work.R
 import com.example.work.databinding.BooklistBinding
@@ -15,15 +18,19 @@ import com.example.work.detail.bookdetail
 import io.grpc.InternalChannelz.id
 
 
-class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>
+class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
 {
-    private val bookdatalist: ArrayList<Bookdata>
+    public var bookdatalist: ArrayList<Bookdata> //to access in filter class, make it public
+    public var filterList: ArrayList<Bookdata>
     private var context: Context
     private lateinit var binding: BooklistBinding
+
+    private var filter: FilterSearch? = null
 
     constructor(context: Context, bookdatalist: ArrayList<Bookdata>){
         this.context = context
         this.bookdatalist = bookdatalist
+        this.filterList = bookdatalist
     }
     override fun onCreateViewHolder( parent: ViewGroup,viewType: Int ): BookAdapter.MyViewHolder
     {
@@ -64,5 +71,12 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>
     override fun getItemCount(): Int
     {
         return bookdatalist.size //return list size/ number of records
+    }
+
+    override fun getFilter(): Filter {
+        if (filter == null){
+            filter = FilterSearch(filterList, this)
+        }
+        return filter as FilterSearch
     }
 }
