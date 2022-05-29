@@ -92,8 +92,8 @@ class Home:Fragment(R.layout.fragment_home)
             }
         )
 
-        /*
-        val poplist = findViewById<RecyclerView>(R.id.poplist)
+
+        /*val poplist = findViewById<RecyclerView>(R.id.poplist)
         val newlist = findViewById<RecyclerView>(R.id.newlist)
         val myRef = FirebaseDatabase.getInstance().getReference("Books")
 
@@ -103,7 +103,6 @@ class Home:Fragment(R.layout.fragment_home)
 
         popBookArrayList = arrayListOf<Bookdata>()
         getpopBookData()*/
-
 
     }
 
@@ -132,6 +131,10 @@ class Home:Fragment(R.layout.fragment_home)
 
 
         })
+    }
+
+    private fun findViewById(){
+
     }
 
 

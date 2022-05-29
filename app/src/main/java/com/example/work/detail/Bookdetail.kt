@@ -82,7 +82,6 @@ class bookdetail : AppCompatActivity() {
         binding.addCommnetBtn.setOnClickListener{
 
             //check if the user login or not when adding comment
-
             if(firebaseAuth.currentUser == null){
                 Toast.makeText(this,"You're not logged in", Toast.LENGTH_SHORT).show()
             }
@@ -98,7 +97,7 @@ class bookdetail : AppCompatActivity() {
             //checking if user is login or not
             if(firebaseAuth.currentUser != null){
                 //not login, user can't do fav
-                Toast.makeText(this"You are not logged in",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"You are not logged in",Toast.LENGTH_SHORT).show()
             }
             else{
                 // login user can fave function
@@ -123,6 +122,7 @@ class bookdetail : AppCompatActivity() {
        ref.child(bookId)
            .addListenerForSingleValueEvent(object: ValueEventListener{
                override fun onDataChange(snapshot: DataSnapshot) {
+
                    //get data
                    val Author = "${snapshot.child("Author").value}"
                    val BookTitle = "${snapshot.child("BookTitle").value}"
@@ -152,6 +152,7 @@ class bookdetail : AppCompatActivity() {
             .addValueEventListener(object : ValueEventListener{
 
                 override fun onDataChange(snapshot: DataSnapshot) {
+
                     //clear list
                     commentArrayList.clear()
                     for (ds in snapshot.children){
@@ -160,8 +161,10 @@ class bookdetail : AppCompatActivity() {
                         //add to list
                         commentArrayList.add(model!!)
                     }
+
                     //setup adapter
                     adapterComment = AdapterComment(this@bookdetail, commentArrayList)
+
                     //set adapter to recycleview
                     binding.commentRv.adapter = adapterComment
                 }
@@ -265,6 +268,7 @@ class bookdetail : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("users")
         ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
             .addValueEventListener(object :ValueEventListener{
+
                 override fun onDataChange(snapshot: DataSnapshot) {
                     isInMyFavourite = snapshot.exists()
                     if(isInMyFavourite){
@@ -283,7 +287,7 @@ class bookdetail : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-            }
+            })
 
     }
 
@@ -322,7 +326,7 @@ class bookdetail : AppCompatActivity() {
         ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
             .removeValue()
             .addOnSuccessListener {
-                Log.d((TAG,"Removed from favourite")
+                Log.d(TAG,"Removed from favourite")
             }
             .addOnFailureListener{  e->
                 Log.d(TAG, "removeFromFavourite: Failed to remove")

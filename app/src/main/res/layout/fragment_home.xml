@@ -7,46 +7,24 @@
     android:orientation="horizontal"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/homeseeall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="340dp"
-        android:layout_marginTop="100dp"
-        android:text="See all >" />
-
-    <TextView
-        android:id="@+id/newseeall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="340dp"
-        android:layout_marginTop="340dp"
-        android:text="See all >" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/poplist"
+    <RelativeLayout
+        android:id="@+id/home_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="157dp"
-        android:layout_marginTop="140dp"
-        tools:listitem="@layout/homelist" />
+        android:layout_height="?actionBarSize"
+        android:background="@drawable/shape_toolbar_02">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/newlist"
-        android:layout_width="match_parent"
-        android:layout_height="157dp"
-        android:layout_marginTop="380dp"
-        tools:listitem="@layout/homelist"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        tools:src="@drawable/popbook" />
+    </RelativeLayout>
+    
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
-        tools:src="@drawable/newbook" />
 
 </FrameLayout>

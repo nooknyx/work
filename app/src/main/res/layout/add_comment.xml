@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
+
         android:text="Add Comment"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -52,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/commenTil"
+        android:background="@drawable/shape_button"
         android:layout_marginTop="20dp"
         android:text="Submit"
         android:textColor="@color/white" />
