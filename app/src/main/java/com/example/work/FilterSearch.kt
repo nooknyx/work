@@ -18,7 +18,7 @@ class FilterSearch : Filter {
         //value to search
         var constraint: CharSequence? = constraint
         val results = FilterResults()
-        //valur to be search should not be null and not empty
+        //value to be search should not be null and not empty
         if (constraint != null && constraint.isNotEmpty()){
             //not null nor empty
 

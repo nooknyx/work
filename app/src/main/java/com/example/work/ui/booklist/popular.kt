@@ -34,9 +34,6 @@ class popular : AppCompatActivity() {
         popularadapter = BookAdapter(this, popularlist )
         recyclerView.adapter = popularadapter
 
-        binding.backBtn.setOnClickListener{
-            onBackPressed()
-        }
 
         //handle backbutton click, go back
         binding.backBtn.setOnClickListener{
