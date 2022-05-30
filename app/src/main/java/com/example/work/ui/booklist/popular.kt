@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.work.Adapter.BookAdapter
 import com.example.work.R
+import com.example.work.databinding.ActivityPopularBinding
 import com.google.firebase.firestore.*
 
 class popular : AppCompatActivity() {
@@ -17,9 +18,13 @@ class popular : AppCompatActivity() {
     private lateinit var popularadapter : BookAdapter
     private lateinit var db : FirebaseFirestore
 
+    //view binding
+    private lateinit var binding: ActivityPopularBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_popular)
+        binding = ActivityPopularBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         recyclerView = findViewById(R.id.poppage)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -28,6 +33,15 @@ class popular : AppCompatActivity() {
         popularlist = arrayListOf()
         popularadapter = BookAdapter(this, popularlist )
         recyclerView.adapter = popularadapter
+
+        binding.backBtn.setOnClickListener{
+            onBackPressed()
+        }
+
+        //handle backbutton click, go back
+        binding.backBtn.setOnClickListener{
+            onBackPressed()
+        }
 
         EventChangeListener()
     }

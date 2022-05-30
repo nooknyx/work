@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
-        android:id="@+id/home_toolbar"
+        android:id="@+id/bookmark_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@drawable/shape_toolbar_02">
@@ -24,7 +24,49 @@
             android:layout_centerVertical="true"/>
 
     </RelativeLayout>
-    
 
+    <TextView
+        android:id="@+id/homeseeall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="100dp"
+        android:text="See all >" />
+
+    <TextView
+        android:id="@+id/newseeall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="340dp"
+        android:text="See all >" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/poplist"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
+        android:layout_marginTop="140dp"
+        tools:listitem="@layout/homelist" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newlist"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
+        android:layout_marginTop="380dp"
+        tools:listitem="@layout/homelist"/>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        tools:src="@drawable/popbook" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        tools:src="@drawable/newbook" />
 
 </FrameLayout>
