@@ -58,12 +58,12 @@
                     android:textStyle="italic" />
 
                 <TextView
-                    android:id="@+id/timestamp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="150dp"
+                    android:id="@+id/viewcount"
+                    android:layout_width="61dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="160dp"
                     android:layout_marginTop="30dp"
-                    android:text="dd/MM/yy"
+                    android:text="9999"
                     android:textColor="@color/textgrey" />
 
 
