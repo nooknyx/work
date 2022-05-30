@@ -25,22 +25,6 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/homeseeall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="340dp"
-        android:layout_marginTop="100dp"
-        android:text="See all >" />
-
-    <TextView
-        android:id="@+id/newseeall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="340dp"
-        android:layout_marginTop="340dp"
-        android:text="See all >" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/poplist"
         android:layout_width="match_parent"
@@ -68,5 +52,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="320dp"
         tools:src="@drawable/newbook" />
+
+    <Button
+        android:id="@+id/seeallbook"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="see all book"
+        android:fontFamily="sans-serif-condensed"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:background="@drawable/shape_button"
+        android:layout_marginTop="600dp"
+        android:layout_marginHorizontal="100dp"/>
 
 </FrameLayout>

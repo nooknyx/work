@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".ui.booklist.popular">
+
 
     <RelativeLayout
         android:id="@+id/bookmark_toolbar"
@@ -12,10 +13,19 @@
         android:layout_height="?actionBarSize"
         android:background="@drawable/shape_toolbar_02">
 
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/backbtn" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bookmark"
+            android:text="Books"
             android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -24,17 +34,12 @@
 
     </RelativeLayout>
 
-
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/commentRv"
+        android:layout_marginTop="60dp"
+        android:id="@+id/allbookpage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@null"
+        tools:listitem="@layout/booklist" />
 
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/row_comment" />
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

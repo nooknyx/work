@@ -5,18 +5,22 @@
       <map>
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/drawable/home_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/drawable/shape_button.xml" value="0.2185" />
-        <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_bookdetail.xml" value="0.2484375" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_allbook.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_bookdetail.xml" value="0.264" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_login.xml" value="0.22871376811594202" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_newbook.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_popular.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_signup.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/add_comment.xml" value="0.264" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/allbooks.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/booklist.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/edituser.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_bookmark.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_fav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_search.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_user.xml" value="0.536" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_user.xml" value="0.2" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/homelist.xml" value="0.24592391304347827" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/row_comment.xml" value="0.1160081053698075" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/menu/bottom_nav.xml" value="0.1" />

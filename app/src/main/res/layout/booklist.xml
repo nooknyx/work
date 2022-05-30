@@ -17,8 +17,8 @@
             app:srcCompat="@drawable/book_detail_box_2" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="346dp"
+            android:layout_height="110dp"
             android:layout_marginVertical="10dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal">
@@ -31,7 +31,7 @@
                 android:src="@drawable/book1" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="225dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:orientation="vertical">
@@ -41,9 +41,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="BookTitle"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/black"
-
-                    android:textSize="22sp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -51,10 +52,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Author"
-
+                    android:fontFamily="sans-serif-condensed"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/viewcount"
+                    android:layout_width="61dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="160dp"
+                    android:layout_marginTop="30dp"
+                    android:text="9999"
+                    android:textColor="@color/textgrey" />
 
 
             </LinearLayout>

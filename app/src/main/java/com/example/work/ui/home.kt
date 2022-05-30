@@ -13,6 +13,7 @@ import com.example.work.MainActivity
 import com.example.work.data.Bookdata
 import com.example.work.databinding.ActivityBookdetailBinding
 import com.example.work.databinding.FragmentHomeBinding
+import com.example.work.ui.booklist.allbook
 import com.example.work.ui.booklist.popular
 import com.google.firebase.database.*
 import com.google.firebase.firestore.ktx.firestore
@@ -96,7 +97,7 @@ class Home:Fragment(R.layout.fragment_home)
             }
         )
 
-        binding.homeseeall.setOnClickListener(
+        /*binding.homeseeall.setOnClickListener(
             View.OnClickListener {
                 requireActivity().run {
                     startActivity(Intent(this, popular::class.java))
@@ -111,6 +112,15 @@ class Home:Fragment(R.layout.fragment_home)
                     startActivity(Intent(this, popular::class.java))
                     return@OnClickListener
                 }
+            }
+        )*/
+
+        binding.seeallbook.setOnClickListener(
+            View.OnClickListener {
+                requireActivity().run {
+                    startActivity(Intent(this, allbook::class.java))
+                    return@OnClickListener
+                 }
             }
         )
 
