@@ -21,10 +21,10 @@
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:src="@drawable/backbtn"
             android:layout_marginStart="20dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/backbtn" />
+            android:layout_centerVertical="true"/>
 
 
         <!--book title-->
@@ -32,12 +32,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:text="Bookname"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbarRl"
-        android:padding="10dp">
+        android:padding="10dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                     android:id="@+id/bookname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerHorizontal="                                                            true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="50dp"
                     android:layout_toEndOf="@+id/bookcovers"
@@ -107,6 +107,7 @@
                     android:src="@drawable/bookmark"
                     android:text="Add to Favourite"
                     android:textSize="10dp" />
+
 
 
                 <TextView
@@ -150,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="50dp"
             android:background="@android:color/transparent"
             android:backgroundTint="#00FFFFFF"
             app:srcCompat="@drawable/ic_baseline_add_comment_24" />\
@@ -158,12 +159,12 @@
         <!--Recycleview for comment-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/commentRv"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/addCommnetBtn"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/row_comment" />
 

@@ -27,7 +27,7 @@
         app:itemTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        android:background="#EAAA3C"
+        android:background="@color/mainorange"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav"/>
 

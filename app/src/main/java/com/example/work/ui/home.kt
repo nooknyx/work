@@ -1,13 +1,10 @@
 package com.example.work.ui
 import android.content.Intent
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentHostCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.work.Adapter.BookAdapter
@@ -20,17 +17,31 @@ import com.example.work.ui.booklist.popular
 import com.google.firebase.database.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Home:Fragment(R.layout.fragment_home)
 {
 
     private lateinit var binding: FragmentHomeBinding
     //private var db = Firebase.firestore
-    //private lateinit var dbref : DatabaseReference
+    //recyclerview for popular books
     private lateinit var popBookRecyclerView: RecyclerView
     private lateinit var popBookArrayList : ArrayList<Bookdata>
+    private lateinit var bookAdapter: BookAdapter
 
+    //recyclerview for new books
+    private lateinit var newBookRecyclerView: RecyclerView
+    private lateinit var newBookArrayList : ArrayList<Bookdata>
 
+    //private var category = ""
+    /*override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val args = arguments
+        if (args != null){
+            category = args.getString("category")!!
+        }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,13 +50,18 @@ class Home:Fragment(R.layout.fragment_home)
     ): View? {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        getpopBookData()
+        //popular book list
         popBookRecyclerView = binding.poplist
         popBookRecyclerView.layoutManager = LinearLayoutManager(context)
         popBookRecyclerView.setHasFixedSize(true)
-
         popBookArrayList = arrayListOf<Bookdata>()
         getpopBookData()
+        //new book list
+        newBookRecyclerView = binding.newlist
+        newBookRecyclerView.layoutManager = LinearLayoutManager(context)
+        newBookRecyclerView.setHasFixedSize(true)
+        newBookArrayList = arrayListOf<Bookdata>()
+        getnewBookData()
 
         return binding.root
 
@@ -67,7 +83,15 @@ class Home:Fragment(R.layout.fragment_home)
                 requireActivity().run {
                     startActivity(Intent(this, ActivityBookdetailBinding::class.java))
                     return@OnClickListener
+                }
+            }
+        )
 
+        binding.newlist.setOnClickListener(
+            View.OnClickListener {
+                requireActivity().run {
+                    startActivity(Intent(this, ActivityBookdetailBinding::class.java))
+                    return@OnClickListener
                 }
             }
         )
@@ -77,7 +101,6 @@ class Home:Fragment(R.layout.fragment_home)
                 requireActivity().run {
                     startActivity(Intent(this, popular::class.java))
                     return@OnClickListener
-
                 }
             }
         )
@@ -87,13 +110,12 @@ class Home:Fragment(R.layout.fragment_home)
                 requireActivity().run {
                     startActivity(Intent(this, popular::class.java))
                     return@OnClickListener
-
                 }
             }
         )
 
-
-        /*val poplist = findViewById<RecyclerView>(R.id.poplist)
+        /*
+        val poplist = findViewById<RecyclerView>(R.id.poplist)
         val newlist = findViewById<RecyclerView>(R.id.newlist)
         val myRef = FirebaseDatabase.getInstance().getReference("Books")
 
@@ -104,25 +126,32 @@ class Home:Fragment(R.layout.fragment_home)
         popBookArrayList = arrayListOf<Bookdata>()
         getpopBookData()*/
 
+
     }
 
     private fun getpopBookData() {
-        val bRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
 
-        bRef.addValueEventListener(object : ValueEventListener {
+        popBookArrayList = ArrayList()
+        val bRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        bRef.orderByChild("viewCount").limitToLast(10)
+        .addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                popBookArrayList.clear()
                 if (snapshot.exists()){
                     for (popbookSnapshot in snapshot.children){
 
 
                         val popBook = popbookSnapshot.getValue(Bookdata::class.java)
+                        //val bookimage = "${popbookSnapshot.child("Image").value}"
+
                         popBookArrayList.add(popBook!!)
                     }
-
-                    popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
+                    bookAdapter = BookAdapter(context!!, popBookArrayList)
+                    binding.poplist.adapter = bookAdapter
+                    //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                 }
-
+                popBookArrayList.reverse()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -133,8 +162,38 @@ class Home:Fragment(R.layout.fragment_home)
         })
     }
 
-    private fun findViewById(){
 
+    private fun getnewBookData() {
+
+        newBookArrayList = ArrayList()
+        val bRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        bRef.orderByChild("dateAdded").limitToLast(10)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    newBookArrayList.clear()
+                    if (snapshot.exists()){
+                        for (newbookSnapshot in snapshot.children){
+
+
+                            val newBook = newbookSnapshot.getValue(Bookdata::class.java)
+                            //val bookimage = "${popbookSnapshot.child("Image").value}"
+
+                            newBookArrayList.add(newBook!!)
+                        }
+                        bookAdapter = BookAdapter(context!!, newBookArrayList)
+                        binding.newlist.adapter = bookAdapter
+                        //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
+
+                    }
+                    newBookArrayList.reverse()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+
+            })
     }
 
 

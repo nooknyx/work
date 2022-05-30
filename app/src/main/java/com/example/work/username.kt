@@ -137,6 +137,7 @@ class username : AppCompatActivity() {
                 progressDialog.dismiss()
                 Toast.makeText(applicationContext, "Account Creation Successful!", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,login::class.java))
+
                 finish()
             }
             .addOnFailureListener{ e->

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.net.toUri
 import com.example.work.Adapter.AdapterComment
 import com.example.work.R
 import com.example.work.data.Bookdata
@@ -49,6 +50,9 @@ class bookdetail : AppCompatActivity() {
     //get data from firebase
     private var bookTitle = ""
 
+    //getting view count whenever user access this page
+
+
     private companion object{
         //TAG
         const val TAG = "BOOK_DETAIL_TAG"
@@ -72,6 +76,11 @@ class bookdetail : AppCompatActivity() {
         //get bookid from intent
         bookId = intent.getStringExtra("bookId")!!
 
+        //get view count + getting view count whenever user access this page
+        incrementBookViewCount(bookId)
+        //load book detail
+        loadBookDetails()
+
         //handle backbutton click, go back
         binding.backBtn.setOnClickListener{
             onBackPressed()
@@ -82,6 +91,7 @@ class bookdetail : AppCompatActivity() {
         binding.addCommnetBtn.setOnClickListener{
 
             //check if the user login or not when adding comment
+
             if(firebaseAuth.currentUser == null){
                 Toast.makeText(this,"You're not logged in", Toast.LENGTH_SHORT).show()
             }
@@ -113,26 +123,27 @@ class bookdetail : AppCompatActivity() {
             }
 
         }
+
+
     }
 
    private fun loadBookDetails(){
 
        //Books > bookId > Detail
-       val ref = FirebaseDatabase.getInstance().getReference("Books")
+       val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
        ref.child(bookId)
            .addListenerForSingleValueEvent(object: ValueEventListener{
                override fun onDataChange(snapshot: DataSnapshot) {
-
                    //get data
                    val Author = "${snapshot.child("Author").value}"
                    val BookTitle = "${snapshot.child("BookTitle").value}"
                    val Image = "${snapshot.child("Image").value}"
-
+                   val viewCount = "${snapshot.child("viewCount").value}"
                    //set data
                    binding.authors.text = Author
                    binding.bookname.text = BookTitle
                    //set bookcover
-
+                   //binding.bookcovers.setImageURI(Image.toUri())
                }
 
                override fun onCancelled(error: DatabaseError) {
@@ -152,7 +163,6 @@ class bookdetail : AppCompatActivity() {
             .addValueEventListener(object : ValueEventListener{
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-
                     //clear list
                     commentArrayList.clear()
                     for (ds in snapshot.children){
@@ -161,10 +171,8 @@ class bookdetail : AppCompatActivity() {
                         //add to list
                         commentArrayList.add(model!!)
                     }
-
                     //setup adapter
                     adapterComment = AdapterComment(this@bookdetail, commentArrayList)
-
                     //set adapter to recycleview
                     binding.commentRv.adapter = adapterComment
                 }
@@ -268,7 +276,6 @@ class bookdetail : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("users")
         ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
             .addValueEventListener(object :ValueEventListener{
-
                 override fun onDataChange(snapshot: DataSnapshot) {
                     isInMyFavourite = snapshot.exists()
                     if(isInMyFavourite){
@@ -334,5 +341,32 @@ class bookdetail : AppCompatActivity() {
             }
     }
 
+    fun incrementBookViewCount(bookId: String)
+    {
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        ref.child(bookId)
+            .addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //get view, check if there is no view assign, will assign new view here
+                    var viewCount = "${snapshot.child("viewCount").value}"
+                    if (viewCount=="" || viewCount == null){
+                        viewCount = "0"
+                    }
+                    //increment the view count here
+                    val incViewCount = viewCount.toLong() + 1
+                    //pass value to db
+                    val hashMap = HashMap<String, Any>()
+                    hashMap["viewCount"] = incViewCount
+
+                    val dbRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    dbRef.child(bookId).updateChildren(hashMap)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+    }
 
 }
