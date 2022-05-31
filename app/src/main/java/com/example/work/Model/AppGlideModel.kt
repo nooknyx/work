@@ -1,5 +1,7 @@
 package com.example.work.Model
 
 
-class AppGlideModel {
+class AppGlideModel
+{
+
 }

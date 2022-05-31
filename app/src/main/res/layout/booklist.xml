@@ -61,9 +61,9 @@
                     android:id="@+id/viewcount"
                     android:layout_width="61dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="160dp"
+                    android:text=" 9999"
                     android:layout_marginTop="30dp"
-                    android:text="9999"
+                    android:drawableStart="@drawable/eye"
                     android:textColor="@color/textgrey" />
 
 
