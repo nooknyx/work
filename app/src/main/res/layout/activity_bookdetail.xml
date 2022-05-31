@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="112dp"
+                    android:layout_marginTop="110dp"
                     android:layout_toEndOf="@+id/bookcovers"
                     android:fontFamily="sans-serif-condensed"
                     android:text="viewcount"
