@@ -30,11 +30,8 @@
         android:id="@+id/commentRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:layout_marginStart="20dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/row_comment" />
+        tools:listitem="@layout/bookmark_comment" />
 
 </FrameLayout>

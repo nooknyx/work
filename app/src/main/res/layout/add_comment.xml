@@ -29,6 +29,10 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
+
+    <!--rating-->
+    
+
     <!--comment-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/commenTil"
