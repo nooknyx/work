@@ -20,6 +20,15 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="370dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/logoutbtn" />
+
     </RelativeLayout>
 
     <ImageView
