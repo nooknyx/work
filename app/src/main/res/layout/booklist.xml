@@ -39,7 +39,7 @@
                 <TextView
                     android:id="@+id/booktitle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="BookTitle"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/black"
@@ -50,19 +50,30 @@
                 <TextView
                     android:id="@+id/author"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Author"
                     android:fontFamily="sans-serif-condensed"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="italic" />
 
+                <RatingBar
+                    android:id="@+id/booklist_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_marginTop="10dp"
+                    android:numStars="5"
+                    android:rating="1.5"
+                    android:stepSize="0.5"/>
+
+
                 <TextView
                     android:id="@+id/viewcount"
                     android:layout_width="61dp"
                     android:layout_height="wrap_content"
                     android:text=" 9999"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:drawableStart="@drawable/eye"
                     android:textColor="@color/textgrey" />
 

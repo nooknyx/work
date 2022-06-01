@@ -19,21 +19,21 @@
         <TextView
             android:id="@+id/bookmark_booktitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:gravity="center"
-            android:fontFamily="sans-serif-condensed"
+            android:layout_height="40dp"
             android:background="@drawable/shape_button"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Book Title"
             android:textColor="@color/black"
-            android:text="Book Title" />
+            android:textSize="18dp" />
 
         <!--Profile-->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profileIv"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
             android:layout_below="@+id/bookmark_booktitle"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_person_24"
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/bookmark_booktitle"
             android:layout_toStartOf="@+id/dateTv"
             android:layout_toEndOf="@+id/profileIv"
@@ -60,10 +60,10 @@
             android:id="@+id/dateTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/nameTv"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
-            android:layout_below="@id/nameTv"
             android:text="dd/MM/yyyy"
             android:textColor="@color/textgrey"
             android:textSize="12dp" />

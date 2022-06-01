@@ -73,7 +73,7 @@
                 <TextView
                     android:id="@+id/bookname"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="35dp"
@@ -87,7 +87,7 @@
                 <TextView
                     android:id="@+id/authors"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="70dp"
@@ -106,10 +106,11 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="110dp"
                     android:layout_toEndOf="@+id/bookcovers"
+                    android:drawableStart="@drawable/eye"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="viewcount"
+                    android:text="  viewcount"
                     android:textColor="@color/textgrey"
-                    android:textSize="11sp"
+                    android:textSize="15sp"
                     android:textStyle="italic" />
 
                 <TextView
@@ -118,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="130dp"
+                    android:layout_marginTop="145dp"
                     android:layout_toEndOf="@+id/bookcovers"
                     android:fontFamily="sans-serif-condensed"
                     android:text="date added"

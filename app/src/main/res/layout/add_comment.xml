@@ -31,14 +31,22 @@
 
 
     <!--rating-->
-    
+    <RatingBar
+        android:id="@+id/add_rating"
+        style="?android:attr/ratingBarStyleIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleTv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:numStars="5" />
 
     <!--comment-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/commenTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/backBtn"
+        android:layout_below="@+id/add_rating"
         android:layout_marginTop="20dp"
         android:hint="Comment"
         app:startIconDrawable="@drawable/insert_comment_24">
