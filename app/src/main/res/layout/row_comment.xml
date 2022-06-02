@@ -18,14 +18,14 @@
         <RatingBar
             android:id="@+id/comment_rating"
             style="?android:attr/ratingBarStyleSmall"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
             android:numStars="5"
             android:rating="1.5"
-            android:stepSize="0.5"/>
+            android:stepSize="0.5" />
 
         <!--Profile-->
         <com.google.android.material.imageview.ShapeableImageView
@@ -56,10 +56,10 @@
             android:id="@+id/dateTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/nameTv"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
-            android:layout_below="@id/nameTv"
             android:text="dd/MM/yyyy"
             android:textColor="@color/textgrey"
             android:textSize="12dp" />

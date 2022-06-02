@@ -70,6 +70,20 @@
                     android:layout_marginTop="20dp"
                     android:src="@drawable/book1" />
 
+                <RatingBar
+                    android:id="@+id/bookdetail_rating"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/authors"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_toEndOf="@id/bookcovers"
+                    android:numStars="5"
+                    android:rating="1.5"
+                    android:stepSize="0.5" />
+
                 <TextView
                     android:id="@+id/bookname"
                     android:layout_width="wrap_content"
@@ -103,10 +117,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="110dp"
-                    android:layout_toEndOf="@+id/bookcovers"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="145dp"
+                    android:layout_toEndOf="@+id/dateadded"
                     android:drawableStart="@drawable/eye"
+                    android:layout_alignParentEnd="true"
                     android:fontFamily="sans-serif-condensed"
                     android:text="  viewcount"
                     android:textColor="@color/textgrey"
@@ -119,12 +134,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="145dp"
+                    android:layout_marginTop="150dp"
                     android:layout_toEndOf="@+id/bookcovers"
                     android:fontFamily="sans-serif-condensed"
                     android:text="date added"
                     android:textColor="@color/textgrey"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="italic" />
 
                 <Button
