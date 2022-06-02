@@ -28,7 +28,7 @@ class allbook : AppCompatActivity() {
         binding = ActivityAllbookBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        recyclerView = findViewById(R.id.newpage)
+        recyclerView = binding.allbookpage
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 

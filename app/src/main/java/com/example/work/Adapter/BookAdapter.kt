@@ -46,6 +46,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
     {
         val BookTitle = binding.booktitle
         val Author = binding.author
+        val viewCount = binding.viewcount
         val imagebook = binding.bookcover
 
     }
@@ -61,6 +62,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         //holder.imagebook.setImageURI(bookimageuri.toUri())
         //val bookId = data.bookId
         //handle click
+        holder.viewCount.text = data.viewCount.toString()
         holder.itemView.setOnClickListener {
             val intent = Intent(context, bookdetail::class.java)
             intent.putExtra("bookId", data.bookId)

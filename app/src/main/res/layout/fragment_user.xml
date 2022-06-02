@@ -78,13 +78,11 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/user_favourite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Favourite" />
+            android:text="Bookmark" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/user_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Review" />
