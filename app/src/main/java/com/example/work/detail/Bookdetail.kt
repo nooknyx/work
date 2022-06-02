@@ -145,6 +145,7 @@ class bookdetail : AppCompatActivity() {
                    //set data
                    binding.authors.text = Author
                    binding.bookname.text = BookTitle
+                   binding.bookdetailRating.rating = avgRatings.toFloat()
                    val date = MainActivity.formatTimeStamp(dateAdded)
                    binding.dateadded.text = date
                    binding.viewcount.text = viewCount

@@ -75,8 +75,6 @@ class MainActivity : AppCompatActivity() {
     companion object
     {
         fun formatTimeStamp(timestamp: Long) : String{
-            //val cal = Calendar.getInstance(Locale.ENGLISH)
-            //cal.timeInMillis = timestamp
             val date = Date(timestamp*1000)
             //format in dd/mm/yyyy
             return DateFormat.format("dd/MM/yyyy",date).toString()
