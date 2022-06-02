@@ -8,7 +8,9 @@ class Bookdata
     var Author : String? = ""
     var Image: String? = ""
     var bookId : String? = ""
-    var dateAdded : String? = ""
+    var dateAdded : Long? = 0
+    var AverageRatings : Double? = 0.0
+    var personalRate : Double? = 0.0
     var viewCount: Long? = 0
 
     /*constructor(name: String?, author: String?, bookid: String?) {
@@ -24,7 +26,9 @@ class Bookdata
         Author: String?,
         Image: String?,
         bookId: String?,
-        dateAdded: String?,
+        dateAdded: Long?,
+        AverageRatings : Double?,
+        personalRate : Double?,
         viewCount: Long?
     ) {
         this.BookTitle = BookTitle
@@ -32,6 +36,8 @@ class Bookdata
         this.Image = Image
         this.bookId = bookId
         this.dateAdded = dateAdded
+        this.AverageRatings = AverageRatings
+        this.personalRate = personalRate
         this.viewCount = viewCount
     }
 

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import com.example.work.Adapter.AdapterComment
+import com.example.work.MainActivity
 import com.example.work.R
 import com.example.work.data.Bookdata
 import com.example.work.Model.ModelComment
@@ -139,9 +140,14 @@ class bookdetail : AppCompatActivity() {
                    val BookTitle = "${snapshot.child("BookTitle").value}"
                    val Image = "${snapshot.child("Image").value}"
                    val viewCount = "${snapshot.child("viewCount").value}"
+                   val dateAdded = "${snapshot.child("dateAdded").value}".toLong()
+                   val avgRatings = "${snapshot.child("ratings").child("AverageRatings").value}"
                    //set data
                    binding.authors.text = Author
                    binding.bookname.text = BookTitle
+                   val date = MainActivity.formatTimeStamp(dateAdded)
+                   binding.dateadded.text = date
+                   binding.viewcount.text = viewCount
                    //set bookcover
                    //binding.bookcovers.setImageURI(Image.toUri())
                }

@@ -44,14 +44,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        tools:src="@drawable/popbook" />
+        android:background="@drawable/popbook" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="320dp"
-        tools:src="@drawable/newbook" />
+        android:background="@drawable/newbook" />
 
     <Button
         android:id="@+id/seeallbook"

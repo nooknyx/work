@@ -5,9 +5,14 @@ import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
+import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.example.work.ui.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -26,19 +31,19 @@ class MainActivity : AppCompatActivity() {
     lateinit var favfragment : Favourite
     lateinit var markfragment : Bookmark
     lateinit var userfragment : User
-
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        auth = FirebaseAuth.getInstance()
 
         val homefragment = Home()
         val searchfragment = Search()
         val favfragment = Favourite()
         val markfragment = Bookmark()
         val userfragment = User()
-
+        val logoutBtn = findViewById<ImageButton>(R.id.logoutBtn)
         setCurrentFragment(homefragment)
 
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -70,10 +75,11 @@ class MainActivity : AppCompatActivity() {
     companion object
     {
         fun formatTimeStamp(timestamp: Long) : String{
-            val cal = Calendar.getInstance(Locale.ENGLISH)
-            cal.timeInMillis = timestamp
+            //val cal = Calendar.getInstance(Locale.ENGLISH)
+            //cal.timeInMillis = timestamp
+            val date = Date(timestamp*1000)
             //format in dd/mm/yyyy
-            return DateFormat.format("dd/MM/yyyy",cal).toString()
+            return DateFormat.format("dd/MM/yyyy",date).toString()
         }
     }
 
