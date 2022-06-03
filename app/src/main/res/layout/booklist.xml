@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="16dp">
 
         <ImageView
@@ -16,7 +16,7 @@
             android:layout_height="133dp"
             app:srcCompat="@drawable/book_detail_box_2" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="346dp"
             android:layout_height="110dp"
             android:layout_marginVertical="10dp"
@@ -30,20 +30,21 @@
                 android:layout_marginStart="20dp"
                 android:src="@drawable/book1" />
 
-            <LinearLayout
-                android:layout_width="225dp"
-                android:layout_height="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/bookcover"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/booktitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BookTitle"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
                     android:fontFamily="sans-serif-condensed"
+                    android:text="BookTitle"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -51,25 +52,40 @@
                     android:id="@+id/author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Author"
+                    android:layout_below="@id/booktitle"
                     android:fontFamily="sans-serif-condensed"
+                    android:text="Author"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/viewcount"
-                    android:layout_width="61dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/author"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginStart="160dp"
-                    android:layout_marginTop="30dp"
-                    android:text="9999"
+                    android:drawableStart="@drawable/eyesmall"
+                    android:text="  9999"
                     android:textColor="@color/textgrey" />
 
+                <RatingBar
+                    android:id="@+id/booklist_rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/viewcount"
+                    android:layout_marginTop="5dp"
+                    android:numStars="5"
+                    android:rating="1.5"
+                    android:stepSize="0.5" />
 
-            </LinearLayout>
 
-        </LinearLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
