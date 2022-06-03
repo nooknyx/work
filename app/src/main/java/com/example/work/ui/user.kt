@@ -21,6 +21,7 @@ class User:Fragment(R.layout.fragment_user)
     private lateinit var userName: EditText
     private lateinit var userEmail: EditText
     private lateinit var binding: FragmentUserBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,16 +41,25 @@ class User:Fragment(R.layout.fragment_user)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.userUsername
+        binding.userProfile
+        binding.userEmail
 
-        /*binding.logoutBtn.setOnClickListener{
-            View.OnClickListener {
-                requireActivity().run {
 
-                    startActivity(Intent(context, login::class.java))
-                    //return@OnClickListener
-                }
+        auth = FirebaseAuth.getInstance()
+        val userid = auth.uid
+        if (auth.currentUser != null) {
+            binding.logoutBtn.setOnClickListener {
+                auth.signOut()
+                startActivity(Intent(activity, login::class.java))
+                activity?.finish()
             }
-        }*/
+        } else if (auth.currentUser!!.isAnonymous)
+        {
+            binding.userUsername.text = "Guest"
+            binding.userEmail.text = ""
+        }
+
 
     }
 
@@ -61,7 +71,5 @@ class User:Fragment(R.layout.fragment_user)
 
 
     }
-
-
 
 }
