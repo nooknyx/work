@@ -7,6 +7,95 @@
     android:background="#FFFFFF"
     tools:context=".detail.EditUser">
 
+    <!--Toolbar-->
+    <RelativeLayout
+        android:id="@+id/toolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/shape_toolbar_01">
+
+
+        <!--Backbtn-->
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/backbtn" />
+
+        <!--Title-->
+        <TextView
+            android:id="@+id/toolbartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Edit Profile"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <!--Profile pic-->
+        <ImageView
+            android:id="@+id/user_profile"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            android:layout_below="@id/toolbartitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@color/white"
+            android:src="@drawable/user_person" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="250dp">
+
+        <!--username input-->
+        <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundMode="none"
+            android:id="@+id/nameTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:startIconDrawable="@drawable/user_person"
+            app:hintEnabled="false">
+
+            <EditText
+                android:layout_marginTop="30dp"
+                android:id="@+id/nameEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edittextbox"
+                android:padding="10dp"
+                android:hint="username"
+                android:textColor="@color/black"
+                android:inputType="textPersonName|textCapWords"/>
+
+
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/updatebtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameTil"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/shape_button"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Update"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
 
 
 

@@ -22,10 +22,10 @@
 
         <ImageButton
             android:id="@+id/logoutBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="370dp"
+            android:layout_marginStart="350dp"
             android:background="@android:color/transparent"
             android:src="@drawable/logoutbtn" />
 
@@ -36,8 +36,8 @@
         android:layout_width="145dp"
         android:layout_height="148dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="80dp"
-        tools:src="@tools:sample/avatars" />
+        android:layout_marginTop="100dp"
+        android:src="@drawable/user_person" />
 
     <TextView
         android:id="@+id/user_username"
