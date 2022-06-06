@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+    android:background="@drawable/shape">
+
+    <!---back btn-->
+    <ImageButton
+        android:id="@+id/search_backbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/back_arrow"
+        android:padding="5dp"/>
+
+    <!--header-->
+    <TextView
+        android:id="@+id/search_booktitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:padding="5dp"
+        android:text="Book Title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <!--Book cover-->
+    <ImageView
+        android:id="@+id/search_bookcover"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/search_booktitle"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/book1"/>
+
+    <!--Book detail title-->
+    <TextView
+        android:id="@+id/search_bookname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_booktitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_toEndOf="@id/search_bookcover"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Book title"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <!--book detail author-->
+    <TextView
+        android:id="@+id/search_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bookname"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/search_bookcover"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Book title"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        />
+
+
+    <!--rating-->
+    <RatingBar
+        android:id="@+id/search_rating"
+        style="?android:attr/ratingBarStyleIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_author"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/search_bookcover"
+        android:numStars="5" />
+
+
+
+    <Button
+        android:id="@+id/search_viewbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bookcover"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_button"
+        android:text="View book"
+        android:textColor="@color/white" />
+
+
+</RelativeLayout>

@@ -41,6 +41,7 @@ class User:Fragment(R.layout.fragment_user)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.userUsername
         binding.userProfile
         binding.userEmail
@@ -65,10 +66,6 @@ class User:Fragment(R.layout.fragment_user)
 
     private fun showAllUserData() {
         val userRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
-
-
-
-
 
     }
 
