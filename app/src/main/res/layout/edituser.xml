@@ -79,8 +79,6 @@
                 android:inputType="textPersonName|textCapWords"/>
 
 
-
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

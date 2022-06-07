@@ -39,7 +39,7 @@
 
                 <TextView
                     android:id="@+id/booktitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-condensed"
@@ -50,7 +50,7 @@
 
                 <TextView
                     android:id="@+id/author"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/booktitle"
                     android:fontFamily="sans-serif-condensed"

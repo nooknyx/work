@@ -62,10 +62,9 @@
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@id/search_bookcover"
         android:fontFamily="sans-serif-condensed"
-        android:text="Book title"
+        android:text="author"
         android:textColor="@color/black"
-        android:textSize="18dp"
-        />
+        android:textSize="18dp" />
 
 
     <!--rating-->

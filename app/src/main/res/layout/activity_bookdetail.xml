@@ -86,7 +86,7 @@
 
                 <TextView
                     android:id="@+id/bookname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="20dp"
@@ -100,7 +100,7 @@
 
                 <TextView
                     android:id="@+id/authors"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/bookname"
                     android:layout_centerHorizontal="true"
@@ -151,7 +151,7 @@
                     android:layout_height="35dp"
                     android:layout_below="@+id/bookdetail_rating"
                     android:layout_marginStart="180dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="40dp"
                     android:background="@drawable/shape_button"
                     android:drawableEnd="@drawable/favourite_white"
                     android:fontFamily="sans-serif-condensed"
