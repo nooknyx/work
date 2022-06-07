@@ -1,4 +1,5 @@
 package com.example.work.ui
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +13,7 @@ import com.example.work.Adapter.BookAdapter
 import com.example.work.R
 import com.example.work.data.Bookdata
 import com.example.work.databinding.FragmentSearchBinding
+import com.example.work.databinding.SearchBookBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -20,7 +22,11 @@ import java.lang.Exception
 
 class Search: Fragment
 {
+
+    //view binding
     private lateinit var binding: FragmentSearchBinding
+
+
     public companion object{
         private const val  TAG = "BOOKS_TAG"
 
@@ -145,4 +151,22 @@ class Search: Fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+
+    /*private fun searchbookpopup(){
+
+    //inflate/ bind view for searched book dialog (search_book.xml)
+
+        val searchBinding = SearchBookBinding.inflate(LayoutInflater.from(this))
+
+        val builder = AlertDialog.Builder(this,R.style.CustomDialog)
+        builder.setView(searchBinding.root)
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+        searchBinding.searchBackbtn.setOnClickListener{
+            alertDialog.dismiss()
+        }
+    }*/
 }
