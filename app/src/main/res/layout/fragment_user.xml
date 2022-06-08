@@ -43,13 +43,6 @@
     </RelativeLayout>
 
 
-    <ScrollView
-
-        android:id="@+id/scoll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -105,7 +98,7 @@
 
 
 
-    </ScrollView>
+
 
 
 
