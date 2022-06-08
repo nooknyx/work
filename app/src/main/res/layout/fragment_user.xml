@@ -103,7 +103,7 @@
                     android:textAlignment="viewStart" />
 
 
-            </RelativeLayout
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -119,10 +119,10 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:drawableStart="@drawable/ic_baseline_mode_comment_24"
-            android:text="Comment"
+            android:text="  Comment"
             android:textSize="20dp"
             android:fontFamily="sans-serif-condensed"
             android:textStyle="bold"/>
