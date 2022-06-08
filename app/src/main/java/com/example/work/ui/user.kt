@@ -11,7 +11,10 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.work.MainActivity
 import com.example.work.R
+import com.example.work.databinding.ActivityBookdetailBinding
+import com.example.work.databinding.EdituserBinding
 import com.example.work.databinding.FragmentUserBinding
+import com.example.work.detail.EditUser
 import com.example.work.login
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -59,6 +62,8 @@ class User:Fragment(R.layout.fragment_user)
 
         firebaseAuth = FirebaseAuth.getInstance()
         val userid = firebaseAuth.uid
+        loadUserInfo(userid.toString())
+
         if (firebaseAuth.currentUser != null) {
             binding.logoutBtn.setOnClickListener {
                 firebaseAuth.signOut()
@@ -71,18 +76,27 @@ class User:Fragment(R.layout.fragment_user)
             binding.userEmail.text = ""
         }
 
-
-        binding.userEditbtn.setOnClickListener(){
-
+        binding.userEditbtn.setOnClickListener()
+        {
+            startActivity(Intent(activity, EditUser::class.java))
+            activity?.finish()
         }
+        /*binding.userEditbtn.setOnClickListener(
+            View.OnClickListener {
+                requireActivity().run {
+                    startActivity(Intent(this, EditUser::class.java))
+                    return@OnClickListener
+                }
+            }
+        )*/
 
     }
 
-    private fun loadUserInfo(){
+    private fun loadUserInfo(userid: String){
 
         //db references to load user info
         val ref = FirebaseDatabase.getInstance().getReference("users")
-        ref.child(firebaseAuth.uid!!)
+        ref.child(userid!!)
             .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //get user data
@@ -117,9 +131,5 @@ class User:Fragment(R.layout.fragment_user)
 
     }
 
-    private fun showAllUserData() {
-        val userRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
-
-    }
 
 }

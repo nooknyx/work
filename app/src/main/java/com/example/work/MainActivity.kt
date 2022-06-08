@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var markfragment : Bookmark
     lateinit var userfragment : User
     lateinit var auth: FirebaseAuth
+    private var fragmentset = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +44,13 @@ class MainActivity : AppCompatActivity() {
         val favfragment = Favourite()
         val markfragment = Bookmark()
         val userfragment = User()
-        val logoutBtn = findViewById<ImageButton>(R.id.logoutBtn)
-        setCurrentFragment(homefragment)
+        if (fragmentset == "1")
+        {
+            setCurrentFragment(userfragment)
+        } else {
+            setCurrentFragment(homefragment)
+        }
+
 
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
@@ -56,7 +62,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_fav -> setCurrentFragment(favfragment)
                 R.id.menu_mark -> setCurrentFragment(markfragment)
                 R.id.menu_user -> setCurrentFragment(userfragment)
-
             }
             true
         }

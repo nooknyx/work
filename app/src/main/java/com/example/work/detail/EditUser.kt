@@ -10,15 +10,21 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.work.MainActivity
 import com.example.work.R
 import com.example.work.databinding.EdituserBinding
+import com.example.work.databinding.FragmentUserBinding
+import com.example.work.ui.User
+import com.example.work.ui.booklist.allbook
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -55,10 +61,20 @@ class EditUser: AppCompatActivity()
         //init firebase authen
         firebaseAuth = FirebaseAuth.getInstance()
         loadUserInfo()
-
+        val userfragment = User()
         //handle click go back
+
         binding.backBtn.setOnClickListener{
             onBackPressed()
+            //startActivity(Intent(this, User::class.java))
+            //this.finish()
+            /*
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("fragmentset", "1")
+            this.startActivity(intent)
+            **/
+            //startActivity(Intent(this, MainActivity::class.java))
+            //intent.putExtra("fragmentset", "1")
         }
 
         //binding click, pick image from camera/gallery
@@ -71,9 +87,14 @@ class EditUser: AppCompatActivity()
             validateData()
         }
 
-
-
     }
+    private fun setCurrentFragment(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.mainFragment, fragment)
+            commit()
+
+        }
+
 
     private var name = ""
     private fun validateData() {
