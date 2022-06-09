@@ -168,7 +168,7 @@ class bookdetail : AppCompatActivity() {
 
         //path to db, loading comment
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
-        ref.child(bookId).child("Comment")
+        ref.child(bookId).child("Comments")
             .addValueEventListener(object : ValueEventListener{
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -338,7 +338,7 @@ class bookdetail : AppCompatActivity() {
         Log.d(TAG,"removeFromFavourite: Removing from fav")
 
         //database ref
-        val ref = FirebaseDatabase.getInstance().getReference("users")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
             .removeValue()
             .addOnSuccessListener {

@@ -5,21 +5,20 @@ import java.sql.Timestamp
 class ModelComment {
 
     //variables
-
-    var id = ""
     var bookId = ""
-    var timestamp = ""
     var comment = ""
+    var id = ""
+    var timestamp = ""
     var uid = ""
 
-    //constructor for firebase
-
-    constructor(id: String, bookId: String, timestamp: String, comment: String, uid: String) {
-
-        this.id = id
+    //empty constructor
+    constructor()
+    //constructor with parameters
+    constructor(bookId: String, comment: String, id: String, timestamp: String, uid: String) {
         this.bookId = bookId
-        this.timestamp = timestamp
         this.comment = comment
+        this.id = id
+        this.timestamp = timestamp
         this.uid = uid
     }
 

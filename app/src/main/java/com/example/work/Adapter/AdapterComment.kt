@@ -93,8 +93,8 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 val bookId = model.bookId
                 val commentId = model.id
 
-                val ref = FirebaseDatabase.getInstance().getReference("Book")
-                ref.child(model.bookId).child("comments").child(commentId)
+                val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                ref.child(model.bookId).child("Comment").child(commentId)
                     .removeValue()
                     .addOnSuccessListener {
                         Toast.makeText(context,"Comment is deleted", Toast.LENGTH_SHORT).show()
@@ -113,13 +113,13 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
     private fun loadUserDetails(model: ModelComment, holder: AdapterComment.HolderComment)
     {
         val uid = model.uid
-        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         ref.child(uid)
             .addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //getting profile img and name
 
-                    val name = "" + snapshot.child("name").value
+                    val name = "" + snapshot.child("username").value
                     val profileImage = "${snapshot.child("profileImage").value}"
 
                     //setting data
