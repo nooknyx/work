@@ -1,5 +1,6 @@
 package com.example.work.Adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.work.FilterSearch
 import com.example.work.MainActivity
 import com.example.work.data.Bookdata
@@ -58,6 +60,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         val data: Bookdata = bookdatalist[position]
         holder.BookTitle.text = data.BookTitle
         holder.Author.text = data.Author
+        Glide.with(context).load(data.Image.toString()).into(holder.imagebook)
         //val bookimageuri = data.Image.toString()
         //holder.imagebook.setImageURI(bookimageuri.toUri())
         //val bookId = data.bookId

@@ -20,12 +20,13 @@ class FilterSearch : Filter {
         val results = FilterResults()
         //value to be search should not be null and not empty
         if (constraint != null && constraint.isNotEmpty()){
-            //not null nor empty
+            //search value is not null nor empty
 
             //change to upper case, or lower case to remove case sensitivity
             constraint = constraint.toString().uppercase()
-            val filteredBook = ArrayList<Bookdata>()
-            for( i in filterList.indices){
+            val filteredBook:ArrayList<Bookdata> = ArrayList()
+            for( i in 0 until filterList.size){
+                //validate
                 if(filterList[i].BookTitle!!.uppercase().contains(constraint)){
                     //search value matched with title, add to list
                     filteredBook.add(filterList[i])
