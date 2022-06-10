@@ -50,7 +50,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         val Author = binding.author
         val viewCount = binding.viewcount
         val imagebook = binding.bookcover
-
+        val bookRating = binding.booklistRating
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
@@ -65,6 +65,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         //holder.imagebook.setImageURI(bookimageuri.toUri())
         //val bookId = data.bookId
         //handle click
+        holder.bookRating.rating = data.AverageRatings!!.toFloat()
         holder.viewCount.text = data.viewCount.toString()
         holder.itemView.setOnClickListener {
             val intent = Intent(context, bookdetail::class.java)

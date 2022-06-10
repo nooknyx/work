@@ -2,10 +2,12 @@ package com.example.work.detail
 
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
+import android.media.Rating
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
@@ -142,7 +144,7 @@ class bookdetail : AppCompatActivity() {
                    val Image = "${snapshot.child("Image").value}"
                    val viewCount = "${snapshot.child("viewCount").value}"
                    val dateAdded = "${snapshot.child("dateAdded").value}".toLong()
-                   val avgRatings = "${snapshot.child("ratings").child("AverageRatings").value}"
+                   val avgRatings = "${snapshot.child("AverageRatings").value}"
                    //set data
                    binding.authors.text = Author
                    binding.bookname.text = BookTitle
@@ -194,7 +196,7 @@ class bookdetail : AppCompatActivity() {
     }
 
     private var comment = ""
-
+    private var userrating = 0.0
     private fun addCommentDialog(){
 
         //Inflate/bind view for dialog (add_comment.xml)
@@ -211,17 +213,17 @@ class bookdetail : AppCompatActivity() {
             alertDialog.dismiss()
         }
 
+
         commentAddBinding.submitbtn.setOnClickListener{
-
+            userrating = commentAddBinding.addRating.rating.toDouble()
             comment = commentAddBinding.commentEt.text.toString().trim()
-
             if(comment.isEmpty()){
                 Toast.makeText(this,"Enter comment", Toast.LENGTH_SHORT).show()
             }
             else{
                 alertDialog.dismiss()
                 addComment()
-
+                totalRatings()
             }
         }
 
@@ -241,7 +243,7 @@ class bookdetail : AppCompatActivity() {
         hashMap["timestamp"] = "$timestamp"
         hashMap["comment"] = "$comment"
         hashMap["uid"] = "${firebaseAuth.uid}"
-
+        hashMap["userRating"]  = "${userrating}".toDouble()
         //add data into the the database
         //path book > bookid > comment > commentId > commentdata
 
@@ -259,6 +261,7 @@ class bookdetail : AppCompatActivity() {
         val uref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         uref.child(firebaseAuth.uid!!).child("Comments").child(timestamp)
             .setValue(hashMap)
+        finish()
     }
 
 
@@ -281,6 +284,36 @@ class bookdetail : AppCompatActivity() {
                 Toast.makeText(applicationContext,"Fail to get the book data", Toast.LENGTH_SHORT).show()
             }
     }*/
+    private fun totalRatings(){
+        var total = 0.0
+        var count = 0
+        var avgRatings = 0.0
+
+        //path to db, get ratings
+
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        ref.child(bookId).child("Comments")
+            .addValueEventListener(object : ValueEventListener{
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    for (ds in snapshot.children){
+                     val avgrate = ds.child("userRating").value.toString()
+                        total = total.plus(avgrate.toDouble())
+                        count = count.plus(1)
+                        avgRatings = total.div(count)
+                    }
+                    val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    ref.child(bookId).child("AverageRatings").setValue(avgRatings)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+    }
 
     private fun checkIsFavourite(){
 

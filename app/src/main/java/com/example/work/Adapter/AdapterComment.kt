@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -64,14 +65,14 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         val comment = model.comment
         val uid = model.uid
         val timestamp = model.timestamp
-
+        val userRating = model.userRating
         //timestamp format
         val date = MainActivity.formatTimeStamp(timestamp.toLong())
 
         //set data
         holder.dateTv.text = date
         holder.commentTv.text = comment
-
+        holder.commentRating.rating = userRating.toFloat()
         //
         loadUserDetails(model, holder)
 
@@ -152,7 +153,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
         val profileIv: ImageView = binding.profileIv
         val nameTv: TextView = binding.nameTv
-
+        val commentRating: RatingBar = binding.commentRating
         val dateTv: TextView = binding.dateTv
         val commentTv: TextView = binding.commentTv
     }
