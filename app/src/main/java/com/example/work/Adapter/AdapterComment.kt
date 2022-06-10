@@ -152,6 +152,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
         val profileIv: ImageView = binding.profileIv
         val nameTv: TextView = binding.nameTv
+
         val dateTv: TextView = binding.dateTv
         val commentTv: TextView = binding.commentTv
     }

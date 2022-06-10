@@ -79,8 +79,14 @@ class MainActivity : AppCompatActivity() {
 
     companion object
     {
-        fun formatTimeStamp(timestamp: Long) : String{
+        fun formatTimeStampT(timestamp: Long) : String{
             val date = Date(timestamp*1000)
+            //format in dd/mm/yyyy
+            return DateFormat.format("dd/MM/yyyy",date).toString()
+        }
+
+        fun formatTimeStamp(timestamp: Long) : String{
+            val date = Date(timestamp)
             //format in dd/mm/yyyy
             return DateFormat.format("dd/MM/yyyy",date).toString()
         }
