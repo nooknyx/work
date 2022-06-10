@@ -251,17 +251,17 @@ class bookdetail : AppCompatActivity() {
         ref.child(bookId).child("Comments").child(timestamp)
             .setValue(hashMap)
             .addOnSuccessListener {
-                progressDialog.dismiss()
+                //progressDialog.dismiss()
                 Toast.makeText(this,"Comment added",Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener{ e->
-                progressDialog.dismiss()
+                //progressDialog.dismiss()
                 Toast.makeText(this,"Failed to add comment", Toast.LENGTH_SHORT).show()
             }
         val uref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         uref.child(firebaseAuth.uid!!).child("Comments").child(timestamp)
             .setValue(hashMap)
-        finish()
+
     }
 
 
