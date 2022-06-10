@@ -221,6 +221,7 @@ class bookdetail : AppCompatActivity() {
             else{
                 alertDialog.dismiss()
                 addComment()
+
             }
         }
 
@@ -255,6 +256,32 @@ class bookdetail : AppCompatActivity() {
                 progressDialog.dismiss()
                 Toast.makeText(this,"Failed to add comment", Toast.LENGTH_SHORT).show()
             }
+        val uref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        uref.child(firebaseAuth.uid!!).child("Comments").child(timestamp)
+            .setValue(hashMap)
+    }
+
+    private fun addCommentToUsers(){
+        // showing progress
+        //progressDialog.setMessage("Adding Comment")
+        //progressDialog.show()
+
+        val timestamp = "${System.currentTimeMillis()}"
+
+        //setting up data to add comment in database
+        val hashMap = HashMap<String, Any>()
+        hashMap["id"] = "$timestamp"
+        hashMap["bookId"] = "$bookId"
+        hashMap["timestamp"] = "$timestamp"
+        hashMap["comment"] = "$comment"
+        hashMap["uid"] = "${firebaseAuth.uid}"
+
+        //add data into the the database
+        //path book > bookid > comment > commentId > commentdata
+
+        val uref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        uref.child(firebaseAuth.uid!!).child("Comments").child(timestamp)
+            .setValue(hashMap)
 
     }
 

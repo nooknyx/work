@@ -65,14 +65,14 @@ class EditUser: AppCompatActivity()
         //handle click go back
 
         binding.backBtn.setOnClickListener{
-            onBackPressed()
+            //onBackPressed()
             //startActivity(Intent(this, User::class.java))
             //this.finish()
-            /*
+
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("fragmentset", "1")
             this.startActivity(intent)
-            **/
+
             //startActivity(Intent(this, MainActivity::class.java))
             //intent.putExtra("fragmentset", "1")
         }
