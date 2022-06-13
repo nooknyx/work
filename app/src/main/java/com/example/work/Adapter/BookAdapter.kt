@@ -61,6 +61,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         //val bookimageuri = data.Image.toString()
         //holder.imagebook.setImageURI(bookimageuri.toUri())
         //val bookId = data.bookId
+
         //handle click
         holder.viewCount.text = data.viewCount.toString()
         holder.itemView.setOnClickListener {

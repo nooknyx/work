@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.booklist.popular">
-
+    android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/bookmark_toolbar"
+        android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@drawable/shape_toolbar_02">
+
+        <!--back button-->
 
         <ImageButton
             android:id="@+id/backBtn"
@@ -22,24 +20,28 @@
             android:background="@android:color/transparent"
             android:src="@drawable/backbtn" />
 
+
+        <!--book title-->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Popular Book"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:text="All books"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="60dp"
-        android:id="@+id/poppage"
+        android:id="@+id/allbook"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null"
-        tools:listitem="@layout/booklist" />
+        android:layout_below="@+id/toolbarRl"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

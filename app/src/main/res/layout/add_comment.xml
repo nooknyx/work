@@ -54,7 +54,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/commentEt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/white"
             android:inputType="textMultiLine|textCapSentences" />
 

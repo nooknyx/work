@@ -162,6 +162,7 @@ class EditUser: AppCompatActivity()
         ref.child(firebaseAuth.uid!!)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+
                     //get user data
                     val email = "${snapshot.child("email").value}"
                     val username = "${snapshot.child("username").value}"

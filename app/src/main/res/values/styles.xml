@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--for drop down menu-->
+
     <!--transparent background for dialog-->
     <style name="CustomDialog" parent="Theme.MaterialComponents.Dialog">
         <item name="android:windowIsTranslucent">true</item>

@@ -23,46 +23,26 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"/>
 
+
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/poplist"
+   <!-- Tab got showing book category, most view, all book etc-->
+
+    <com.google.android.material.tabs.TabItem
+        android:id="@+id/tablayout"
+        android:layout_marginTop="65dp"
         android:layout_width="match_parent"
-        android:layout_height="157dp"
-        android:layout_marginTop="140dp"
-        tools:listitem="@layout/homelist" />
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:tabBackground="@drawable/tab_selector"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight = "0dp"
+        app:tabMode="scrollable"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/newlist"
-        android:layout_width="match_parent"
-        android:layout_height="157dp"
-        android:layout_marginTop="380dp"
-        tools:listitem="@layout/homelist"/>
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/popbook" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
-        android:background="@drawable/newbook" />
-
-    <Button
-        android:id="@+id/seeallbook"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="see all book"
-        android:fontFamily="sans-serif-condensed"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:background="@drawable/shape_button"
-        android:layout_marginTop="600dp"
-        android:layout_marginHorizontal="100dp"/>
+   <androidx.viewpager.widget.ViewPager
+       android:id="@+id/viewPager"
+       android:layout_marginTop="125dp"
+       android:layout_height="match_parent"
+       android:layout_width="match_parent"/>
 
 </FrameLayout>

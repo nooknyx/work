@@ -12,11 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Work">
         <activity
+            android:name=".bookuser"
+            android:exported="false" />
+        <activity
             android:name=".ui.booklist.allbook"
             android:exported="false" />
         <activity
             android:name=".ui.booklist.popular"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".detail.bookdetail"
             android:exported="false" />

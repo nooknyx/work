@@ -7,7 +7,6 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
-        android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@drawable/shape_toolbar_02">
@@ -23,26 +22,23 @@
 
         <ImageButton
             android:id="@+id/logoutBtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="350dp"
+            android:layout_marginStart="360dp"
             android:background="@android:color/transparent"
             android:src="@drawable/logoutbtn" />
 
         <ImageButton
             android:id="@+id/user_editbtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="280dp"
+            android:layout_marginStart="320dp"
             android:background="@android:color/transparent"
             android:src="@drawable/edit_buttn" />
 
-
     </RelativeLayout>
-
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -53,8 +49,8 @@
                     android:id="@+id/user_profile"
                     android:layout_width="145dp"
                     android:layout_height="148dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
                     android:src="@drawable/user_person" />
 
                 <TextView
@@ -95,13 +91,6 @@
 
             </RelativeLayout>
 
-
-
-
-
-
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,10 +101,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:drawableStart="@drawable/ic_baseline_mode_comment_24"
+            android:fontFamily="sans-serif-condensed"
             android:text="  Comment"
             android:textSize="20dp"
-            android:fontFamily="sans-serif-condensed"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <!--Recycleview for comment-->
         <androidx.recyclerview.widget.RecyclerView

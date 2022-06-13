@@ -2,6 +2,7 @@ package com.example.work.Adapter
 
 import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,6 +16,7 @@ import com.example.work.MainActivity
 import com.example.work.R
 import com.example.work.Model.ModelComment
 import com.example.work.databinding.RowCommentBinding
+import com.example.work.detail.bookdetail
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,6 +36,9 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
     private lateinit var binding: RowCommentBinding
 
     private lateinit var firebaseAuth: FirebaseAuth
+
+    //hold boolean for favourtie value
+    private var isInMyBookmark = false
 
     //constructor
     constructor(context: Context, commentArrayList: ArrayList<ModelComment>){
@@ -64,6 +69,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         val comment = model.comment
         val uid = model.uid
         val timestamp = model.timestamp
+        val commentid = model.id
 
         //timestamp format
         val date = MainActivity.formatTimeStamp(timestamp.toLong())
@@ -83,6 +89,84 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         }
     }
 
+    //for bookmark comment
+
+    private fun checkIsBookmark(){
+
+        Log.d(bookdetail.TAG, "checkIsFavourite :Checking if book is in fav or not")
+
+        val ref = FirebaseDatabase.getInstance().getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Comments").child(commentid)
+            .addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    isInMyBookmark = snapshot.exists()
+                    if(isInMyBookmark){
+                        //available in favourite
+                        binding.bookmarkbtn
+                            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.bookmarkbtn_yellow,0,0)
+                        binding.bookmarkbtn.text = "Remove from bookmark"
+                    }
+                    else{
+                        //not available
+                        binding.bookmarkbtn
+                            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.bookmarkbtn,0,0)
+                        binding.bookmarkbtn.text = "Add to bookmark"
+
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+
+    }
+
+    private fun addToBookmark(){
+
+        val timestamp = System.currentTimeMillis()
+
+        //set up data to add in db
+        val hashMap = HashMap<String,Any>()
+        hashMap["commentid"] = id
+        hashMap["timestamp"] = timestamp
+
+        //save to db
+        val ref = FirebaseDatabase.getInstance().getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Comments").child(commentid)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                //add to fav
+                Log.d(bookdetail.TAG, "addToFavourite: Added to bookmark")
+            }
+            .addOnFailureListener{
+                //failed to add
+                Log.d(bookdetail.TAG, "addToFavourite: Failed to add to bookmark")
+                Toast.makeText(this,"Failed to add to bookmark",Toast.LENGTH_SHORT).show()
+            }
+
+
+    }
+
+    private fun removeFromBookmark(){
+
+        Log.d(bookdetail.TAG,"removeFromFavourite: Removing from fav")
+
+        //database ref
+        val ref = FirebaseDatabase.getInstance().getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Comments").child(commentid)
+            .removeValue()
+            .addOnSuccessListener {
+                Log.d(bookdetail.TAG,"Removed from favourite")
+            }
+            .addOnFailureListener{  e->
+                Log.d(bookdetail.TAG, "removeFromFavourite: Failed to remove")
+                Toast.makeText(this, "Failed to remove from Bookmark", Toast.LENGTH_LONG).show()
+            }
+    }
+
+
+    //hold the comment to delete
     private fun deleteCommentDialog(model: ModelComment, holder: AdapterComment.HolderComment) {
 
         //alert dialog
@@ -93,7 +177,10 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 val bookId = model.bookId
                 val commentId = model.id
 
-                val ref = FirebaseDatabase.getInstance().getReference("Book")
+                val ref = FirebaseDatabase
+                    .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("Books")
+
                 ref.child(model.bookId).child("comments").child(commentId)
                     .removeValue()
                     .addOnSuccessListener {
@@ -113,7 +200,10 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
     private fun loadUserDetails(model: ModelComment, holder: AdapterComment.HolderComment)
     {
         val uid = model.uid
-        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
+
         ref.child(uid)
             .addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {

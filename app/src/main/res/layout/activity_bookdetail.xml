@@ -33,12 +33,12 @@
             android:id="@+id/bookname_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:text="Bookname"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -105,9 +105,9 @@
                     android:layout_below="@id/bookname"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
                     android:layout_toEndOf="@+id/bookcovers"
                     android:fontFamily="sans-serif-condensed"
-                    android:layout_marginTop="5dp"
                     android:text="author"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -214,7 +214,6 @@
             android:layout_below="@+id/addCommnetBtn"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/row_comment" />
 

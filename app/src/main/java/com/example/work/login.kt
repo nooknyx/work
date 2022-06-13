@@ -99,12 +99,12 @@ class login : AppCompatActivity() {
         }
     }
     //if the user already sign in, go to MainActivity
-    override fun onStart() {
+   /* override fun onStart() {
         super.onStart()
         if(FirebaseAuth.getInstance().currentUser != null){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
-    }
+    }*/
 }

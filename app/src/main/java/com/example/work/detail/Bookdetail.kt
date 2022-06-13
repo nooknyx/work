@@ -125,16 +125,22 @@ class bookdetail : AppCompatActivity() {
 
         }
 
+        //for bookmarking comment
+
 
     }
 
    private fun loadBookDetails(){
 
        //Books > bookId > Detail
-       val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+       val ref = FirebaseDatabase
+           .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+           .getReference("Books")
+
        ref.child(bookId)
            .addListenerForSingleValueEvent(object: ValueEventListener{
                override fun onDataChange(snapshot: DataSnapshot) {
+
                    //get data
                    val Author = "${snapshot.child("Author").value}"
                    val BookTitle = "${snapshot.child("BookTitle").value}"
@@ -142,6 +148,7 @@ class bookdetail : AppCompatActivity() {
                    val viewCount = "${snapshot.child("viewCount").value}"
                    val dateAdded = "${snapshot.child("dateAdded").value}".toLong()
                    val avgRatings = "${snapshot.child("ratings").child("AverageRatings").value}"
+
                    //set data
                    binding.authors.text = Author
                    binding.bookname.text = BookTitle
@@ -149,7 +156,8 @@ class bookdetail : AppCompatActivity() {
                    val date = MainActivity.formatTimeStamp(dateAdded)
                    binding.dateadded.text = date
                    binding.viewcount.text = viewCount
-                   //set bookcover
+
+                    //set bookcover
                    //binding.bookcovers.setImageURI(Image.toUri())
                }
 
@@ -161,11 +169,12 @@ class bookdetail : AppCompatActivity() {
    }
 
     private fun showComments() {
+
         //init arraylist
         commentArrayList = ArrayList()
 
         //path to db, loading comment
-        val ref = FirebaseDatabase.getInstance().getReference("Book")
+        val ref = FirebaseDatabase.getInstance().getReference("Books")
         ref.child(bookId).child("Comment")
             .addValueEventListener(object : ValueEventListener{
 
@@ -287,12 +296,14 @@ class bookdetail : AppCompatActivity() {
                     isInMyFavourite = snapshot.exists()
                     if(isInMyFavourite){
                         //available in favourite
-                        binding.favebtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_red,0,0)
+                        binding.favebtn
+                            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_red,0,0)
                         binding.favebtn.text = "Remove from favourite"
                     }
                     else{
                         //not available
-                        binding.favebtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_white,0,0)
+                        binding.favebtn
+                            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_white,0,0)
                         binding.favebtn.text = "Add to favourite"
 
                     }
@@ -350,7 +361,10 @@ class bookdetail : AppCompatActivity() {
 
     fun incrementBookViewCount(bookId: String)
     {
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+
         ref.child(bookId)
             .addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -365,7 +379,10 @@ class bookdetail : AppCompatActivity() {
                     val hashMap = HashMap<String, Any>()
                     hashMap["viewCount"] = incViewCount
 
-                    val dbRef = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    val dbRef = FirebaseDatabase
+                        .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("Books")
+
                     dbRef.child(bookId).updateChildren(hashMap)
                 }
 
