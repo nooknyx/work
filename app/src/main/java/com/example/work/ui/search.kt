@@ -1,5 +1,5 @@
 package com.example.work.ui
-import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,7 +13,9 @@ import com.example.work.Adapter.BookAdapter
 import com.example.work.R
 import com.example.work.data.Bookdata
 import com.example.work.databinding.FragmentSearchBinding
-import com.example.work.databinding.SearchBookBinding
+import com.example.work.login
+import com.google.api.LogDescriptor
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -22,18 +24,14 @@ import java.lang.Exception
 
 class Search: Fragment
 {
-
-    //view binding
     private lateinit var binding: FragmentSearchBinding
-
-
     public companion object{
         private const val  TAG = "BOOKS_TAG"
 
         //receive data from activity to load books e.g bookId
         public fun newInstance(bookId: String, author: String, name: String): Search{
             val fragment = Search()
-            //put data to bundle
+            //put data to bundle intent
             val args = Bundle()
             args.putString("bookId",bookId)
             args.putString("author",author)
@@ -49,6 +47,7 @@ class Search: Fragment
 
     private lateinit var bookdatalist: ArrayList<Bookdata>
     private lateinit var bookAdapter: BookAdapter
+    private lateinit var auth: FirebaseAuth
 
     constructor()
 
@@ -69,8 +68,11 @@ class Search: Fragment
         savedInstanceState: Bundle?
     ): View?
     {
+        auth = FirebaseAuth.getInstance()
         //Inflate thje layout for this fragment
         binding = FragmentSearchBinding.inflate(LayoutInflater.from(context), container, false)
+        loadAllBooks()
+
 
         // search
         binding.editTextTextPersonName.addTextChangedListener{ object :TextWatcher{
@@ -102,20 +104,20 @@ class Search: Fragment
         val ref = FirebaseDatabase.getInstance().getReference("Books")
         ref.orderByChild("bookId").equalTo(bookId)
             .addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                //clear list before starting adding data into it
-                bookdatalist.clear()
-                for (ds in snapshot.children){
-                    //get data
-                    val model = ds.getValue(Bookdata::class.java)
-                    //add to list
-                    bookdatalist.add(model!!)
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //clear list before starting adding data into it
+                    bookdatalist.clear()
+                    for (ds in snapshot.children){
+                        //get data
+                        val model = ds.getValue(Bookdata::class.java)
+                        //add to list
+                        bookdatalist.add(model!!)
+                    }
+                    //setup adapter
+                    bookAdapter = BookAdapter(context!!, bookdatalist)
+                    //set adapter to recyclerview
+                    binding.booksRv.adapter = bookAdapter
                 }
-                //setup adapter
-                bookAdapter = BookAdapter(context!!, bookdatalist)
-                //set adapter to recyclerview
-                binding.booksRv.adapter = bookAdapter
-            }
 
                 override fun onCancelled(error: DatabaseError) {
 
@@ -126,7 +128,7 @@ class Search: Fragment
     private fun loadAllBooks(){
         //init list
         bookdatalist = ArrayList()
-        val ref = FirebaseDatabase.getInstance().getReference("Books")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
         ref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 //clear list before starting adding data into it
@@ -150,23 +152,15 @@ class Search: Fragment
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+/**
+        binding.searchScanbtn.setOnClickListener{
+            View.OnClickListener {
+                requireActivity().run {
+
+                    startActivity(Intent(context, ScanActivity::class.java))
+                    return@OnClickListener
+                }
+            }
+        }*/
     }
-
-
-    /*private fun searchbookpopup(){
-
-    //inflate/ bind view for searched book dialog (search_book.xml)
-
-        val searchBinding = SearchBookBinding.inflate(LayoutInflater.from(this))
-
-        val builder = AlertDialog.Builder(this,R.style.CustomDialog)
-        builder.setView(searchBinding.root)
-
-        val alertDialog = builder.create()
-        alertDialog.show()
-
-        searchBinding.searchBackbtn.setOnClickListener{
-            alertDialog.dismiss()
-        }
-    }*/
 }
