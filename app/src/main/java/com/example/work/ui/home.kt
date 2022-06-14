@@ -20,7 +20,6 @@ import com.example.work.data.Bookdata
 import com.example.work.databinding.ActivityBookdetailBinding
 import com.example.work.databinding.BooklistBinding
 import com.example.work.databinding.FragmentHomeBinding
-
 import com.google.firebase.database.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -76,7 +75,8 @@ class Home:Fragment(R.layout.fragment_home)
         newBookArrayList = arrayListOf<Bookdata>()*/
 
         setupViewPagerAdapter(binding.viewPager)
-        binding.tablayout.setupViewPagerAdapter(binding.viewPager)
+        binding.tablayout.setupWithViewPager(binding.viewPager)
+
         return binding.root
 
     }

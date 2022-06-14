@@ -101,13 +101,12 @@ class Booklist() : Fragment() {
                         for (newbookSnapshot in snapshot.children){
 
                             val newBook = newbookSnapshot.getValue(Bookdata::class.java)
-                            //val bookimage = "${popbookSnapshot.child("Image").value}"
+
 
                             booklistArrayList.add(newBook!!)
                         }
                         adapter = BookAdapter(context!!, booklistArrayList)
-                        //binding.newlist.adapter = bookAdapter
-                        //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
+
 
                     }
                     booklistArrayList.reverse()
@@ -135,13 +134,11 @@ class Booklist() : Fragment() {
 
 
                             val newBook = ratebookSnapshot.getValue(Bookdata::class.java)
-                            //val bookimage = "${popbookSnapshot.child("Image").value}"
+
 
                             booklistArrayList.add(newBook!!)
                         }
                         adapter = BookAdapter(context!!, booklistArrayList)
-                        //binding.newlist.adapter = bookAdapter
-                        //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                     }
                     booklistArrayList.reverse()
@@ -169,14 +166,12 @@ class Booklist() : Fragment() {
 
 
                             val popBook = popbookSnapshot.getValue(Bookdata::class.java)
-                            //val bookimage = "${popbookSnapshot.child("Image").value}"
+
 
                             booklistArrayList.add(popBook!!)
                         }
                         adapter = BookAdapter(context!!, booklistArrayList)
 
-                        //binding.poplist.adapter = bookAdapter
-                        //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                     }
                     booklistArrayList.reverse()
