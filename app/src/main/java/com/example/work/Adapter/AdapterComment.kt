@@ -96,7 +96,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         Log.d(bookdetail.TAG, "checkIsFavourite :Checking if book is in fav or not")
 
         val ref = FirebaseDatabase.getInstance().getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Comments").child(commentid)
+        ref.child(firebaseAuth.uid!!).child("Comments").child("id")
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     isInMyBookmark = snapshot.exists()
@@ -128,12 +128,12 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
         //set up data to add in db
         val hashMap = HashMap<String,Any>()
-        hashMap["commentid"] = id
+        hashMap["commentid"] = timestamp
         hashMap["timestamp"] = timestamp
 
         //save to db
         val ref = FirebaseDatabase.getInstance().getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Comments").child(commentid)
+        ref.child(firebaseAuth.uid!!).child("Comments").child("id")
             .setValue(hashMap)
             .addOnSuccessListener {
                 //add to fav
@@ -142,7 +142,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
             .addOnFailureListener{
                 //failed to add
                 Log.d(bookdetail.TAG, "addToFavourite: Failed to add to bookmark")
-                Toast.makeText(this,"Failed to add to bookmark",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Failed to add to bookmark",Toast.LENGTH_SHORT).show()
             }
 
 
@@ -154,14 +154,14 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
         //database ref
         val ref = FirebaseDatabase.getInstance().getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Comments").child(commentid)
+        ref.child(firebaseAuth.uid!!).child("Comments").child("id")
             .removeValue()
             .addOnSuccessListener {
                 Log.d(bookdetail.TAG,"Removed from favourite")
             }
             .addOnFailureListener{  e->
                 Log.d(bookdetail.TAG, "removeFromFavourite: Failed to remove")
-                Toast.makeText(this, "Failed to remove from Bookmark", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Failed to remove from Bookmark", Toast.LENGTH_LONG).show()
             }
     }
 

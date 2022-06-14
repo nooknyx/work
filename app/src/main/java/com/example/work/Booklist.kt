@@ -15,11 +15,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class Booklist : Fragment() {
+class Booklist() : Fragment() {
 
     //view binding fragment_booklist.xml => FragmentBooklistBinding
     private lateinit var binding: FragmentBooklistBinding
-    
+
     companion object{
         private const val TAG = "BOOKS_LIST_TAG"
         
@@ -37,16 +37,14 @@ class Booklist : Fragment() {
         }
         
     }
-    
+
     private var categoryId = ""
     private var category = ""
     private var uid = ""
     
     private lateinit var booklistArrayList: ArrayList<Bookdata>
     private lateinit var adapter: BookAdapter
-    
-    constructor()
-    
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         

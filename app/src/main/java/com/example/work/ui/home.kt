@@ -40,9 +40,7 @@ class Home:Fragment(R.layout.fragment_home)
     //recyclerview for new books
     private lateinit var newBookRecyclerView: RecyclerView
     private lateinit var newBookArrayList : ArrayList<Bookdata>
-
     private lateinit var viewPagerAdapter: ViewPagerAdapter
-
     private lateinit var categoryArrayList: ArrayList<ModelCategory>
 
 
@@ -65,29 +63,21 @@ class Home:Fragment(R.layout.fragment_home)
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         //popular book list
-        //popBookRecyclerView = binding.poplist
-        popBookRecyclerView.layoutManager = LinearLayoutManager(context)
+        //popBookRecyclerView = binding.viewPager
+        /*popBookRecyclerView.layoutManager = LinearLayoutManager(context)
         popBookRecyclerView.setHasFixedSize(true)
-        popBookArrayList = arrayListOf<Bookdata>()
+        popBookArrayList = arrayListOf<Bookdata>()*/
 
 
         //new book list
         //newBookRecyclerView = binding.newlist
-        newBookRecyclerView.layoutManager = LinearLayoutManager(context)
+        /*newBookRecyclerView.layoutManager = LinearLayoutManager(context)
         newBookRecyclerView.setHasFixedSize(true)
-        newBookArrayList = arrayListOf<Bookdata>()
+        newBookArrayList = arrayListOf<Bookdata>()*/
 
-        return binding.root
-
-/*
-        val popimage = view.findViewById<ImageView>(R.id.imageView3)
-        val newimage = view.findViewById<ImageView>(R.id.imageView4)
-        popimage.visibility = View.VISIBLE
-        newimage.visibility = View.VISIBLE
-
- */
         setupViewPagerAdapter(binding.viewPager)
         binding.tablayout.setupViewPagerAdapter(binding.viewPager)
+        return binding.root
 
     }
 
@@ -97,7 +87,7 @@ class Home:Fragment(R.layout.fragment_home)
     private fun setupViewPagerAdapter(viewPager: ViewPager){
 
         viewPagerAdapter = ViewPagerAdapter(
-            childFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, this)
+            childFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, requireContext())
 
         categoryArrayList = ArrayList()
 
@@ -174,6 +164,9 @@ class Home:Fragment(R.layout.fragment_home)
                     //refresh list
                     viewPagerAdapter.notifyDataSetChanged()
                 }
+
+            }
+            override fun onCancelled(error: DatabaseError) {
 
             }
 

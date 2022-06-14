@@ -54,7 +54,7 @@ class bookdetail : AppCompatActivity() {
     //getting view count whenever user access this page
 
 
-    private companion object{
+     companion object{
         //TAG
         const val TAG = "BOOK_DETAIL_TAG"
     }
