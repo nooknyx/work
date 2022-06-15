@@ -64,9 +64,6 @@ class Favourite:Fragment(R.layout.fragment_fav)
                         val model = ModelCategory()
                         model.id = bookId
 
-                        //add model to list
-                        booksArrayList.add(model)
-
                     }
 
                     //setup adapter
