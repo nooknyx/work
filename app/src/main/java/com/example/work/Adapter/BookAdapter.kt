@@ -61,8 +61,6 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         holder.BookTitle.text = data.BookTitle
         holder.Author.text = data.Author
         Glide.with(context).load(data.Image.toString()).into(holder.imagebook)
-        //val bookimageuri = data.Image.toString()
-        //holder.imagebook.setImageURI(bookimageuri.toUri())
         //val bookId = data.bookId
 
         //handle click
