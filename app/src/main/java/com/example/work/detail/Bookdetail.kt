@@ -70,7 +70,7 @@ class bookdetail : AppCompatActivity() {
         //init firebase authen
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if(firebaseAuth.currentUser==null){
+        if(firebaseAuth.currentUser != null){
             //check for faveourtie for logged in user
             checkIsFavourite()
         }
@@ -268,26 +268,6 @@ class bookdetail : AppCompatActivity() {
 
     }
 
-//    private fun readFirestoreData(){
-//        var db = bookReference.collection("book")
-//        db.orderBy("bookID").get()
-//            .addOnSuccessListener { snapshot -> //or [it] is fine
-//                if (snapshot != null){
-//                    bookList.clear()
-//                    val books = snapshot.toObjects(Bookdata::class.java)
-//                    for (book in books){
-//                        bookList.add(book)
-//                    }
-//                    //val adapter = BookAdapter(bookList)
-//                    //listView.adapter = adapter
-//                    Log.d("Firestore Read",books.toString())
-//                }
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(applicationContext,"Fail to get the book data", Toast.LENGTH_SHORT).show()
-//            }
-//    }
-
     private fun checkIsFavourite(){
 
         Log.d(TAG, "checkIsFavourite :Checking if book is in fav or not")
@@ -299,7 +279,10 @@ class bookdetail : AppCompatActivity() {
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    isInMyFavourite = snapshot.exists()
+                    //isInMyFavourite = snapshot.exists()
+                    if (snapshot.exists()) {
+                        isInMyFavourite = true
+                    }
                     if(isInMyFavourite){
                         //available in favourite
                         binding.favebtn

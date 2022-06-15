@@ -33,27 +33,9 @@ class Home:Fragment(R.layout.fragment_home)
 
     private lateinit var binding: FragmentHomeBinding
     //private var db = Firebase.firestore
-    //recyclerview for popular books
-    private lateinit var popBookRecyclerView: RecyclerView
-    private lateinit var popBookArrayList : ArrayList<Bookdata>
-    private lateinit var bookAdapter: BookAdapter
-
-    //recyclerview for new books
-    private lateinit var newBookRecyclerView: RecyclerView
-    private lateinit var newBookArrayList : ArrayList<Bookdata>
+    //bookViewPager
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var categoryArrayList: ArrayList<ModelCategory>
-
-
-    //private var category = ""
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val args = arguments
-        if (args != null){
-            category = args.getString("category")!!
-        }
-    }*/
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,19 +44,6 @@ class Home:Fragment(R.layout.fragment_home)
     ): View? {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
-
-        //popular book list
-        //popBookRecyclerView = binding.viewPager
-        /*popBookRecyclerView.layoutManager = LinearLayoutManager(context)
-        popBookRecyclerView.setHasFixedSize(true)
-        popBookArrayList = arrayListOf<Bookdata>()*/
-
-
-        //new book list
-        //newBookRecyclerView = binding.newlist
-        /*newBookRecyclerView.layoutManager = LinearLayoutManager(context)
-        newBookRecyclerView.setHasFixedSize(true)
-        newBookArrayList = arrayListOf<Bookdata>()*/
 
         setupViewPagerAdapter(binding.viewPager)
         binding.tablayout.setupWithViewPager(binding.viewPager)

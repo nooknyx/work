@@ -35,6 +35,8 @@ class Favourite:Fragment(R.layout.fragment_fav)
     ): View? {
 
         binding = FragmentFavBinding.inflate(layoutInflater)
+        firebaseAuth = FirebaseAuth.getInstance()
+        loadFavouriteBooks()
         return binding.root
     }
 
@@ -48,39 +50,36 @@ class Favourite:Fragment(R.layout.fragment_fav)
 
         val ref = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Favourite")
-            .addValueEventListener(object : ValueEventListener{
+                .getReference("users")
+                    ref.child(firebaseAuth.uid!!).child("Favourite")
+                .addValueEventListener(object : ValueEventListener{
 
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    //clear list before adding data
-                    booksArrayList.clear()
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        //clear list before adding data
+                        booksArrayList.clear()
 
-                    for (ds in snapshot.children){
-                        //get bookid
-                        val bookId = "${ds.child("bookId").value}"
+                        for (ds in snapshot.children){
+                            //get bookid
+                            val bookId = "${ds.child("bookId").value}"
 
-                        //set model
-                        val model = ModelCategory()
-                        model.id = bookId
+                            //set model
+                            val model = ModelCategory()
+                            model.id = bookId
 
-                        //add model to list
-                        booksArrayList.add(model)
+                        }
+
+                        //setup adapter
+                        adapterFavourite = AdapterFavourite(context!!, booksArrayList)
+
+                        //adapter for recycleview
+                        binding.favRv.adapter = adapterFavourite
 
                     }
 
-                    //setup adapter
-                    adapterFavourite = AdapterFavourite(this@Favourite, booksArrayList)
-
-                    //adapter for recycleview
-                    binding.favRv.adapter = adapterFavourite
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
 
     }
 }

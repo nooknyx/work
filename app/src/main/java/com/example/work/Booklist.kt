@@ -105,20 +105,20 @@ class Booklist() : Fragment() {
         bRef.addValueEventListener(object : ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                booklistArrayList.clear()
+                if (booklistArrayList.count() > 0 )
+                {
+                    booklistArrayList.clear()
+                }
                 if (snapshot.exists()) {
                     for (allBookSnapshot in snapshot.children) {
                         val allBook = allBookSnapshot.getValue(Bookdata::class.java)
-                        //val bookimage = "${allBookSnapshot.child("Image").value}"
+
 
                         booklistArrayList.add(allBook!!)
                     }
-
                     adapter = BookAdapter(context!!, booklistArrayList)
                     binding.booksRv.adapter = adapter
-
                 }
-                booklistArrayList.reverse()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -135,12 +135,15 @@ class Booklist() : Fragment() {
         bRef.orderByChild("dateAdded").limitToLast(10)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    booklistArrayList.clear()
+                    if (booklistArrayList.count() > 0 )
+                    {
+                        booklistArrayList.clear()
+                    }
                     if (snapshot.exists()){
                         for (newbookSnapshot in snapshot.children){
 
                             val newBook = newbookSnapshot.getValue(Bookdata::class.java)
-                            //val bookimage = "${popbookSnapshot.child("Image").value}"
+
 
                             booklistArrayList.add(newBook!!)
                         }
@@ -148,7 +151,6 @@ class Booklist() : Fragment() {
                         adapter = BookAdapter(context!!, booklistArrayList)
                         binding.booksRv.adapter = adapter
 
-                        //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                     }
                     booklistArrayList.reverse()
@@ -170,18 +172,20 @@ class Booklist() : Fragment() {
         bRef.orderByChild("AverageRatings").limitToLast(10)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    booklistArrayList.clear()
+                    if (booklistArrayList.count() > 0 )
+                    {
+                        booklistArrayList.clear()
+                    }
                     if (snapshot.exists()){
                         for (ratebookSnapshot in snapshot.children){
 
                             val newBook = ratebookSnapshot.getValue(Bookdata::class.java)
-                            //val bookimage = "${popbookSnapshot.child("Image").value}"
+
 
                             booklistArrayList.add(newBook!!)
                         }
                         adapter = BookAdapter(context!!, booklistArrayList)
                         binding.booksRv.adapter = adapter
-                        //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                     }
                     booklistArrayList.reverse()
@@ -203,20 +207,23 @@ class Booklist() : Fragment() {
         bRef.orderByChild("viewCount").limitToLast(10)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    booklistArrayList.clear()
+                    if (booklistArrayList.count() > 0 )
+                    {
+                        booklistArrayList.clear()
+                    }
                     if (snapshot.exists()){
                         for (popbookSnapshot in snapshot.children){
 
 
                             val popBook = popbookSnapshot.getValue(Bookdata::class.java)
-                            //val bookimage = "${popbookSnapshot.child("Image").value}"
+
 
                             booklistArrayList.add(popBook!!)
                         }
                         adapter = BookAdapter(context!!, booklistArrayList)
                         binding.booksRv.adapter = adapter
 
-                        //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
+
 
                     }
                     booklistArrayList.reverse()
@@ -237,12 +244,15 @@ class Booklist() : Fragment() {
         bRef.orderByChild("category").equalTo("Psychology")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    booklistArrayList.clear()
+                    if (booklistArrayList.count() > 0 )
+                    {
+                        booklistArrayList.clear()
+                    }
                     if (snapshot.exists()){
                         for (psybookSnapshot in snapshot.children){
 
                             val psyBook = psybookSnapshot.getValue(Bookdata::class.java)
-                            //val bookimage = "${popbookSnapshot.child("Image").value}"
+
 
                             booklistArrayList.add(psyBook!!)
                         }
@@ -250,10 +260,8 @@ class Booklist() : Fragment() {
                         adapter = BookAdapter(context!!, booklistArrayList)
                         binding.booksRv.adapter = adapter
 
-                        //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                     }
-                    booklistArrayList.reverse()
                 }
 
                 override fun onCancelled(error: DatabaseError) {

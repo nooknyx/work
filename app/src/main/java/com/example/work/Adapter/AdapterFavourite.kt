@@ -74,7 +74,7 @@ class AdapterFavourite: RecyclerView.Adapter<AdapterFavourite.HolderBookFavourit
         val ref = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books")
-        ref.child(bookId)
+        ref.child(bookId!!)
             .addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //get book data
