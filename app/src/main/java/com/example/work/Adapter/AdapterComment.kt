@@ -150,17 +150,17 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     private fun removeFromBookmark(){
 
-        Log.d(bookdetail.TAG,"removeFromFavourite: Removing from fav")
+        Log.d(bookdetail.TAG,"removeFromBookmark: Removing from fav")
 
         //database ref
         val ref = FirebaseDatabase.getInstance().getReference("users")
         ref.child(firebaseAuth.uid!!).child("Comments").child("id")
             .removeValue()
             .addOnSuccessListener {
-                Log.d(bookdetail.TAG,"Removed from favourite")
+                Log.d(bookdetail.TAG,"Removed from Bookmark")
             }
             .addOnFailureListener{  e->
-                Log.d(bookdetail.TAG, "removeFromFavourite: Failed to remove")
+                Log.d(bookdetail.TAG, "removeFromBookmark: Failed to remove")
                 Toast.makeText(context, "Failed to remove from Bookmark", Toast.LENGTH_LONG).show()
             }
     }

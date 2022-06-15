@@ -76,7 +76,7 @@ class Home:Fragment(R.layout.fragment_home)
         newBookArrayList = arrayListOf<Bookdata>()*/
 
         setupViewPagerAdapter(binding.viewPager)
-        binding.tablayout.setupViewPagerAdapter(binding.viewPager)
+        binding.tablayout.setupWithViewPager(binding.viewPager)
         return binding.root
 
     }

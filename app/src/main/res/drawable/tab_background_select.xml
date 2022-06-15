@@ -4,7 +4,7 @@
 
     <!--filled color for selected item-->
 
-    <solid android:color="@color/orangedarker"/>
+    <solid android:color="@color/mainorange"/>
     <corners android:radius="8dp"/>
 
 </shape>

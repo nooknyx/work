@@ -20,6 +20,8 @@ class Booklist() : Fragment() {
     //view binding fragment_booklist.xml => FragmentBooklistBinding
     private lateinit var binding: FragmentBooklistBinding
 
+
+
     companion object{
         private const val TAG = "BOOKS_LIST_TAG"
         
@@ -64,12 +66,15 @@ class Booklist() : Fragment() {
         
         // Inflate the layout for this fragment
         binding = FragmentBooklistBinding.inflate(LayoutInflater.from(context), container, false)
+
+
         
         //load data
         Log.d(TAG, "onCreateView: Category: $category")
         
         if(category == "All"){
             //load all book
+            loadAllBooks()
         }
         else if (category == "Most Viewed"){
             //load most view book
@@ -88,6 +93,40 @@ class Booklist() : Fragment() {
         return binding.root
     }
 
+    private fun loadAllBooks() {
+        //init list
+        booklistArrayList = ArrayList()
+        val bRef = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+        bRef.addValueEventListener(object : ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                booklistArrayList.clear()
+                if (snapshot.exists()) {
+                    for (allBookSnapshot in snapshot.children) {
+                        val allBook = allBookSnapshot.getValue(Bookdata::class.java)
+                        //val bookimage = "${allBookSnapshot.child("Image").value}"
+
+                        booklistArrayList.add(allBook!!)
+                    }
+
+                    adapter = BookAdapter(context!!, booklistArrayList)
+                    binding.booksRv.adapter = adapter
+
+                }
+                booklistArrayList.reverse()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+
+
+
     private fun loadNewBooks(query: String) {
         booklistArrayList = ArrayList()
         val bRef = FirebaseDatabase
@@ -105,8 +144,10 @@ class Booklist() : Fragment() {
 
                             booklistArrayList.add(newBook!!)
                         }
+
                         adapter = BookAdapter(context!!, booklistArrayList)
-                        //binding.newlist.adapter = bookAdapter
+                        binding.booksRv.adapter = adapter
+
                         //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                     }
@@ -133,14 +174,13 @@ class Booklist() : Fragment() {
                     if (snapshot.exists()){
                         for (ratebookSnapshot in snapshot.children){
 
-
                             val newBook = ratebookSnapshot.getValue(Bookdata::class.java)
                             //val bookimage = "${popbookSnapshot.child("Image").value}"
 
                             booklistArrayList.add(newBook!!)
                         }
                         adapter = BookAdapter(context!!, booklistArrayList)
-                        //binding.newlist.adapter = bookAdapter
+                        binding.booksRv.adapter = adapter
                         //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                     }
@@ -174,8 +214,8 @@ class Booklist() : Fragment() {
                             booklistArrayList.add(popBook!!)
                         }
                         adapter = BookAdapter(context!!, booklistArrayList)
+                        binding.booksRv.adapter = adapter
 
-                        //binding.poplist.adapter = bookAdapter
                         //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
 
                     }
