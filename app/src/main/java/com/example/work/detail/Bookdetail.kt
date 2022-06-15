@@ -70,7 +70,7 @@ class bookdetail : AppCompatActivity() {
         //init firebase authen
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if(firebaseAuth.currentUser!=null){
+        if(firebaseAuth.currentUser==null){
             //check for faveourtie for logged in user
             checkIsFavourite()
         }
@@ -107,7 +107,7 @@ class bookdetail : AppCompatActivity() {
             //only login user can add favourite
 
             //checking if user is login or not
-            if(firebaseAuth.currentUser != null){
+            if(firebaseAuth.currentUser == null){
                 //not login, user can't do fav
                 Toast.makeText(this,"You are not logged in",Toast.LENGTH_SHORT).show()
             }
@@ -292,7 +292,10 @@ class bookdetail : AppCompatActivity() {
 
         Log.d(TAG, "checkIsFavourite :Checking if book is in fav or not")
 
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
+
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -313,7 +316,7 @@ class bookdetail : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+
                 }
             })
 
@@ -329,7 +332,10 @@ class bookdetail : AppCompatActivity() {
         hashMap["timestamp"] = timestamp
 
         //save to db
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
+
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .setValue(hashMap)
             .addOnSuccessListener {
@@ -350,7 +356,10 @@ class bookdetail : AppCompatActivity() {
         Log.d(TAG,"removeFromFavourite: Removing from fav")
 
         //database ref
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
+
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .removeValue()
             .addOnSuccessListener {

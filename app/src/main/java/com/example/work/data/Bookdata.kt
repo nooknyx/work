@@ -12,6 +12,7 @@ class Bookdata
     var AverageRatings : Double? = 0.0
     var personalRate : Double? = 0.0
     var viewCount: Long? = 0
+    var isFavourite = false
 
     /*constructor(name: String?, author: String?, bookid: String?) {
         this.name = name
@@ -29,7 +30,8 @@ class Bookdata
         dateAdded: Long?,
         AverageRatings : Double?,
         personalRate : Double?,
-        viewCount: Long?
+        viewCount: Long?,
+        isFavoutire: Boolean
     ) {
         this.BookTitle = BookTitle
         this.Author = Author
@@ -39,6 +41,7 @@ class Bookdata
         this.AverageRatings = AverageRatings
         this.personalRate = personalRate
         this.viewCount = viewCount
+        this.isFavourite = isFavourite
     }
 
 }

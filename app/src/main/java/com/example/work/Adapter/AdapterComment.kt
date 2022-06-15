@@ -152,7 +152,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     private fun removeFromBookmark(){
 
-        Log.d(bookdetail.TAG,"removeFromBookmark: Removing from fav")
+        Log.d(bookdetail.TAG,"removeFromBookmark: Removing from bookmark")
 
         //database ref
         val ref = FirebaseDatabase.getInstance().getReference("users")
