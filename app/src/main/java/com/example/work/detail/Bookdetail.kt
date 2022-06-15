@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
+import com.bumptech.glide.Glide
 import com.example.work.Adapter.AdapterComment
 import com.example.work.MainActivity
 import com.example.work.R
@@ -147,16 +148,17 @@ class bookdetail : AppCompatActivity() {
                    val Image = "${snapshot.child("Image").value}"
                    val viewCount = "${snapshot.child("viewCount").value}"
                    val dateAdded = "${snapshot.child("dateAdded").value}".toLong()
-                   val avgRatings = "${snapshot.child("ratings").child("AverageRatings").value}"
+                   val avgRatings = "${snapshot.child("AverageRatings").value}".toFloat()
+
 
                    //set data
                    binding.authors.text = Author
                    binding.bookname.text = BookTitle
-                   binding.bookdetailRating.rating = avgRatings.toFloat()
-                   val date = MainActivity.formatTimeStamp(dateAdded)
+                   binding.bookdetailRating.rating = avgRatings
+                   val date = MainActivity.formatTimeStampT(dateAdded)
                    binding.dateadded.text = date
                    binding.viewcount.text = viewCount
-
+                   Glide.with(this@bookdetail).load(Image).into(binding.bookcovers)
                     //set bookcover
                    //binding.bookcovers.setImageURI(Image.toUri())
                }
