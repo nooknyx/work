@@ -1,5 +1,6 @@
 package com.example.work.Adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,12 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.work.FilterSearch
+import com.example.work.MainActivity
 import com.example.work.data.Bookdata
+import com.example.work.R
 import com.example.work.databinding.BooklistBinding
 import com.example.work.detail.bookdetail
+import io.grpc.InternalChannelz.id
 
 
 class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable

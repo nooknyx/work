@@ -3,13 +3,11 @@ package com.example.work
 import android.widget.Filter
 import com.example.work.Adapter.BookAdapter
 import com.example.work.data.Bookdata
-import com.example.work.ui.Search
 
 class FilterSearch : Filter {
 
-    private var filterList: ArrayList<Bookdata>
-    //adapter which filter need to implement
-    private var bookAdapter: BookAdapter
+    var filterList: ArrayList<Bookdata>
+    var bookAdapter: BookAdapter
 
     constructor(filterList: ArrayList<Bookdata>, bookAdapter: BookAdapter) : super() {
         this.filterList = filterList
@@ -18,10 +16,12 @@ class FilterSearch : Filter {
 
     override fun performFiltering(constraint: CharSequence): FilterResults {
         //value to search
-        var constraint = constraint
+        var constraint: CharSequence? = constraint
         val results = FilterResults()
         //value to be search should not be null and not empty
         if (constraint != null && constraint.isNotEmpty()){
+            //search value is not null nor empty
+
             //change to upper case, or lower case to remove case sensitivity
             constraint = constraint.toString().uppercase()
             val filteredBook:ArrayList<Bookdata> = ArrayList()
@@ -32,7 +32,7 @@ class FilterSearch : Filter {
                     filteredBook.add(filterList[i])
                 }
                 if(filterList[i].Author!!.uppercase().contains(constraint)){
-                    //search value matched with author, add to list
+                    //search value matched with title, add to list
                     filteredBook.add(filterList[i])
                 }
             }

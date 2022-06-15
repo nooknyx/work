@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.work.Adapter.BookAdapter
 import com.example.work.data.Bookdata
+import com.example.work.databinding.BooklistBinding
 import com.example.work.databinding.FragmentBooklistBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

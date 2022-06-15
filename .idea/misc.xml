@@ -7,6 +7,9 @@
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/drawable/shape_button.xml" value="0.2185" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/drawable/shape_edittextbox.xml" value="0.2595" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/drawable/shape_header.xml" value="0.2595" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/drawable/tab_background_select.xml" value="0.208" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/drawable/tab_background_unselected.xml" value="0.208" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/drawable/tab_selector.xml" value="0.208" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_allbook.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_bookdetail.xml" value="0.264" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/activity_login.xml" value="0.22871376811594202" />
@@ -18,6 +21,7 @@
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/allbooks.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/booklist.xml" value="0.536" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/edituser.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_booklist.xml" value="0.16757246376811594" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_bookmark.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_fav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Public/Downloads/app/src/main/res/layout/fragment_home.xml" value="0.264" />
@@ -47,14 +51,6 @@
         <entry key="..\:/Users/anthe/Desktop/Work/Final Project/v2/0328test2/Downloads/app/src/main/res/layout/fragment_user.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/anthe/Desktop/Work/Final Project/v2/0328test2/Downloads/app/src/main/res/layout/row_comment.xml" value="0.21875" />
         <entry key="..\:/Users/anthe/Desktop/Work/Final Project/v2/0328test2/Downloads/app/src/main/res/layout/search_book.xml" value="0.2223731884057971" />
-        <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/activity_bookdetail.xml" value="0.12158054711246201" />
-        <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/activity_main.xml" value="0.12158054711246201" />
-        <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/bookmark_comment.xml" value="0.12158054711246201" />
-        <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/edituser.xml" value="0.12158054711246201" />
-        <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/fragment_booklist.xml" value="0.12158054711246201" />
-        <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/fragment_home.xml" value="0.2" />
-        <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/fragment_search.xml" value="0.1" />
-        <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/search_book.xml" value="0.12158054711246201" />
       </map>
     </option>
   </component>
