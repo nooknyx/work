@@ -279,10 +279,7 @@ class bookdetail : AppCompatActivity() {
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    //isInMyFavourite = snapshot.exists()
-                    if (snapshot.exists()) {
-                        isInMyFavourite = true
-                    }
+                    isInMyFavourite = snapshot.exists()
                     if(isInMyFavourite){
                         //available in favourite
                         binding.favebtn

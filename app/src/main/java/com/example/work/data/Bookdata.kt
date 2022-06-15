@@ -14,11 +14,6 @@ class Bookdata
     var viewCount: Long? = 0
     var isFavourite = false
 
-    /*constructor(name: String?, author: String?, bookid: String?) {
-        this.name = name
-        this.author = author
-        this.bookid = bookid
-    }*/
     //empty constructor
     constructor()
     //constructor /w parameter
@@ -31,7 +26,7 @@ class Bookdata
         AverageRatings : Double?,
         personalRate : Double?,
         viewCount: Long?,
-        isFavoutire: Boolean
+        isFavourite: Boolean
     ) {
         this.BookTitle = BookTitle
         this.Author = Author
