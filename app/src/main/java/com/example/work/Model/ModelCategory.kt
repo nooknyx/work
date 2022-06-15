@@ -11,7 +11,7 @@ class ModelCategory {
     var timestamp: Long = 0
     var uid: String = ""
 
-    //mepty constructor
+    //empty constructor
     constructor()
     constructor(id: String, category: String, timestamp: Long, uid: String){
 
