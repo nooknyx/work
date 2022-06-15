@@ -96,8 +96,6 @@ class AdapterFavourite: RecyclerView.Adapter<AdapterFavourite.HolderBookFavourit
                     model.viewCount = viewCount.toLong()
 
 
-
-
                     holder.booktitle.text = booktitle
                     holder.author.text = author
                     holder.avgRating.rating = avgRatings.toFloat()
