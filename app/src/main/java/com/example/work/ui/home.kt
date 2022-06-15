@@ -143,28 +143,6 @@ class Home:Fragment(R.layout.fragment_home)
                 //refresh list
                 viewPagerAdapter.notifyDataSetChanged()
 
-                //load from firebase db
-                for (ds in snapshot.children){
-
-                    //get data in model
-
-                    val model = ds.getValue(ModelCategory::class.java)
-
-                    //add to list
-                    categoryArrayList.add(model!!)
-
-                    //add to viewPagerAdapter
-                    viewPagerAdapter.addFragment(
-                        Booklist.newInstance(
-                            "${model.id}",
-                            "${model.category}",
-                            "${model.uid}"
-                        ), model.category
-                    )
-                    //refresh list
-                    viewPagerAdapter.notifyDataSetChanged()
-                }
-
             }
             override fun onCancelled(error: DatabaseError) {
 
