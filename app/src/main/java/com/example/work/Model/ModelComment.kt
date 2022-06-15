@@ -11,17 +11,19 @@ class ModelComment {
     var timestamp = ""
     var comment = ""
     var uid = ""
+    var userRating : Double? = 0.0
 
     //constructor for firebase
     constructor()
 
-    constructor(id: String, bookId: String, timestamp: String, comment: String, uid: String) {
+    constructor(id: String, bookId: String, timestamp: String, comment: String, uid: String, userRating: Double) {
 
         this.id = id
         this.bookId = bookId
         this.timestamp = timestamp
         this.comment = comment
         this.uid = uid
+        this.userRating = userRating
     }
 
 }

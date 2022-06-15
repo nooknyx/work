@@ -158,6 +158,7 @@ class bookdetail : AppCompatActivity() {
                    val date = MainActivity.formatTimeStampT(dateAdded)
                    binding.dateadded.text = date
                    binding.viewcount.text = viewCount
+                   binding.booknameHead.text = bookTitle
                    Glide.with(this@bookdetail).load(Image).into(binding.bookcovers)
                     //set bookcover
                    //binding.bookcovers.setImageURI(Image.toUri())
@@ -176,8 +177,8 @@ class bookdetail : AppCompatActivity() {
         commentArrayList = ArrayList()
 
         //path to db, loading comment
-        val ref = FirebaseDatabase.getInstance().getReference("Books")
-        ref.child(bookId).child("Comment")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        ref.child(bookId).child("Comments")
             .addValueEventListener(object : ValueEventListener{
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -237,8 +238,8 @@ class bookdetail : AppCompatActivity() {
 
     private fun addComment(){
     // showing progress
-        progressDialog.setMessage("Adding Comment")
-        progressDialog.show()
+        //progressDialog.setMessage("Adding Comment")
+        //progressDialog.show()
 
         val timestamp = "${System.currentTimeMillis()}"
 
@@ -253,45 +254,45 @@ class bookdetail : AppCompatActivity() {
         //add data into the the database
         //path book > bookid > comment > commentId > commentdata
 
-        val ref = FirebaseDatabase.getInstance().getReference("Book")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
         ref.child(bookId).child("Comments").child(timestamp)
             .setValue(hashMap)
             .addOnSuccessListener {
-                progressDialog.dismiss()
+                //progressDialog.dismiss()
                 Toast.makeText(this,"Comment added",Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener{ e->
-                progressDialog.dismiss()
+                //progressDialog.dismiss()
                 Toast.makeText(this,"Failed to add comment", Toast.LENGTH_SHORT).show()
             }
 
     }
 
-    private fun readFirestoreData(){
-        var db = bookReference.collection("book")
-        db.orderBy("bookID").get()
-            .addOnSuccessListener { snapshot -> //or [it] is fine
-                if (snapshot != null){
-                    bookList.clear()
-                    val books = snapshot.toObjects(Bookdata::class.java)
-                    for (book in books){
-                        bookList.add(book)
-                    }
-                    //val adapter = BookAdapter(bookList)
-                    //listView.adapter = adapter
-                    Log.d("Firestore Read",books.toString())
-                }
-            }
-            .addOnFailureListener {
-                Toast.makeText(applicationContext,"Fail to get the book data", Toast.LENGTH_SHORT).show()
-            }
-    }
+//    private fun readFirestoreData(){
+//        var db = bookReference.collection("book")
+//        db.orderBy("bookID").get()
+//            .addOnSuccessListener { snapshot -> //or [it] is fine
+//                if (snapshot != null){
+//                    bookList.clear()
+//                    val books = snapshot.toObjects(Bookdata::class.java)
+//                    for (book in books){
+//                        bookList.add(book)
+//                    }
+//                    //val adapter = BookAdapter(bookList)
+//                    //listView.adapter = adapter
+//                    Log.d("Firestore Read",books.toString())
+//                }
+//            }
+//            .addOnFailureListener {
+//                Toast.makeText(applicationContext,"Fail to get the book data", Toast.LENGTH_SHORT).show()
+//            }
+//    }
 
     private fun checkIsFavourite(){
 
         Log.d(TAG, "checkIsFavourite :Checking if book is in fav or not")
 
-        val ref = FirebaseDatabase.getInstance().getReference("users")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -328,7 +329,7 @@ class bookdetail : AppCompatActivity() {
         hashMap["timestamp"] = timestamp
 
         //save to db
-        val ref = FirebaseDatabase.getInstance().getReference("users")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .setValue(hashMap)
             .addOnSuccessListener {
@@ -349,7 +350,7 @@ class bookdetail : AppCompatActivity() {
         Log.d(TAG,"removeFromFavourite: Removing from fav")
 
         //database ref
-        val ref = FirebaseDatabase.getInstance().getReference("users")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
             .removeValue()
             .addOnSuccessListener {

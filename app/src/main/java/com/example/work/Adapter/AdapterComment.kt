@@ -70,6 +70,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         val uid = model.uid
         val timestamp = model.timestamp
         val commentid = model.id
+        val userRating = model.userRating
 
         //timestamp format
         val date = MainActivity.formatTimeStamp(timestamp.toLong())
@@ -77,6 +78,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         //set data
         holder.dateTv.text = date
         holder.commentTv.text = comment
+        binding.commentRating.rating = userRating!!.toFloat()
 
         //
         loadUserDetails(model, holder)
@@ -209,7 +211,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //getting profile img and name
 
-                    val name = "" + snapshot.child("name").value
+                    val name = "" + snapshot.child("username").value
                     val profileImage = "${snapshot.child("profileImage").value}"
 
                     //setting data
