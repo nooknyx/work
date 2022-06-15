@@ -68,6 +68,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         //handle click
         holder.bookRating.rating = data.AverageRatings!!.toFloat()
         holder.viewCount.text = data.viewCount.toString()
+
         holder.itemView.setOnClickListener {
             val intent = Intent(context, bookdetail::class.java)
             intent.putExtra("bookId", data.bookId)
@@ -83,6 +84,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
     }
 
     override fun getFilter(): Filter {
+
         if (filter == null){
             filter = FilterSearch(filterList, this)
         }

@@ -1,6 +1,7 @@
 package com.example.work.ui
 import android.content.Context
 import android.content.Intent
+import android.graphics.ColorSpace
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -101,12 +102,15 @@ class Home:Fragment(R.layout.fragment_home)
                 val modelMostView = ModelCategory("01", "Most Viewed", 1, "")
                 val modelNewBook = ModelCategory("01", "New Books", 1, "")
                 val modelTopRating = ModelCategory("01", "Top Rating", 1, "")
+                val modelPsyBook = ModelCategory("01","Psychology",1,"")
+
 
                 //added to lo list
                 categoryArrayList.add(modelAll)
                 categoryArrayList.add(modelMostView)
                 categoryArrayList.add(modelNewBook)
                 categoryArrayList.add(modelTopRating)
+                categoryArrayList.add(modelPsyBook)
 
                 viewPagerAdapter.addFragment(
                     Booklist.newInstance(
@@ -140,30 +144,17 @@ class Home:Fragment(R.layout.fragment_home)
                     ), modelTopRating.category
                 )
 
+                viewPagerAdapter.addFragment(
+                    Booklist.newInstance(
+                        "${modelPsyBook.id}",
+                        "${modelPsyBook.category}",
+                        "${modelPsyBook.uid}"
+                    ), modelPsyBook.category
+                )
+
                 //refresh list
                 viewPagerAdapter.notifyDataSetChanged()
 
-                //load from firebase db
-                for (ds in snapshot.children){
-
-                    //get data in model
-
-                    val model = ds.getValue(ModelCategory::class.java)
-
-                    //add to list
-                    categoryArrayList.add(model!!)
-
-                    //add to viewPagerAdapter
-                    viewPagerAdapter.addFragment(
-                        Booklist.newInstance(
-                            "${model.id}",
-                            "${model.category}",
-                            "${model.uid}"
-                        ), model.category
-                    )
-                    //refresh list
-                    viewPagerAdapter.notifyDataSetChanged()
-                }
 
             }
             override fun onCancelled(error: DatabaseError) {

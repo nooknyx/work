@@ -87,6 +87,9 @@ class Booklist() : Fragment() {
         else if (category == "New Books"){
             loadNewBooks("dateAdded")
         }
+        else if (category == "Psychology" ){
+            loadPsychology("category")
+        }
 
         //
         
@@ -123,9 +126,6 @@ class Booklist() : Fragment() {
             }
         })
     }
-
-
-
 
     private fun loadNewBooks(query: String) {
         booklistArrayList = ArrayList()
@@ -227,6 +227,42 @@ class Booklist() : Fragment() {
 
 
             })
+    }
+
+    private fun loadPsychology(query: String) {
+        booklistArrayList = ArrayList()
+        val bRef = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+        bRef.orderByChild("category")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    booklistArrayList.clear()
+                    if (snapshot.exists()){
+                        for (psybookSnapshot in snapshot.children){
+
+                            val psyBook = psybookSnapshot.getValue(Bookdata::class.java)
+                            //val bookimage = "${popbookSnapshot.child("Image").value}"
+
+                            booklistArrayList.add(psyBook!!)
+                        }
+
+                        adapter = BookAdapter(context!!, booklistArrayList)
+                        binding.booksRv.adapter = adapter
+
+                        //popBookRecyclerView.adapter = BookAdapter(popBookArrayList)
+
+                    }
+                    booklistArrayList.reverse()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+
+            })
+
     }
 
 }
