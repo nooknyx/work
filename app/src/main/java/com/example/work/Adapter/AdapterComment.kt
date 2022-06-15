@@ -183,7 +183,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                     .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
                     .getReference("Books")
 
-                ref.child(model.bookId).child("comments").child(commentId)
+                ref.child(model.bookId).child("Comments").child(commentId)
                     .removeValue()
                     .addOnSuccessListener {
                         Toast.makeText(context,"Comment is deleted", Toast.LENGTH_SHORT).show()

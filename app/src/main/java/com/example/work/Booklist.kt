@@ -234,7 +234,7 @@ class Booklist() : Fragment() {
         val bRef = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books")
-        bRef.orderByChild("category")
+        bRef.orderByChild("category").equalTo("Psychology")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     booklistArrayList.clear()

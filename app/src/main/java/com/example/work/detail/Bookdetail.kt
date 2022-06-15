@@ -293,7 +293,7 @@ class bookdetail : AppCompatActivity() {
         Log.d(TAG, "checkIsFavourite :Checking if book is in fav or not")
 
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
+        ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     isInMyFavourite = snapshot.exists()
@@ -351,7 +351,7 @@ class bookdetail : AppCompatActivity() {
 
         //database ref
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Favourites").child(bookId)
+        ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .removeValue()
             .addOnSuccessListener {
                 Log.d(TAG,"Removed from favourite")
