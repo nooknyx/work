@@ -221,11 +221,57 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                         // failed to delete
                         Toast.makeText(context,"Failed to delete comment", Toast.LENGTH_SHORT).show()
                     }
+
+                val uref = FirebaseDatabase
+                .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("users")
+
+                uref.child(firebaseAuth.uid!!).child("Comments").child(commentId)
+                    .removeValue()
+                    .addOnSuccessListener {
+                        Toast.makeText(context,"Comment is deleted", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener{
+                        // failed to delete
+                        Toast.makeText(context,"Failed to delete comment", Toast.LENGTH_SHORT).show()
+                    }
             }
             .setNegativeButton("Cancle"){d,e->
                 d.dismiss()
             }
             .show()
+    }
+
+
+    private fun totalRatings(bookId: String){
+        var total = 0.0
+        var count = 0
+        var avgRatings = 0.0
+
+        //path to db, get ratings
+
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        ref.child(bookId).child("Comments")
+            .addValueEventListener(object : ValueEventListener{
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    for (ds in snapshot.children){
+                        val avgrate = ds.child("userRating").value.toString()
+                        total = total.minus(avgrate.toDouble())
+                        count = count.minus(1)
+                        avgRatings = total.div(count)
+                    }
+                    val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    ref.child(bookId).child("AverageRatings").setValue(avgRatings)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
     }
 
     private fun loadUserDetails(model: ModelComment, holder: AdapterComment.HolderComment)
