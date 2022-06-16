@@ -46,8 +46,6 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         this.context = context
         this.commentArrayList = commentArrayList
 
-        //init firebase
-        firebaseAuth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderComment {
@@ -70,11 +68,17 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         val comment = model.comment
         val uid = model.uid
         val timestamp = model.timestamp
-        val commentid = model.id
+        val commentId = model.id
         val userRating = model.userRating
 
         //timestamp format
         val date = MainActivity.formatTimeStamp(timestamp.toLong())
+        //init firebase
+        firebaseAuth = FirebaseAuth.getInstance()
+        if(firebaseAuth.currentUser != null){
+            //check for faveourtie for logged in user
+            checkIsBookmark(commentId)
+        }
 
         //set data
         holder.dateTv.text = date
@@ -98,17 +102,17 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
             if(firebaseAuth.currentUser == null){
 
                 //not login, user can't do bookmark
-                Toast.makeText(this,"You are not logged in",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"You are not logged in",Toast.LENGTH_SHORT).show()
             }
             else{
                 // login user can fave function
                 if(isInMyBookmark){
                     //already in remove
-                    removeFromBookmark()
+                    removeFromBookmark(commentId)
                 }
                 else{
                     //add to fav
-                    addToBookmark()
+                    addToBookmark(commentId)
                 }
 
             }
@@ -118,12 +122,12 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     //for bookmark comment
 
-    private fun checkIsBookmark(){
+    private fun checkIsBookmark(commentId: String){
 
         Log.d(bookdetail.TAG, "checkIsBookmark :Checking if book is in fav or not")
 
-        val ref = FirebaseDatabase.getInstance().getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Comments").child("id")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Bookmark").equalTo(commentId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     isInMyBookmark = snapshot.exists()
@@ -149,18 +153,18 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     }
 
-    private fun addToBookmark(){
+    private fun addToBookmark(commentId: String){
 
         val timestamp = System.currentTimeMillis()
 
         //set up data to add in db
         val hashMap = HashMap<String,Any>()
-        hashMap["commentid"] = timestamp
+        hashMap["commentid"] = commentId
         hashMap["timestamp"] = timestamp
 
         //save to db
-        val ref = FirebaseDatabase.getInstance().getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Comments").child("id")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Bookmark").child(commentId)
             .setValue(hashMap)
             .addOnSuccessListener {
                 //add to fav
@@ -175,13 +179,13 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     }
 
-    private fun removeFromBookmark(){
+    private fun removeFromBookmark(commentId: String){
 
         Log.d(bookdetail.TAG,"removeFromBookmark: Removing from bookmark")
 
         //database ref
-        val ref = FirebaseDatabase.getInstance().getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Comments").child("id")
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Bookmark").child(commentId)
             .removeValue()
             .addOnSuccessListener {
                 Log.d(bookdetail.TAG,"Removed from Bookmark")

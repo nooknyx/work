@@ -61,31 +61,31 @@ class Favourite:Fragment(R.layout.fragment_fav)
 
         val ref = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Favourite")
-            .addValueEventListener(object : ValueEventListener{
+                .getReference("users")
+                    ref.child(firebaseAuth.uid!!).child("Favourite")
+                .addValueEventListener(object : ValueEventListener{
 
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    //clear list before adding data
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        //clear list before adding data
 
-                    for (ds in snapshot.children){
-                        //get bookid
-                        val bookId = "${ds.child("bookId").value}"
+                        for (ds in snapshot.children){
+                            //get bookid
+                            val bookId = "${ds.child("bookId").value}"
 
-                        //set model
-                        //val model = ModelCategory()
-                        //model.id = bookId
-                        loadFavbooklist(bookId)
+                            //set model
+                            //val model = ModelCategory()
+                            //model.id = bookId
+                            loadFavbooklist(bookId)
+                        }
+
+
+
                     }
 
-
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
 
 
     }
