@@ -71,7 +71,7 @@ class Search: Fragment
         auth = FirebaseAuth.getInstance()
         //Inflate thje layout for this fragment
         binding = FragmentSearchBinding.inflate(LayoutInflater.from(context), container, false)
-        //loadAllBooks()
+        loadAllBooks()
 
 
         // search
