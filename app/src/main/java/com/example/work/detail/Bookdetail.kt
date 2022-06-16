@@ -55,7 +55,7 @@ class bookdetail : AppCompatActivity() {
     //getting view count whenever user access this page
 
 
-     companion object{
+    companion object{
         //TAG
         const val TAG = "BOOK_DETAIL_TAG"
     }
@@ -131,45 +131,45 @@ class bookdetail : AppCompatActivity() {
 
     }
 
-   private fun loadBookDetails(){
+    private fun loadBookDetails(){
 
-       //Books > bookId > Detail
-       val ref = FirebaseDatabase
-           .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
-           .getReference("Books")
+        //Books > bookId > Detail
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
 
-       ref.child(bookId)
-           .addListenerForSingleValueEvent(object: ValueEventListener{
-               override fun onDataChange(snapshot: DataSnapshot) {
+        ref.child(bookId)
+            .addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
 
-                   //get data
-                   val Author = "${snapshot.child("Author").value}"
-                   val BookTitle = "${snapshot.child("BookTitle").value}"
-                   val Image = "${snapshot.child("Image").value}"
-                   val viewCount = "${snapshot.child("viewCount").value}"
-                   val dateAdded = "${snapshot.child("dateAdded").value}".toLong()
-                   val avgRatings = "${snapshot.child("AverageRatings").value}".toFloat()
+                    //get data
+                    val Author = "${snapshot.child("Author").value}"
+                    val BookTitle = "${snapshot.child("BookTitle").value}"
+                    val Image = "${snapshot.child("Image").value}"
+                    val viewCount = "${snapshot.child("viewCount").value}"
+                    val dateAdded = "${snapshot.child("dateAdded").value}".toLong()
+                    val avgRatings = "${snapshot.child("AverageRatings").value}".toFloat()
 
 
-                   //set data
-                   binding.authors.text = Author
-                   binding.bookname.text = BookTitle
-                   binding.bookdetailRating.rating = avgRatings
-                   val date = MainActivity.formatTimeStampT(dateAdded)
-                   binding.dateadded.text = date
-                   binding.viewcount.text = viewCount
-                   binding.booknameHead.text = bookTitle
-                   Glide.with(this@bookdetail).load(Image).into(binding.bookcovers)
+                    //set data
+                    binding.authors.text = Author
+                    binding.bookname.text = BookTitle
+                    binding.bookdetailRating.rating = avgRatings
+                    val date = MainActivity.formatTimeStampT(dateAdded)
+                    binding.dateadded.text = date
+                    binding.viewcount.text = viewCount
+                    binding.booknameHead.text = bookTitle
+                    Glide.with(this@bookdetail).load(Image).into(binding.bookcovers)
                     //set bookcover
-                   //binding.bookcovers.setImageURI(Image.toUri())
-               }
+                    //binding.bookcovers.setImageURI(Image.toUri())
+                }
 
-               override fun onCancelled(error: DatabaseError) {
-                   TODO("Not yet implemented")
-               }
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
 
-           })
-   }
+            })
+    }
 
     private fun showComments() {
 
@@ -237,7 +237,7 @@ class bookdetail : AppCompatActivity() {
     }
 
     private fun addComment(){
-    // showing progress
+        // showing progress
         //progressDialog.setMessage("Adding Comment")
         //progressDialog.show()
 

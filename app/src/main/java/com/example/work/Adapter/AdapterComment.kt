@@ -59,6 +59,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     }
 
+
     override fun onBindViewHolder(holder: HolderComment, position: Int) {
 
         //get data
@@ -89,13 +90,37 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 deleteCommentDialog(model, holder)
             }
         }
+
+        binding.bookmarkbtn.setOnClickListener(){
+            //only login user can add favourite
+
+            //checking if user is login or not
+            if(firebaseAuth.currentUser == null){
+
+                //not login, user can't do bookmark
+                Toast.makeText(this,"You are not logged in",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                // login user can fave function
+                if(isInMyBookmark){
+                    //already in remove
+                    removeFromBookmark()
+                }
+                else{
+                    //add to fav
+                    addToBookmark()
+                }
+
+            }
+
+        }
     }
 
     //for bookmark comment
 
     private fun checkIsBookmark(){
 
-        Log.d(bookdetail.TAG, "checkIsFavourite :Checking if book is in fav or not")
+        Log.d(bookdetail.TAG, "checkIsBookmark :Checking if book is in fav or not")
 
         val ref = FirebaseDatabase.getInstance().getReference("users")
         ref.child(firebaseAuth.uid!!).child("Comments").child("id")

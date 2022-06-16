@@ -94,8 +94,9 @@ class AdapterFavourite: RecyclerView.Adapter<AdapterFavourite.HolderBookFavourit
                     model.dateAdded = dateAdded
                     model.AverageRatings = avgRatings.toDouble()
                     model.viewCount = viewCount.toLong()
+                    model.Image = bookcover
 
-
+                    //set holder
                     holder.booktitle.text = booktitle
                     holder.author.text = author
                     holder.avgRating.rating = avgRatings.toFloat()
