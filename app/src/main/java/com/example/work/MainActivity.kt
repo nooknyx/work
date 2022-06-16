@@ -1,16 +1,20 @@
 package com.example.work
 
+import android.content.Context
 import android.content.Intent
 import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
+import com.example.work.detail.bookdetail
 import com.example.work.ui.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -90,7 +94,11 @@ class MainActivity : AppCompatActivity() {
             //format in dd/mm/yyyy
             return DateFormat.format("dd/MM/yyyy",date).toString()
         }
+
+
     }
+
+
 
 
 
