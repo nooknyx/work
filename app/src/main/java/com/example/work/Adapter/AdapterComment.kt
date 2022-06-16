@@ -123,10 +123,10 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     private fun checkIsBookmark(commentId: String){
 
-        Log.d(bookdetail.TAG, "checkIsBookmark :Checking if book is in fav or not")
+        Log.d(bookdetail.TAG, "checkIsBookmark :Checking if book is in bookmark or not")
 
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Bookmark").equalTo(commentId)
+        ref.child(firebaseAuth.uid!!).child("Bookmark").child(commentId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     isInMyBookmark = snapshot.exists()
@@ -174,7 +174,6 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 Log.d(bookdetail.TAG, "addToFavourite: Failed to add to bookmark")
                 Toast.makeText(context,"Failed to add to bookmark",Toast.LENGTH_SHORT).show()
             }
-
 
     }
 
