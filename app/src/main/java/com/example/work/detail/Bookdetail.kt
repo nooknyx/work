@@ -160,16 +160,17 @@ class bookdetail : AppCompatActivity() {
                     binding.viewcount.text = viewCount
                     binding.booknameHead.text = bookTitle
                     Glide.with(this@bookdetail).load(Image).into(binding.bookcovers)
-                    //set bookcover
-                    //binding.bookcovers.setImageURI(Image.toUri())
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+
                 }
 
             })
     }
+
+
 
     private fun showComments() {
 
@@ -204,7 +205,7 @@ class bookdetail : AppCompatActivity() {
     }
 
     private var comment = ""
-
+    private var userrating = 0.0
     private fun addCommentDialog(){
 
         //Inflate/bind view for dialog (add_comment.xml)
@@ -222,7 +223,7 @@ class bookdetail : AppCompatActivity() {
         }
 
         commentAddBinding.submitbtn.setOnClickListener{
-
+            userrating = commentAddBinding.addRating.rating.toDouble()
             comment = commentAddBinding.commentEt.text.toString().trim()
 
             if(comment.isEmpty()){
@@ -231,6 +232,7 @@ class bookdetail : AppCompatActivity() {
             else{
                 alertDialog.dismiss()
                 addComment()
+                totalRatings()
             }
         }
 
@@ -250,6 +252,7 @@ class bookdetail : AppCompatActivity() {
         hashMap["timestamp"] = "$timestamp"
         hashMap["comment"] = "$comment"
         hashMap["uid"] = "${firebaseAuth.uid}"
+        hashMap["userRating"] = "${userrating}".toDouble()
 
         //add data into the the database
         //path book > bookid > comment > commentId > commentdata
@@ -265,7 +268,43 @@ class bookdetail : AppCompatActivity() {
                 //progressDialog.dismiss()
                 Toast.makeText(this,"Failed to add comment", Toast.LENGTH_SHORT).show()
             }
+        val uref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        uref.child(firebaseAuth.uid!!).child("Comments").child(timestamp)
+            .setValue(hashMap)
+        finish()
 
+
+    }
+
+    private fun totalRatings(){
+        var total = 0.0
+        var count = 0
+        var avgRatings = 0.0
+
+        //path to db, get ratings
+
+        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        ref.child(bookId).child("Comments")
+            .addValueEventListener(object : ValueEventListener{
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    for (ds in snapshot.children){
+                        val avgrate = ds.child("userRating").value.toString()
+                        total = total.plus(avgrate.toDouble())
+                        count = count.plus(1)
+                        avgRatings = total.div(count)
+                    }
+                    val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    ref.child(bookId).child("AverageRatings").setValue(avgRatings)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
     }
 
     private fun checkIsFavourite(){
