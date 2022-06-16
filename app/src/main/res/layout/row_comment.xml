@@ -14,14 +14,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageButton
+        <Button
             android:id="@+id/bookmarkbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/bookmarkbtn" />
+            android:drawableEnd="@drawable/bookmarkbtn" />
 
         <RatingBar
             android:id="@+id/comment_rating"
