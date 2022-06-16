@@ -62,7 +62,6 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
         //get data
         val model = commentArrayList[position]
-
         val id = model.id
         val bookId = model.bookId
         val comment = model.comment
@@ -240,6 +239,8 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 d.dismiss()
             }
             .show()
+        totalRatings(model.bookId)
+
     }
 
 
@@ -258,8 +259,8 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
                     for (ds in snapshot.children){
                         val avgrate = ds.child("userRating").value.toString()
-                        total = total.minus(avgrate.toDouble())
-                        count = count.minus(1)
+                        total = total.plus(avgrate.toDouble())
+                        count = count.plus(1)
                         avgRatings = total.div(count)
                     }
                     val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")

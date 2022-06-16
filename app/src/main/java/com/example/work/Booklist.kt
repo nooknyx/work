@@ -223,8 +223,6 @@ class Booklist() : Fragment() {
                         adapter = BookAdapter(context!!, booklistArrayList)
                         binding.booksRv.adapter = adapter
 
-
-
                     }
                     booklistArrayList.reverse()
                 }

@@ -125,10 +125,6 @@ class bookdetail : AppCompatActivity() {
             }
 
         }
-
-        //for bookmarking comment
-
-
     }
 
     private fun loadBookDetails(){
@@ -271,8 +267,6 @@ class bookdetail : AppCompatActivity() {
         val uref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         uref.child(firebaseAuth.uid!!).child("Comments").child(timestamp)
             .setValue(hashMap)
-        finish()
-
 
     }
 
