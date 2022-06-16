@@ -24,7 +24,6 @@ class Booklist() : Fragment() {
 
     companion object{
         private const val TAG = "BOOKS_LIST_TAG"
-        
         //receive data from activity to load book 
         public fun newInstance(categoryId: String, category: String, uid: String): Booklist {
             val fragment = Booklist()
@@ -37,7 +36,6 @@ class Booklist() : Fragment() {
             fragment.arguments = args
             return fragment
         }
-        
     }
 
     private var categoryId = ""

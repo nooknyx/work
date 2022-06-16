@@ -207,6 +207,24 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 val bookId = model.bookId
                 val commentId = model.id
 
+
+                val bref  = FirebaseDatabase
+                    .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("users")
+                bref.addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (ds in snapshot.children)
+                        {
+                                if(ds.child("Bookmark").hasChild(commentId))
+                                {
+                                    ds.ref.child("Bookmark").child(commentId).removeValue()
+                                }
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+
                 val ref = FirebaseDatabase
                     .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
                     .getReference("Books")
@@ -234,8 +252,11 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                         // failed to delete
                         Toast.makeText(context,"Failed to delete comment", Toast.LENGTH_SHORT).show()
                     }
+
+                //uref.child("Bookmark").child(commentId).removeValue()
+
             }
-            .setNegativeButton("Cancle"){d,e->
+            .setNegativeButton("Cancel"){d,e->
                 d.dismiss()
             }
             .show()

@@ -47,7 +47,6 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
         commentArrayList = ArrayList()
         loadBookmark()
 
-
         return binding.root
     }
 
@@ -72,8 +71,6 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
 
                         loadBookmarklist(commentId)
                     }
-
-
 
                 }
 
