@@ -154,12 +154,12 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     private fun addToBookmark(commentId: String){
 
-        val timestamp = System.currentTimeMillis()
+        val timestamp = "${System.currentTimeMillis()}"
 
         //set up data to add in db
         val hashMap = HashMap<String,Any>()
         hashMap["commentid"] = commentId
-        hashMap["timestamp"] = timestamp
+        hashMap["timestamp"] = "$timestamp"
 
         //save to db
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
