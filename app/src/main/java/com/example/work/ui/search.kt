@@ -64,14 +64,14 @@ class Search: Fragment()
 
 
         //handle click, scan
-        binding.searchScanbtn.setOnClickListener{
+        /*binding.searchScanbtn.setOnClickListener{
             View.OnClickListener {
                 requireActivity().run {
                     startActivity(Intent(context, ScanActivity::class.java))
                     return@OnClickListener
                 }
             }
-        }
+        }*/
 
         return binding.root
 
