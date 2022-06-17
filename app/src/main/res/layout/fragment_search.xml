@@ -31,32 +31,18 @@
         android:layout_marginTop="100dp"
         android:src="@drawable/searchbar"/>
 
-    <Button
-        android:id="@+id/search_searchbtn"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_button"
-        android:text="Search"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="180dp"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/search_scanbtn"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="180dp"
         android:background="@drawable/shape_button"
         android:text="Scan"
         android:textColor="@color/white"
         android:textSize="15dp"
-        android:textStyle="bold"
-        android:layout_marginStart="230dp"
-        android:layout_marginTop="180dp"/>
-
-
-
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"

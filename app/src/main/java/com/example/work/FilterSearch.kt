@@ -28,10 +28,10 @@ class FilterSearch : Filter {
                 if(filterList[i].BookTitle.uppercase().contains(constraint)){ //26.48 Part4
                     filteredBook.add(filterList[i])//search value matched with title, add to list
                 }
-                /*if(filterList[i].Author.uppercase().contains(constraint)){
+                if(filterList[i].Author.uppercase().contains(constraint)){
                     //search value matched with author, add to list
                     filteredBook.add(filterList[i])
-                }*/
+                }
             }
             //return filtered list and size
             results.count = filteredBook.size
