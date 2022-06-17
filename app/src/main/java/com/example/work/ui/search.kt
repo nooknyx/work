@@ -3,18 +3,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.work.Adapter.BookAdapter
-import com.example.work.R
+import com.example.work.ScanActivity
 import com.example.work.data.Bookdata
 import com.example.work.databinding.FragmentSearchBinding
-import com.example.work.login
-import com.google.api.LogDescriptor
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -66,17 +62,16 @@ class Search: Fragment()
             }
         })
 
-        /**
-         //handle click, scan
-        binding.searchScanbtn.setOnClickListener{
-        View.OnClickListener {
-        requireActivity().run {
 
-        startActivity(Intent(context, ScanActivity::class.java))
-        return@OnClickListener
+        //handle click, scan
+        binding.searchScanbtn.setOnClickListener{
+            View.OnClickListener {
+                requireActivity().run {
+                    startActivity(Intent(context, ScanActivity::class.java))
+                    return@OnClickListener
+                }
+            }
         }
-        }
-        }*/
 
         return binding.root
 
