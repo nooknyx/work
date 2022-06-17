@@ -25,9 +25,9 @@ import io.grpc.InternalChannelz.id
 class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
 {
     public var bookdatalist: ArrayList<Bookdata> //to access in filter class, make it public
-    public var filterList: ArrayList<Bookdata>
+    private var filterList: ArrayList<Bookdata>// to hold filtered
     private var context: Context
-    private lateinit var binding: BooklistBinding
+    private lateinit var binding: BooklistBinding //binding the row of book
 
     private var filter: FilterSearch? = null
 
@@ -38,42 +38,29 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
     }
     override fun onCreateViewHolder( parent: ViewGroup,viewType: Int ): BookAdapter.MyViewHolder
     {
-        //val itemView = LayoutInflater.from(parent.context).inflate(R.layout.booklist, parent,false)
-        binding = BooklistBinding.inflate(LayoutInflater.from(context), parent, false)
-        //return MyViewHolder(itemView)
+        binding = BooklistBinding.inflate(LayoutInflater.from(context), parent, false)//call booklist.xml
         return MyViewHolder(binding.root)
-    }
-
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    {
-        val BookTitle = binding.booktitle
-        val Author = binding.author
-        val viewCount = binding.viewcount
-        val imagebook = binding.bookcover
-        val bookRating = binding.booklistRating
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
         //get data
-
         val data: Bookdata = bookdatalist[position]
+
+        //set data
         holder.BookTitle.text = data.BookTitle
         holder.Author.text = data.Author
         Glide.with(context).load(data.Image.toString()).into(holder.imagebook)
         //val bookId = data.bookId
-
-        //handle click
         holder.bookRating.rating = data.AverageRatings!!.toFloat()
         holder.viewCount.text = data.viewCount.toString()
 
+        //handle click
         holder.itemView.setOnClickListener {
             val intent = Intent(context, bookdetail::class.java)
             intent.putExtra("bookId", data.bookId)
             context.startActivity(intent)
         }
-
-
     }
 
     override fun getItemCount(): Int
@@ -89,4 +76,12 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.MyViewHolder>, Filterable
         return filter as FilterSearch
     }
 
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)//for row from booklist.xml
+    {
+        var BookTitle = binding.booktitle
+        var Author = binding.author
+        var viewCount = binding.viewcount
+        var imagebook = binding.bookcover
+        var bookRating = binding.booklistRating
+    }
 }

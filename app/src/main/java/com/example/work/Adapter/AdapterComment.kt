@@ -111,7 +111,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 }
                 else{
                     //add to fav
-                    addToBookmark(model)
+                    addToBookmark(commentId)
                 }
 
             }
@@ -152,22 +152,18 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     }
 
-    private fun addToBookmark(model: ModelComment){
+    private fun addToBookmark(commentId: String){
 
-        val timestamp = "${System.currentTimeMillis()}"
+        val timestamp = System.currentTimeMillis()
 
         //set up data to add in db
         val hashMap = HashMap<String,Any>()
-        hashMap["id"] = model.id
-        hashMap["bookId"] = model.bookId
-        hashMap["timestamp"] = "$timestamp"
-        hashMap["comment"] = model.comment
-        hashMap["uid"] = model.uid
-        hashMap["userRating"] = "${model.userRating}".toDouble()
+        hashMap["commentid"] = commentId
+        hashMap["timestamp"] = timestamp
 
         //save to db
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Bookmark").child(model.id)
+        ref.child(firebaseAuth.uid!!).child("Bookmark").child(commentId)
             .setValue(hashMap)
             .addOnSuccessListener {
                 //add to fav
