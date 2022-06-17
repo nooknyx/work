@@ -108,8 +108,11 @@ class Favourite:Fragment(R.layout.fragment_fav)
 
                         booksArrayList.add(allBook!!)
                     }
-                    adapterFavourite = AdapterFavourite(context!!, booksArrayList)
-                    binding.favRv.adapter = adapterFavourite
+                    activity?.let{
+                        adapterFavourite = AdapterFavourite(it, booksArrayList)
+                        binding.favRv.adapter = adapterFavourite
+                    }
+
                 }
             }
 
