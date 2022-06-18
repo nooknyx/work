@@ -21,6 +21,8 @@ import com.example.work.data.Bookdata
 import com.example.work.databinding.ActivityBookdetailBinding
 import com.example.work.databinding.BooklistBinding
 import com.example.work.databinding.FragmentHomeBinding
+import com.example.work.detail.ContactSP
+import com.example.work.detail.EditUser
 
 import com.google.firebase.database.*
 import com.google.firebase.firestore.ktx.firestore
@@ -48,6 +50,11 @@ class Home:Fragment(R.layout.fragment_home)
         setupViewPagerAdapter(binding.viewPager)
         binding.tablayout.setupWithViewPager(binding.viewPager)
         return binding.root
+
+        binding.contactsp.setOnClickListener(){
+            startActivity(Intent(activity, ContactSP::class.java))
+            activity?.finish()
+        }
 
     }
 

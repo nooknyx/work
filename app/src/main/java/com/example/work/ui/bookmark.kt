@@ -73,8 +73,6 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
                         loadBookmarklist(commentId)
                     }
 
-
-
                 }
 
                 override fun onCancelled(error: DatabaseError) {

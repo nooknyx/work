@@ -82,19 +82,14 @@ class User:Fragment(R.layout.fragment_user)
             binding.userEmail.text = ""
         }
         showuserComments()
+
+        //edit button setting (click to go to edit page)
         binding.userEditbtn.setOnClickListener()
         {
             startActivity(Intent(activity, EditUser::class.java))
             activity?.finish()
         }
-        /*binding.userEditbtn.setOnClickListener(
-            View.OnClickListener {
-                requireActivity().run {
-                    startActivity(Intent(this, EditUser::class.java))
-                    return@OnClickListener
-                }
-            }
-        )*/
+
 
     }
 

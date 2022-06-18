@@ -70,7 +70,7 @@ class bookdetail : AppCompatActivity() {
         //init firebase authen
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if(firebaseAuth.currentUser != null){
+        if(firebaseAuth.currentUser == null){
             //check for faveourtie for logged in user
             checkIsFavourite()
         }
@@ -115,11 +115,11 @@ class bookdetail : AppCompatActivity() {
                 // login user can fave function
                 if(isInMyFavourite){
                     //already in remove
-                    removeFromFavourite()
+                    removeFromFavourite(bookId)
                 }
                 else{
                     //add to fav
-                    addToFavourite()
+                    addToFavourite(bookId)
                 }
 
             }
@@ -154,7 +154,7 @@ class bookdetail : AppCompatActivity() {
                     val date = MainActivity.formatTimeStampT(dateAdded)
                     binding.dateadded.text = date
                     binding.viewcount.text = viewCount
-                    binding.booknameHead.text = bookTitle
+                    binding.booknameHead.text = BookTitle
                     Glide.with(this@bookdetail).load(Image).into(binding.bookcovers)
 
                 }
@@ -174,7 +174,10 @@ class bookdetail : AppCompatActivity() {
         commentArrayList = ArrayList()
 
         //path to db, loading comment
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+
         ref.child(bookId).child("Comments")
             .addValueEventListener(object : ValueEventListener{
 
@@ -253,7 +256,10 @@ class bookdetail : AppCompatActivity() {
         //add data into the the database
         //path book > bookid > comment > commentId > commentdata
 
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+
         ref.child(bookId).child("Comments").child(timestamp)
             .setValue(hashMap)
             .addOnSuccessListener {
@@ -277,7 +283,10 @@ class bookdetail : AppCompatActivity() {
 
         //path to db, get ratings
 
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+
         ref.child(bookId).child("Comments")
             .addValueEventListener(object : ValueEventListener{
 
@@ -301,7 +310,7 @@ class bookdetail : AppCompatActivity() {
             })
     }
 
-    private fun checkIsFavourite(){
+    private fun checkIsFavourite(bookId: String){
 
         Log.d(TAG, "checkIsFavourite :Checking if book is in fav or not")
 
@@ -335,7 +344,7 @@ class bookdetail : AppCompatActivity() {
 
     }
 
-    private fun addToFavourite(){
+    private fun addToFavourite(bookId: String){
 
         val timestamp = System.currentTimeMillis()
 
@@ -364,7 +373,7 @@ class bookdetail : AppCompatActivity() {
 
     }
 
-    private fun removeFromFavourite(){
+    private fun removeFromFavourite(bookId: String){
 
         Log.d(TAG,"removeFromFavourite: Removing from fav")
 

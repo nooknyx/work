@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Work">
         <activity
+            android:name=".detail.ContactSP"
+            android:exported="false" />
+        <activity
             android:name=".bookuser"
             android:exported="false" />
         <activity
@@ -29,7 +32,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".detail.EditUser"
             android:exported="false" />

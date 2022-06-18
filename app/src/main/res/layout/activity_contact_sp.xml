@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detail.ContactSP">
+
+    <RelativeLayout
+        android:id="@+id/toolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="@drawable/shape_toolbar_01">
+
+        <!--Backbtn-->
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/backbtn" />
+
+        <!--Title-->
+        <TextView
+            android:id="@+id/toolbartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Contact Us"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+
+        <!--name input-->
+        <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundMode="none"
+            android:id="@+id/nameTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            app:startIconDrawable="@drawable/user_person"
+            app:hintEnabled="false">
+
+            <EditText
+                android:layout_marginTop="30dp"
+                android:id="@+id/nameEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edittextbox"
+                android:padding="10dp"
+                android:hint="Name"
+                android:textColor="@color/black"
+                android:inputType="textPersonName|textCapWords"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--email input-->
+        <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundMode="none"
+            android:id="@+id/emailTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/nameTil"
+            app:startIconDrawable="@drawable/email"
+            app:hintEnabled="false">
+
+            <EditText
+                android:layout_marginTop="30dp"
+                android:id="@+id/emailEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edittextbox"
+                android:padding="10dp"
+                android:hint="Email"
+                android:textColor="@color/black"
+                android:inputType="textPersonName|textCapWords"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--topic input-->
+        <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundMode="none"
+            android:id="@+id/topicTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/emailTil"
+            app:hintEnabled="false">
+
+            <EditText
+                android:layout_marginTop="30dp"
+                android:id="@+id/topicEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edittextbox"
+                android:padding="10dp"
+                android:hint="Topic"
+                android:textColor="@color/black"
+                android:inputType="textPersonName|textCapWords"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--detail input-->
+        <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundMode="none"
+            android:id="@+id/detailTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/topicTil"
+            app:hintEnabled="false">
+
+            <EditText
+                android:layout_marginTop="30dp"
+                android:id="@+id/detailEt"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/shape_textbox"
+                android:padding="10dp"
+                android:hint="detail"
+                android:textColor="@color/black"
+                android:inputType="textMultiLine"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submitbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailTil"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/shape_button"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -66,6 +66,7 @@ class AdapterFavourite: RecyclerView.Adapter<AdapterFavourite.HolderBookFavourit
             intent.putExtra("bookId", model.bookId)
             context.startActivity(intent)
         }
+
     }
 
     private fun loadBookDetails(model: Bookdata, holder: AdapterFavourite.HolderBookFavourite) {

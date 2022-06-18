@@ -123,10 +123,14 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     private fun checkIsBookmark(commentId: String){
 
-        Log.d(bookdetail.TAG, "checkIsBookmark :Checking if book is in fav or not")
+        Log.d(bookdetail.TAG, "checkIsBookmark :Checking if book is in bookmark or not")
 
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Bookmark").equalTo(commentId)
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
+
+        ref.child(firebaseAuth.uid!!).child("Bookmark")
+            .child(commentId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     isInMyBookmark = snapshot.exists()
@@ -162,7 +166,10 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         hashMap["timestamp"] = timestamp
 
         //save to db
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
+
         ref.child(firebaseAuth.uid!!).child("Bookmark").child(commentId)
             .setValue(hashMap)
             .addOnSuccessListener {
@@ -175,7 +182,6 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 Toast.makeText(context,"Failed to add to bookmark",Toast.LENGTH_SHORT).show()
             }
 
-
     }
 
     private fun removeFromBookmark(commentId: String){
@@ -183,7 +189,9 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         Log.d(bookdetail.TAG,"removeFromBookmark: Removing from bookmark")
 
         //database ref
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
         ref.child(firebaseAuth.uid!!).child("Bookmark").child(commentId)
             .removeValue()
             .addOnSuccessListener {
@@ -207,6 +215,24 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 val bookId = model.bookId
                 val commentId = model.id
 
+
+                val bref  = FirebaseDatabase
+                    .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("users")
+                bref.addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (ds in snapshot.children)
+                        {
+                            if(ds.child("Bookmark").hasChild(commentId))
+                            {
+                                ds.ref.child("Bookmark").child(commentId).removeValue()
+                            }
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+
                 val ref = FirebaseDatabase
                     .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
                     .getReference("Books")
@@ -222,8 +248,8 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                     }
 
                 val uref = FirebaseDatabase
-                .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("users")
+                    .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("users")
 
                 uref.child(firebaseAuth.uid!!).child("Comments").child(commentId)
                     .removeValue()
@@ -234,8 +260,11 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                         // failed to delete
                         Toast.makeText(context,"Failed to delete comment", Toast.LENGTH_SHORT).show()
                     }
+
+                //uref.child("Bookmark").child(commentId).removeValue()
+
             }
-            .setNegativeButton("Cancle"){d,e->
+            .setNegativeButton("Cancel"){d,e->
                 d.dismiss()
             }
             .show()
@@ -313,7 +342,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
     }
 
     override fun getItemCount(): Int {
-       return commentArrayList.size
+        return commentArrayList.size
     }
 
     inner class HolderComment(itemView: CardView): RecyclerView.ViewHolder(itemView){
