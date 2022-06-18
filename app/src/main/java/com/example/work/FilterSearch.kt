@@ -32,6 +32,10 @@ class FilterSearch : Filter {
                     //search value matched with author, add to list
                     filteredBook.add(filterList[i])
                 }
+                if(filterList[i].Barcode!!.toString().contains(constraint)){
+                    //search value matched with author, add to list
+                    filteredBook.add(filterList[i])
+                }
             }
             //return filtered list and size
             results.count = filteredBook.size
