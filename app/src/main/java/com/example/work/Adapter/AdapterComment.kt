@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.FragmentManager
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -108,10 +109,11 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 if(isInMyBookmark){
                     //already in remove
                     removeFromBookmark(commentId)
+
                 }
                 else{
                     //add to fav
-                    addToBookmark(commentId)
+                    addToBookmark(model)
                 }
 
             }
@@ -152,18 +154,23 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     }
 
-    private fun addToBookmark(commentId: String){
+    private fun addToBookmark(model: ModelComment){
 
-        val timestamp = System.currentTimeMillis()
+        val timestamp = "${System.currentTimeMillis()}"
 
         //set up data to add in db
         val hashMap = HashMap<String,Any>()
-        hashMap["commentid"] = commentId
-        hashMap["timestamp"] = timestamp
+        hashMap["commentid"] = model.id
+        hashMap["id"] = model.id
+        hashMap["bookId"] = model.bookId
+        hashMap["timestamp"] = "$timestamp"
+        hashMap["comment"] = model.comment
+        hashMap["uid"] = model.uid
+        hashMap["userRating"] = "${model.userRating}".toDouble()
 
         //save to db
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Bookmark").child(commentId)
+        ref.child(firebaseAuth.uid!!).child("Bookmark").child(model.id)
             .setValue(hashMap)
             .addOnSuccessListener {
                 //add to fav
@@ -174,7 +181,6 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 Log.d(bookdetail.TAG, "addToFavourite: Failed to add to bookmark")
                 Toast.makeText(context,"Failed to add to bookmark",Toast.LENGTH_SHORT).show()
             }
-
     }
 
     private fun removeFromBookmark(commentId: String){

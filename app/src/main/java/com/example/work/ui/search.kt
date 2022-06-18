@@ -109,10 +109,14 @@ class Search: Fragment()
                     //add to list
                     bookdatalist.add(model!!)
                 }
+
+                activity?.let{
                     //setup adapter
-                    bookAdapter = BookAdapter(context!!, bookdatalist)
+                    bookAdapter = BookAdapter(it, bookdatalist)
                     //set adapter to recyclerview
                     binding.booksRv.adapter = bookAdapter
+                }
+
 
             }
 

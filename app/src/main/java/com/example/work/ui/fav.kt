@@ -45,15 +45,13 @@ class Favourite:Fragment(R.layout.fragment_fav)
         favRecyclerView.layoutManager = LinearLayoutManager(context)
         favRecyclerView.setHasFixedSize(true)
         booksArrayList = ArrayList()
+        booksArrayList.clear()
         loadFavouriteBooks()
 
 
         return binding.root
     }
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }*/
 
     private fun loadFavouriteBooks(){
 
@@ -72,13 +70,8 @@ class Favourite:Fragment(R.layout.fragment_fav)
                             //get bookid
                             val bookId = "${ds.child("bookId").value}"
 
-                            //set model
-                            //val model = ModelCategory()
-                            //model.id = bookId
                             loadFavbooklist(bookId)
                         }
-
-
 
                     }
 
@@ -95,13 +88,9 @@ class Favourite:Fragment(R.layout.fragment_fav)
         val favbookref = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books").orderByChild("bookId").equalTo(bookId)
-        favbookref.addValueEventListener(object : ValueEventListener{
+        favbookref.addListenerForSingleValueEvent(object : ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (booksArrayList.count() > 0 )
-                {
-                    booksArrayList.clear()
-                }
                 if (snapshot.exists()) {
                     for (allBookSnapshot in snapshot.children) {
                         val allBook = allBookSnapshot.getValue(Bookdata::class.java)
