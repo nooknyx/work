@@ -6,9 +6,10 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import com.example.work.Adapter.BookAdapter
-import com.example.work.ScanActivity
+
 import com.example.work.data.Bookdata
 import com.example.work.databinding.FragmentSearchBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -44,14 +45,22 @@ class Search: Fragment()
         auth = FirebaseAuth.getInstance()
         loadAllBooks()
 
-        // search
+
+
         binding.editTextTextPersonName.addTextChangedListener(object :TextWatcher{
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {//called when user type something
                 try {
-                    bookAdapter.filter.filter(s)
+                    if (binding.editTextTextPersonName.length() == 0) {
+                        binding.booksRv.visibility = View.GONE
+                    } else {
+                        binding.booksRv.visibility = View.VISIBLE
+                        bookAdapter.filter.filter(s)
+                    }
+
                 }
                 catch (e: Exception){
                 }
@@ -60,8 +69,11 @@ class Search: Fragment()
             override fun afterTextChanged(s: Editable?) {
 
             }
-        })
 
+        })
+        if (binding.editTextTextPersonName.length() == 0) {
+            binding.booksRv.visibility = View.GONE
+        }
 
         //handle click, scan
         /*binding.searchScanbtn.setOnClickListener{
@@ -90,10 +102,11 @@ class Search: Fragment()
                     //add to list
                     bookdatalist.add(model!!)
                 }
-                //setup adapter
-                bookAdapter = BookAdapter(context!!, bookdatalist)
-                //set adapter to recyclerview
-                binding.booksRv.adapter = bookAdapter
+                    //setup adapter
+                    bookAdapter = BookAdapter(context!!, bookdatalist)
+                    //set adapter to recyclerview
+                    binding.booksRv.adapter = bookAdapter
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -101,6 +114,7 @@ class Search: Fragment()
             }
         })
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
