@@ -72,7 +72,7 @@ class bookdetail : AppCompatActivity() {
 
         if(firebaseAuth.currentUser == null){
             //check for faveourtie for logged in user
-            checkIsFavourite()
+            checkIsFavourite(bookId)
         }
 
         //get bookid from intent

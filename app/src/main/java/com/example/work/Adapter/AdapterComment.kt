@@ -214,10 +214,10 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         for (ds in snapshot.children)
                         {
-                                if(ds.child("Bookmark").hasChild(commentId))
-                                {
-                                    ds.ref.child("Bookmark").child(commentId).removeValue()
-                                }
+                            if(ds.child("Bookmark").hasChild(commentId))
+                            {
+                                ds.ref.child("Bookmark").child(commentId).removeValue()
+                            }
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
@@ -239,8 +239,8 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                     }
 
                 val uref = FirebaseDatabase
-                .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("users")
+                    .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("users")
 
                 uref.child(firebaseAuth.uid!!).child("Comments").child(commentId)
                     .removeValue()
@@ -333,7 +333,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
     }
 
     override fun getItemCount(): Int {
-       return commentArrayList.size
+        return commentArrayList.size
     }
 
     inner class HolderComment(itemView: CardView): RecyclerView.ViewHolder(itemView){
@@ -344,3 +344,4 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         val commentTv: TextView = binding.commentTv
     }
 }
+
