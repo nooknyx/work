@@ -12,6 +12,7 @@ import com.example.work.Adapter.BookAdapter
 
 import com.example.work.data.Bookdata
 import com.example.work.databinding.FragmentSearchBinding
+import com.example.work.detail.EditUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -79,10 +80,16 @@ class Search: Fragment()
         /*binding.searchScanbtn.setOnClickListener{
             View.OnClickListener {
                 requireActivity().run {
-                    startActivity(Intent(context, ScanActivity::class.java))
+                    startActivity(Intent(activity, ScanActivity::class.java))
                     return@OnClickListener
                 }
             }
+        }*/
+
+        /*binding.userEditbtn.setOnClickListener()
+        {
+            startActivity(Intent(activity, EditUser::class.java))
+            activity?.finish()
         }*/
 
         return binding.root
@@ -102,10 +109,10 @@ class Search: Fragment()
                     //add to list
                     bookdatalist.add(model!!)
                 }
-                //setup adapter
-                bookAdapter = BookAdapter(context!!, bookdatalist)
-                //set adapter to recyclerview
-                binding.booksRv.adapter = bookAdapter
+                    //setup adapter
+                    bookAdapter = BookAdapter(context!!, bookdatalist)
+                    //set adapter to recyclerview
+                    binding.booksRv.adapter = bookAdapter
 
             }
 

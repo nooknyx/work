@@ -24,7 +24,6 @@ class Booklist() : Fragment() {
 
     companion object{
         private const val TAG = "BOOKS_LIST_TAG"
-        
         //receive data from activity to load book 
         public fun newInstance(categoryId: String, category: String, uid: String): Booklist {
             val fragment = Booklist()
@@ -37,7 +36,6 @@ class Booklist() : Fragment() {
             fragment.arguments = args
             return fragment
         }
-        
     }
 
     private var categoryId = ""
@@ -116,8 +114,10 @@ class Booklist() : Fragment() {
 
                         booklistArrayList.add(allBook!!)
                     }
-                    adapter = BookAdapter(context!!, booklistArrayList)
-                    binding.booksRv.adapter = adapter
+                    activity?.let{
+                        adapter = BookAdapter(it, booklistArrayList)
+                        binding.booksRv.adapter = adapter
+                    }
                 }
             }
 
@@ -148,8 +148,10 @@ class Booklist() : Fragment() {
                             booklistArrayList.add(newBook!!)
                         }
 
-                        adapter = BookAdapter(context!!, booklistArrayList)
-                        binding.booksRv.adapter = adapter
+                        activity?.let{
+                            adapter = BookAdapter(it, booklistArrayList)
+                            binding.booksRv.adapter = adapter
+                        }
 
 
                     }
@@ -184,8 +186,10 @@ class Booklist() : Fragment() {
 
                             booklistArrayList.add(newBook!!)
                         }
-                        adapter = BookAdapter(context!!, booklistArrayList)
-                        binding.booksRv.adapter = adapter
+                        activity?.let{
+                            adapter = BookAdapter(it, booklistArrayList)
+                            binding.booksRv.adapter = adapter
+                        }
 
                     }
                     booklistArrayList.reverse()
@@ -214,14 +218,18 @@ class Booklist() : Fragment() {
                     if (snapshot.exists()){
                         for (popbookSnapshot in snapshot.children){
 
-
-                            val popBook = popbookSnapshot.getValue(Bookdata::class.java)
-
-
-                            booklistArrayList.add(popBook!!)
+                            if(popbookSnapshot.value != null)
+                            {
+                                val popBook = popbookSnapshot.getValue(Bookdata::class.java)
+                                booklistArrayList.add(popBook!!)
+                            }
                         }
-                        adapter = BookAdapter(context!!, booklistArrayList)
-                        binding.booksRv.adapter = adapter
+                        //only update ui if the context exist
+                        activity?.let{
+                            adapter = BookAdapter(it, booklistArrayList)
+                            binding.booksRv.adapter = adapter
+                        }
+
 
                     }
                     booklistArrayList.reverse()
@@ -254,11 +262,10 @@ class Booklist() : Fragment() {
 
                             booklistArrayList.add(psyBook!!)
                         }
-
-                        adapter = BookAdapter(context!!, booklistArrayList)
-                        binding.booksRv.adapter = adapter
-
-
+                        activity?.let{
+                            adapter = BookAdapter(it, booklistArrayList)
+                            binding.booksRv.adapter = adapter
+                        }
                     }
                 }
 

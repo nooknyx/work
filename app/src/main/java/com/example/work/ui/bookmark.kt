@@ -47,12 +47,43 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
         commentArrayList = ArrayList()
         loadBookmark()
 
-
         return binding.root
     }
 
+    private fun loadBookmark(){
+
+        commentArrayList = ArrayList();
+
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
+        ref.child(firebaseAuth.uid!!).child("Bookmark")
+            .addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //clear list before adding data
+
+                    for (ds in snapshot.children){
+                        //get bookid
+                        val allComment = ds.getValue(ModelComment::class.java)
+                        commentArrayList.add(allComment!!)
+
+                    }
+                    
+                    activity?.let{
+                        adapterBookmarkComment = AdapterComment(it, commentArrayList)
+                        binding.commentRv.adapter = adapterBookmarkComment
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
 
 
+    }
+/*
     private fun loadBookmark(){
 
         commentArrayList = ArrayList();
@@ -87,7 +118,7 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
         commentArrayList = ArrayList()
         val favbookref = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference("Books").orderByChild("id").equalTo(commentId)
+            .getReference("Books")
         favbookref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -97,12 +128,21 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
                 }
                 if (snapshot.exists()) {
                     for (allBookSnapshot in snapshot.children) {
-                        val allComment = allBookSnapshot.getValue(ModelComment::class.java)
 
-                        commentArrayList.add(allComment!!)
+                        if(allBookSnapshot.child("Comments").hasChild(commentId))
+                        {
+                            val allComment = allBookSnapshot.getValue(ModelComment::class.java)
+                            commentArrayList.add(allComment!!)
+                        }
+                        /*val allComment = allBookSnapshot.getValue(ModelComment::class.java)
+                        commentArrayList.add(allComment!!)*/
+
                     }
-                    adapterBookmarkComment = AdapterComment(context!!, commentArrayList)
-                    binding.commentRv.adapter = adapterBookmarkComment
+                    activity?.let{
+                        adapterBookmarkComment = AdapterComment(it, commentArrayList)
+                        binding.commentRv.adapter = adapterBookmarkComment
+                    }
+
                 }
             }
 
@@ -113,4 +153,6 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
 
         })
     }
+
+    */
 }

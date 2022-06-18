@@ -149,10 +149,13 @@ class User:Fragment(R.layout.fragment_user)
                         //add to list
                         commentArrayList.add(model!!)
                     }
-                    //setup adapter
-                    adapterComment = AdapterComment(context!!, commentArrayList)
-                    //set adapter to recycleview
-                    binding.userComment.adapter = adapterComment
+                    activity?.let{
+                        //setup adapter
+                        adapterComment = AdapterComment(context!!, commentArrayList)
+                        //set adapter to recycleview
+                        binding.userComment.adapter = adapterComment
+                    }
+
                 }
                 override fun onCancelled(error: DatabaseError) {
                 }

@@ -139,6 +139,7 @@ class bookdetail : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     //get data
+
                     val Author = "${snapshot.child("Author").value}"
                     val BookTitle = "${snapshot.child("BookTitle").value}"
                     val Image = "${snapshot.child("Image").value}"
