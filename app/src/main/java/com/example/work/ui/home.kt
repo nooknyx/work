@@ -65,22 +65,8 @@ class Home:Fragment(R.layout.fragment_home)
             activity?.finish()
         }
 
-
-        //check if usertype of the user that login is admin or user
-        //if is user > go to userdashboard
-        //if is admin > go to admin page
-
-        binding.userpg.setOnClickListener(){
-            //make it check if the user that login is admin or user
-            if (firebaseAuth.currentUser != null  ){
-                startActivity((Intent(activity, AdminDashboard::class.java)))
-                activity?.finish()
-            }
-        }
-
         return binding.root
 
-        return binding.root
 
     }
 

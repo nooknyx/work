@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
@@ -29,20 +30,20 @@ class Search: Fragment()
     private lateinit var bookAdapter: BookAdapter
     private lateinit var auth: FirebaseAuth//firebase auth
 
-
+/*
     override fun onResume() {
         super.onResume()
 
         //set dropdown menu
-        val category = resources.getStringArray(R.array.category)
+        /*val category = resources.getStringArray(R.array.category)
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdpwn_item,category)
-        binding.categorymenu.setAdapter(arrayAdapter)
+        binding.categorymenu.setAdapter(arrayAdapter)*/
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,9 +57,45 @@ class Search: Fragment()
         binding = FragmentSearchBinding.inflate(LayoutInflater.from(context), container, false)
 
         auth = FirebaseAuth.getInstance()
-        loadAllBooks()
 
+        val categoryArrayList = arrayListOf("Select Category","All","History","Philosophy","Psychology")
+        val categoryAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,categoryArrayList)
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+        binding.categorymenu.adapter = categoryAdapter
+        binding.categorymenu.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {
 
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(binding.categorymenu.selectedItemPosition == 0) {
+                    binding.booksRv.visibility = View.GONE
+                    binding.booksRv.adapter = null
+                } else {
+                    binding.booksRv.visibility = View.VISIBLE
+                }
+                if(binding.categorymenu.selectedItemPosition == 1) {
+                    binding.booksRv.adapter = null
+                    loadAllBooks()
+                }
+                if(binding.categorymenu.selectedItemPosition == 2) {
+                    //binding.booksRv.visibility = View.VISIBLE
+                    binding.booksRv.adapter = null
+                    loadBooksCategory("History")
+                }
+                if(binding.categorymenu.selectedItemPosition == 3) {
+                    //binding.booksRv.visibility = View.VISIBLE
+                    binding.booksRv.adapter = null
+                    loadBooksCategory("Philosophy")
+                }
+                if(binding.categorymenu.selectedItemPosition == 4) {
+                    //binding.booksRv.visibility = View.VISIBLE
+                    binding.booksRv.adapter = null
+                    loadBooksCategory("Psychology")
+                }
+            }
+
+        }
 
 
         binding.editTextTextPersonName.addTextChangedListener(object :TextWatcher{
@@ -89,6 +126,8 @@ class Search: Fragment()
             binding.booksRv.visibility = View.GONE
         }
 
+
+
         //handle click, scan
         /*binding.searchScanbtn.setOnClickListener{
             View.OnClickListener {
@@ -107,6 +146,37 @@ class Search: Fragment()
 
         return binding.root
 
+    }
+
+    private fun loadBooksCategory(Category: String) {
+        bookdatalist = ArrayList()
+        val bRef = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+        bRef.orderByChild("category").equalTo(Category)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                        bookdatalist.clear()
+                    if (snapshot.exists()){
+                        for (categorybookSnapshot in snapshot.children){
+
+                            val categoryBook = categorybookSnapshot.getValue(Bookdata::class.java)
+
+                            bookdatalist.add(categoryBook!!)
+                        }
+                        activity?.let{
+                            bookAdapter = BookAdapter(it, bookdatalist)
+                            binding.booksRv.adapter = bookAdapter
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+
+            })
     }
 
     private fun loadAllBooks(){
@@ -139,8 +209,8 @@ class Search: Fragment()
         })
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-    }
+    }**/
 }
