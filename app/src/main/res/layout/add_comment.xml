@@ -37,10 +37,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleTv"
-        android:isIndicator="false"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
+        android:isIndicator="false"
         android:numStars="5" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="not rated"
+        android:layout_toEndOf="@+id/add_rating"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/titleTv"/>
 
     <!--comment-->
     <com.google.android.material.textfield.TextInputLayout

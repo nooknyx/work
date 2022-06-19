@@ -350,4 +350,3 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         val commentTv: TextView = binding.commentTv
     }
 }
-

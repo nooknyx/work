@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Work">
         <activity
+            android:name=".detail.UserDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".detail.AdminDashboard"
+            android:exported="false" />
+        <activity
             android:name=".detail.ContactSP"
             android:exported="false" />
         <activity
