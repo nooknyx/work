@@ -167,8 +167,6 @@ class bookdetail : AppCompatActivity() {
             })
     }
 
-
-
     private fun showComments() {
 
         //init arraylist
@@ -206,6 +204,7 @@ class bookdetail : AppCompatActivity() {
 
     private var comment = ""
     private var userrating = 0.0
+
     private fun addCommentDialog(){
 
         //Inflate/bind view for dialog (add_comment.xml)
@@ -321,18 +320,22 @@ class bookdetail : AppCompatActivity() {
 
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .addValueEventListener(object :ValueEventListener{
+
                 override fun onDataChange(snapshot: DataSnapshot) {
                     isInMyFavourite = snapshot.exists()
+
                     if(isInMyFavourite){
                         //available in favourite
                         binding.favebtn
                             .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_red,0,0)
+
                         binding.favebtn.text = "Remove from favourite"
                     }
                     else{
                         //not available
                         binding.favebtn
                             .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_white,0,0)
+
                         binding.favebtn.text = "Add to favourite"
 
                     }
@@ -351,6 +354,7 @@ class bookdetail : AppCompatActivity() {
 
         //set up data to add in db
         val hashMap = HashMap<String,Any>()
+
         hashMap["bookId"] = bookId
         hashMap["timestamp"] = timestamp
 
@@ -365,7 +369,7 @@ class bookdetail : AppCompatActivity() {
                 //add to fav
                 Log.d(TAG, "addToFavourite: Added to fav")
             }
-            .addOnFailureListener{
+            .addOnFailureListener{ e->
                 //failed to add
                 Log.d(TAG, "addToFavourite: Failed to add to fav")
                 Toast.makeText(this,"Failed to add to fave",Toast.LENGTH_SHORT).show()
