@@ -25,7 +25,6 @@ import com.example.work.databinding.FragmentHomeBinding
 import com.example.work.detail.AdminDashboard
 import com.example.work.detail.ContactSP
 import com.example.work.detail.EditUser
-import com.example.work.detail.UserDashboard
 import com.google.firebase.auth.FirebaseAuth
 
 import com.google.firebase.database.*
@@ -72,14 +71,9 @@ class Home:Fragment(R.layout.fragment_home)
         //if is admin > go to admin page
 
         binding.userpg.setOnClickListener(){
-
             //make it check if the user that login is admin or user
             if (firebaseAuth.currentUser != null  ){
                 startActivity((Intent(activity, AdminDashboard::class.java)))
-                activity?.finish()
-            }
-            else{
-                startActivity((Intent(activity, UserDashboard::class.java)))
                 activity?.finish()
             }
         }
