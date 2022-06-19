@@ -49,12 +49,14 @@ class Home:Fragment(R.layout.fragment_home)
 
         setupViewPagerAdapter(binding.viewPager)
         binding.tablayout.setupWithViewPager(binding.viewPager)
-        return binding.root
+
 
         binding.contactsp.setOnClickListener(){
             startActivity(Intent(activity, ContactSP::class.java))
             activity?.finish()
         }
+
+        return binding.root
 
     }
 

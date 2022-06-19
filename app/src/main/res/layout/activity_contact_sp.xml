@@ -77,15 +77,16 @@
             app:hintEnabled="false">
 
             <EditText
-                android:layout_marginTop="30dp"
                 android:id="@+id/emailEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/shape_edittextbox"
-                android:padding="10dp"
                 android:hint="Email"
-                android:textColor="@color/black"
-                android:inputType="textPersonName|textCapWords"/>
+                android:inputType="textPersonName|textCapWords"
+                android:padding="10dp"
+                android:text="admin@storyteller.com"
+                android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
