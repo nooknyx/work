@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import com.example.work.detail.AdminDashboard
 import com.google.firebase.auth.FirebaseAuth
 
 class login : AppCompatActivity() {
@@ -58,8 +59,14 @@ class login : AppCompatActivity() {
 
             //authentication the user login
             auth.signInWithEmailAndPassword(userlogin.text.toString(),passlogin.text.toString()).addOnSuccessListener {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                val user = auth.uid
+                if (user == "GAhbfN5PUfhLsgv2Uj8w6dZ0MWZ2")
+                {
+                    val intent = Intent(this, AdminDashboard::class.java)
+                    startActivity(intent)
+                } else {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent) }
             }.addOnFailureListener {
                 Toast.makeText(applicationContext, "Failed to Login!", Toast.LENGTH_SHORT).show()
             }
@@ -86,7 +93,6 @@ class login : AppCompatActivity() {
                         //Log.d(TAG, "signInAnonymously:success")
                         Toast.makeText(applicationContext, "Login as guest.",
                             Toast.LENGTH_SHORT).show()
-                        val user = auth.currentUser
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {

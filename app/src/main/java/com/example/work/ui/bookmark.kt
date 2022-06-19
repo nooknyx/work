@@ -62,7 +62,7 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //clear list before adding data
-
+                    commentArrayList.clear()
                     for (ds in snapshot.children){
                         //get bookid
                         val allComment = ds.getValue(ModelComment::class.java)
