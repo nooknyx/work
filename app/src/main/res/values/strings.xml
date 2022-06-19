@@ -3,10 +3,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="Category">
+    <string-array name="category">
         <item>All Books</item>
         <item>Top Rating</item>
         <item>Most View</item>
+        <item>Psychology</item>
         <item>Horror</item>
         <item>Comedy</item>
         <item>Adventure</item>

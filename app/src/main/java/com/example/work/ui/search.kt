@@ -6,9 +6,11 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import com.example.work.Adapter.BookAdapter
+import com.example.work.R
 
 import com.example.work.data.Bookdata
 import com.example.work.databinding.FragmentSearchBinding
@@ -28,6 +30,16 @@ class Search: Fragment()
     private lateinit var auth: FirebaseAuth//firebase auth
 
 
+    override fun onResume() {
+        super.onResume()
+
+        //set dropdown menu
+        val category = resources.getStringArray(R.array.category)
+        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdpwn_item,category)
+        binding.categorymenu.setAdapter(arrayAdapter)
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -45,6 +57,7 @@ class Search: Fragment()
 
         auth = FirebaseAuth.getInstance()
         loadAllBooks()
+
 
 
 
