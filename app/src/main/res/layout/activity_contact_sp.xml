@@ -44,37 +44,37 @@
 
         <!--name input-->
         <com.google.android.material.textfield.TextInputLayout
-            app:boxBackgroundMode="none"
             android:id="@+id/nameTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
-            app:startIconDrawable="@drawable/user_person"
-            app:hintEnabled="false">
+            app:boxBackgroundMode="none"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/user_person">
 
             <EditText
-                android:layout_marginTop="30dp"
                 android:id="@+id/nameEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/shape_edittextbox"
-                android:padding="10dp"
                 android:hint="Name"
-                android:textColor="@color/black"
-                android:inputType="textPersonName|textCapWords"/>
+                android:inputType="textPersonName|textCapWords"
+                android:padding="10dp"
+                android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--email input-->
         <com.google.android.material.textfield.TextInputLayout
-            app:boxBackgroundMode="none"
             android:id="@+id/emailTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_below="@+id/nameTil"
-            app:startIconDrawable="@drawable/email"
-            app:hintEnabled="false">
+            android:layout_marginTop="50dp"
+            app:boxBackgroundMode="none"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/email">
 
             <EditText
                 android:id="@+id/emailEt"
@@ -85,54 +85,53 @@
                 android:hint="Email"
                 android:inputType="textPersonName|textCapWords"
                 android:padding="10dp"
-                android:text="admin@storyteller.com"
                 android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--topic input-->
         <com.google.android.material.textfield.TextInputLayout
-            app:boxBackgroundMode="none"
             android:id="@+id/topicTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_below="@+id/emailTil"
+            android:layout_marginTop="50dp"
+            app:boxBackgroundMode="none"
             app:hintEnabled="false">
 
             <EditText
-                android:layout_marginTop="30dp"
                 android:id="@+id/topicEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/shape_edittextbox"
-                android:padding="10dp"
                 android:hint="Topic"
-                android:textColor="@color/black"
-                android:inputType="textPersonName|textCapWords"/>
+                android:inputType="textPersonName|textCapWords"
+                android:padding="10dp"
+                android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--detail input-->
         <com.google.android.material.textfield.TextInputLayout
-            app:boxBackgroundMode="none"
             android:id="@+id/detailTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_below="@+id/topicTil"
+            android:layout_marginTop="50dp"
+            app:boxBackgroundMode="none"
             app:hintEnabled="false">
 
             <EditText
-                android:layout_marginTop="30dp"
                 android:id="@+id/detailEt"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/shape_textbox"
-                android:padding="10dp"
                 android:hint="detail"
-                android:textColor="@color/black"
-                android:inputType="textMultiLine"/>
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
