@@ -70,13 +70,13 @@ class bookdetail : AppCompatActivity() {
         //init firebase authen
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if(firebaseAuth.currentUser == null){
+        //get bookid from intent
+        bookId = intent.getStringExtra("bookId")!!
+
+        if(firebaseAuth.currentUser != null){
             //check for faveourtie for logged in user
             checkIsFavourite(bookId)
         }
-
-        //get bookid from intent
-        bookId = intent.getStringExtra("bookId")!!
 
         //get view count + getting view count whenever user access this page
         incrementBookViewCount(bookId)
@@ -322,6 +322,7 @@ class bookdetail : AppCompatActivity() {
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
+
                     isInMyFavourite = snapshot.exists()
                     if(isInMyFavourite){
                         //available in favourite
