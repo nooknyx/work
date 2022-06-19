@@ -1,4 +1,5 @@
 package com.example.work.ui
+
 import android.content.Context
 import android.content.Intent
 import android.graphics.ColorSpace
@@ -21,8 +22,11 @@ import com.example.work.data.Bookdata
 import com.example.work.databinding.ActivityBookdetailBinding
 import com.example.work.databinding.BooklistBinding
 import com.example.work.databinding.FragmentHomeBinding
+import com.example.work.detail.AdminDashboard
 import com.example.work.detail.ContactSP
 import com.example.work.detail.EditUser
+import com.example.work.detail.UserDashboard
+import com.google.firebase.auth.FirebaseAuth
 
 import com.google.firebase.database.*
 import com.google.firebase.firestore.ktx.firestore
@@ -34,16 +38,22 @@ class Home:Fragment(R.layout.fragment_home)
 {
 
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var firebaseAuth: FirebaseAuth
+
     //private var db = Firebase.firestore
     //bookViewPager
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var categoryArrayList: ArrayList<ModelCategory>
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        firebaseAuth = FirebaseAuth.getInstance()
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -55,6 +65,26 @@ class Home:Fragment(R.layout.fragment_home)
             startActivity(Intent(activity, ContactSP::class.java))
             activity?.finish()
         }
+
+
+        //check if usertype of the user that login is admin or user
+        //if is user > go to userdashboard
+        //if is admin > go to admin page
+
+        binding.userpg.setOnClickListener(){
+
+            //make it check if the user that login is admin or user
+            if (firebaseAuth.currentUser != null  ){
+                startActivity((Intent(activity, AdminDashboard::class.java)))
+                activity?.finish()
+            }
+            else{
+                startActivity((Intent(activity, UserDashboard::class.java)))
+                activity?.finish()
+            }
+        }
+
+        return binding.root
 
         return binding.root
 

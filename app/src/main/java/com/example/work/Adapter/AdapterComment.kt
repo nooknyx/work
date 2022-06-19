@@ -127,7 +127,9 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
         Log.d(bookdetail.TAG, "checkIsBookmark :Checking if book is in bookmark or not")
 
-        val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
         ref.child(firebaseAuth.uid!!).child("Bookmark").child(commentId)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
