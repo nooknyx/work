@@ -5,10 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.UserHandle
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.work.data.UserData
 import com.example.work.ui.User
 import com.google.firebase.auth.FirebaseAuth
@@ -35,7 +32,7 @@ class username : AppCompatActivity() {
         val emailsign = findViewById<EditText>(R.id.emailsign)
         val passconsign = findViewById<EditText>(R.id.passconsign)
         val loginPg = findViewById<TextView>(R.id.loginHere)
-        val signupsing = findViewById<ImageButton>(R.id.signsignbtn)
+        val signupsing = findViewById<Button>(R.id.signsignbtn)
 
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Waiting...")

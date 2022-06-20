@@ -9,8 +9,8 @@
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:background="@drawable/shape_toolbar_01">
+        android:layout_height="match_parent"
+        android:background="@color/mainorange">
 
         <!--Backbtn-->
         <ImageButton
@@ -42,12 +42,17 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_3"/>
+
         <!--name input-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="200dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
             app:startIconDrawable="@drawable/user_person">
@@ -71,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nameTil"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
             app:startIconDrawable="@drawable/email">
@@ -95,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/emailTil"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false">
 
@@ -118,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/topicTil"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false">
 
@@ -140,7 +145,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/detailTil"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/shape_button"
             android:fontFamily="sans-serif-condensed"
             android:text="Submit"

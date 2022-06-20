@@ -32,13 +32,13 @@
         android:id="@+id/categorymenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="50dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:padding="5dp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style=""
         android:id="@+id/editText"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:background="@drawable/shape_textbox"
             android:hint="Search"
             android:inputType="textPersonName|textCapWords"
-            android:padding="10dp"
+            android:padding="15dp"
             android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>

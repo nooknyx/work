@@ -213,6 +213,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/addCommnetBtn"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/row_comment" />

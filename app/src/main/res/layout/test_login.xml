@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/usersign"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".username">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
 
     <RelativeLayout
         android:id="@+id/mainfill"
         android:layout_width="match_parent"
         android:layout_height="650dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/shape_header">
 
@@ -106,7 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_edittextbox"
-                    android:hint="Re-enter Password"
+                    android:hint="Re - Password"
                     android:inputType="textPassword"
                     android:padding="10dp" />
 
@@ -142,5 +140,7 @@
             android:textStyle="bold" />
 
     </RelativeLayout>
+
+
 
 </RelativeLayout>

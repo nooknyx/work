@@ -31,16 +31,6 @@
             android:background="@android:color/transparent"
             android:src="@drawable/contactsp" />
 
-        <ImageButton
-            android:id="@+id/userpg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="15dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/userpagebtn" />
-
-
 
     </RelativeLayout>
 

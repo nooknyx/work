@@ -21,11 +21,11 @@ class login : AppCompatActivity() {
 
 
         //set up image button1234567890
-        val signin = findViewById<ImageButton>(R.id.loginloginbt)
-        val signup = findViewById<ImageButton>(R.id.signuploginbt)
+        val signin = findViewById<Button>(R.id.loginloginbt)
+        val signup = findViewById<Button>(R.id.signuploginbt)
         val guestlog = findViewById<TextView>(R.id.guestloginbt)
 
-        val forgetpass = findViewById<ImageButton>(R.id.forgetlogin)
+        val forgetpass = findViewById<TextView>(R.id.forgetlogin)
 
         //get firebase authentication
         auth = FirebaseAuth.getInstance()
