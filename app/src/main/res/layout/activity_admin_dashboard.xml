@@ -143,36 +143,15 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--topic input-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dateTil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/topicTil"
-            android:layout_marginTop="20dp"
-            app:boxBackgroundMode="none"
-            app:startIconDrawable="@drawable/calendar"
-            app:hintEnabled="false">
 
-            <EditText
-                android:id="@+id/dateEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shape_edittextbox"
-                android:hint="Date Added"
-                android:inputType="textPersonName|textCapWords"
-                android:padding="10dp"
-                android:textColor="@color/black" />
 
-        </com.google.android.material.textfield.TextInputLayout>
 
         <!--detail input-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/detailTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dateTil"
+            android:layout_below="@+id/topicTil"
             android:layout_marginTop="20dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false">

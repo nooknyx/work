@@ -47,6 +47,7 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
             bookmarkRecyclerView.layoutManager = LinearLayoutManager(context)
             bookmarkRecyclerView.setHasFixedSize(true)
             commentArrayList = ArrayList()
+            commentArrayList.clear()
             loadBookmark()
         }
 
@@ -84,7 +85,6 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
 
                 }
             })
-
 
     }
 /*

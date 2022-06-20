@@ -85,22 +85,6 @@ class login : AppCompatActivity() {
         }
 
         guestlog.setOnClickListener{
-            /*auth.signInAnonymously()
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        //Log.d(TAG, "signInAnonymously:success")
-                        Toast.makeText(applicationContext, "Login as guest.",
-                            Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        //Log.w(TAG, "signInAnonymously:failure", task.exception)
-                        Toast.makeText(applicationContext, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
-                    }
-                }*/
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -109,9 +93,17 @@ class login : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if(FirebaseAuth.getInstance().currentUser != null){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            if(FirebaseAuth.getInstance().uid == "GAhbfN5PUfhLsgv2Uj8w6dZ0MWZ2"){
+                val intent = Intent(this, AdminDashboard::class.java)
+                startActivity(intent)
+                finish()
+            }
+            else {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
         }
     }
 }

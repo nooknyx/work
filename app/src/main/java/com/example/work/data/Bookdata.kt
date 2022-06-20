@@ -8,6 +8,7 @@ class Bookdata
     var Author : String? = ""
     var Image: String? = ""
     var bookId : String? = ""
+    var bookSummary : String? = ""
     var dateAdded : Long? = 0
     var AverageRatings : Double? = 0.0
     var personalRate : Double? = 0.0
@@ -23,6 +24,7 @@ class Bookdata
         Author: String?,
         Image: String?,
         bookId: String?,
+        bookSummary: String?,
         dateAdded: Long?,
         AverageRatings : Double?,
         personalRate : Double?,
@@ -34,6 +36,7 @@ class Bookdata
         this.Author = Author
         this.Image = Image
         this.bookId = bookId
+        this.bookSummary = bookSummary
         this.dateAdded = dateAdded
         this.AverageRatings = AverageRatings
         this.personalRate = personalRate

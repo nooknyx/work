@@ -51,9 +51,7 @@ class User:Fragment(R.layout.fragment_user)
         binding = FragmentUserBinding.inflate(layoutInflater)
         return binding.root
 
-        binding.userUsername
-        binding.userProfile
-        binding.userEmail
+
         //showAllUserData();
     }
 

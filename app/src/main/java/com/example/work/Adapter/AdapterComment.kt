@@ -38,6 +38,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
+
     //hold boolean for favourtie value
     private var isInMyBookmark = false
 
@@ -79,7 +80,9 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
             //check for bookmark for logged in user
             checkIsBookmark(model)
         }
-
+        isInMyBookmark = false
+        binding.bookmarkbtn
+            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.bookmarkbtn_yellow,0,0)
         //set data
         holder.dateTv.text = date
         holder.commentTv.text = comment
