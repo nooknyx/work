@@ -81,8 +81,7 @@ class login : AppCompatActivity() {
         }
 
         forgetpass.setOnClickListener{
-            Toast.makeText(
-                applicationContext, "Check your email", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, ForgetPassword::class.java))
         }
 
         guestlog.setOnClickListener{

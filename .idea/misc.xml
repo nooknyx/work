@@ -73,7 +73,9 @@
         <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/fragment_booklist.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/gapsw/AndroidStudioProjects/work/app/src/main/res/layout/fragment_search.xml" value="0.5345911949685535" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/button_white.xml" value="0.256" />
+        <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/edittext.xml" value="0.2155" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/shape_button.xml" value="0.257" />
+        <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/shape_edittextbox.xml" value="0.2155" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/shape_header.xml" value="0.257" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/shape_textbox.xml" value="0.257" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/shape_toolbar_01.xml" value="0.257" />
@@ -81,6 +83,7 @@
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_admin_dashboard.xml" value="0.2515625" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_bookdetail.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_contact_sp.xml" value="0.3098958333333333" />
+        <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_forget_password.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_login.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_signup.xml" value="0.19924529018924966" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/fragment_home.xml" value="0.3098958333333333" />
