@@ -76,6 +76,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         val date = MainActivity.formatTimeStamp(timestamp.toLong())
         //init firebase
         firebaseAuth = FirebaseAuth.getInstance()
+
         if(firebaseAuth.currentUser != null){
             //check for bookmark for logged in user
             checkIsBookmark(model)
@@ -112,7 +113,6 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 if(isInMyBookmark){
                     //already in remove
                     removeFromBookmark(commentId)
-
                 }
                 else{
                     //add to fav
@@ -132,11 +132,15 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("users")
+
+
+
         ref.child(firebaseAuth.uid!!).child("Bookmark").child(model.id)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     isInMyBookmark = snapshot.exists()
+
                     if(isInMyBookmark){
                         //available in favourite
                         binding.bookmarkbtn
@@ -216,6 +220,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         builder.setTitle("Delete Comment")
             .setMessage("Are you sure?")
             .setPositiveButton("Delete"){ d,e->
+
                 val bookId = model.bookId
                 val commentId = model.id
 
@@ -223,7 +228,9 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 val bref  = FirebaseDatabase
                     .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
                     .getReference("users")
+
                 bref.addValueEventListener(object : ValueEventListener{
+
                     override fun onDataChange(snapshot: DataSnapshot) {
                         for (ds in snapshot.children)
                         {

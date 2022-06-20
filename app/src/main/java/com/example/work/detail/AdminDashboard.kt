@@ -39,6 +39,7 @@ class AdminDashboard : AppCompatActivity() {
         progressDialog.setCanceledOnTouchOutside(false)
 
         val Submit = findViewById<Button>(R.id.submitbtn)
+        val cleardata = findViewById<TextView>(R.id.cleardata)
 
         Submit.setOnClickListener{
 
@@ -103,7 +104,14 @@ class AdminDashboard : AppCompatActivity() {
                 addBook()
 
             }
+        }
 
+        cleardata.setOnClickListener {
+            BookTitle.text = null
+            IdBook.text = null
+            Author.text = null
+            Category.text = null
+            Detail.text = null
         }
 
     }
@@ -147,11 +155,7 @@ class AdminDashboard : AppCompatActivity() {
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 Toast.makeText(this,"Book added", Toast.LENGTH_SHORT).show()
-                BookTitle.text = null
-                IdBook.text = null
-                Author.text = null
-                Category.text = null
-                Detail.text = null
+
             }
             .addOnFailureListener{ e->
                 progressDialog.dismiss()

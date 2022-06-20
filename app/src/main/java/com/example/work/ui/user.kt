@@ -151,6 +151,7 @@ class User:Fragment(R.layout.fragment_user)
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //clear list
                     commentArrayList.clear()
+
                     for (ds in snapshot.children){
                         //get data ss model
                         val model = ds.getValue(ModelComment::class.java)

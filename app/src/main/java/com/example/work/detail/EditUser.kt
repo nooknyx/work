@@ -129,7 +129,10 @@ class EditUser: AppCompatActivity()
         val filePathAndName = "ProfileImages/"+firebaseAuth.uid
 
         //storage ref
-        val reference = FirebaseStorage.getInstance().getReference(filePathAndName)
+        val reference = FirebaseStorage
+            .getInstance("gs://storytellerdb-2ff7a.appspot.com")
+            .getReference(filePathAndName)
+
         reference.putFile(imageUri!!)
             .addOnSuccessListener { taskSnapshot->
                 //image uploaded, get url of uploaded image
@@ -150,7 +153,8 @@ class EditUser: AppCompatActivity()
     }
 
     private fun updateProfile(uploadImageUrl: String) {
-            progressDialog.setMessage("Update Profile...")
+
+        progressDialog.setMessage("Update Profile...")
 
         //setup info to update to the db
         val hashMap: HashMap<String, Any> = HashMap()
@@ -160,7 +164,9 @@ class EditUser: AppCompatActivity()
         }
 
         //update to db
-        val reference = FirebaseDatabase.getInstance().getReference("users")
+        val reference = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
         reference.child(firebaseAuth.uid!!)
             .updateChildren(hashMap)
             .addOnSuccessListener {
@@ -178,7 +184,9 @@ class EditUser: AppCompatActivity()
     private fun loadUserInfo(){
 
         //db references to load user info
-        val ref = FirebaseDatabase.getInstance().getReference("users")
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("users")
         ref.child(firebaseAuth.uid!!)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
