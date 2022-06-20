@@ -57,7 +57,7 @@ class Search: Fragment()
         binding = FragmentSearchBinding.inflate(LayoutInflater.from(context), container, false)
 
         auth = FirebaseAuth.getInstance()
-
+        binding.booksRv.adapter = null
         val categoryArrayList = arrayListOf("Select Category","All","History","Philosophy","Psychology")
         val categoryAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,categoryArrayList)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
