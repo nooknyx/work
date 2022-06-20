@@ -8,27 +8,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.view.size
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.work.Adapter.BookAdapter
 import com.example.work.R
 
 import com.example.work.data.Bookdata
 import com.example.work.databinding.FragmentSearchBinding
-import com.example.work.detail.EditUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.zxing.integration.android.IntentIntegrator
 import java.lang.Exception
 
-class Search: Fragment()
+class Search: Fragment(),View.OnClickListener
 {
     private lateinit var binding: FragmentSearchBinding//view binding
     private lateinit var bookdatalist: ArrayList<Bookdata>
     private lateinit var bookAdapter: BookAdapter
     private lateinit var auth: FirebaseAuth//firebase auth
+    private lateinit var intentIntegrator: IntentIntegrator
 
 /*
     override fun onResume() {
@@ -53,11 +54,11 @@ class Search: Fragment()
     {
         super.onCreate(savedInstanceState)
 
-        //Inflate thje layout for this fragment
+        //Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(LayoutInflater.from(context), container, false)
 
         auth = FirebaseAuth.getInstance()
-        binding.booksRv.adapter = null
+
         val categoryArrayList = arrayListOf("Select Category","All","History","Philosophy","Psychology")
         val categoryAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,categoryArrayList)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
@@ -129,21 +130,13 @@ class Search: Fragment()
 
 
         //handle click, scan
-        /*binding.searchScanbtn.setOnClickListener{
-            View.OnClickListener {
-                requireActivity().run {
-                    startActivity(Intent(activity, ScanActivity::class.java))
-                    return@OnClickListener
-                }
-            }
-        }*/
+        binding.searchScanbtn.setOnClickListener{
+            binding.booksRv.adapter = null
+            loadAllBooks()
+            intentIntegrator.setBeepEnabled(true).initiateScan()//when it detected, the device will sound beep.
+        }
 
-        /*binding.userEditbtn.setOnClickListener()
-        {
-            startActivity(Intent(activity, EditUser::class.java))
-            activity?.finish()
-        }*/
-
+        intentIntegrator = IntentIntegrator.forSupportFragment(this@Search)
         return binding.root
 
     }
@@ -209,8 +202,24 @@ class Search: Fragment()
         })
     }
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }**/
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.search_scanbtn -> {
+                intentIntegrator.setBeepEnabled(true).initiateScan()//when it detected, the device will sound beep.
+            }
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
+        if(intentResult!= null){
+            if(intentResult.contents != null){
+                binding.editTextTextPersonName.setText(intentResult.contents) //return value that QR read to
+            }
+            else{
+                Toast.makeText(context, "Not Found",Toast.LENGTH_SHORT).show()
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+        //pull back to search fragment to prevent sending to Main page
+    }
 }
