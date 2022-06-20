@@ -25,9 +25,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            android:text="Admin"
+            android:layout_marginTop="20dp"
+            android:text="Add books"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -169,16 +169,16 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/submitbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/detailTil"
             android:layout_marginTop="20dp"
-            android:background="@drawable/shape_button"
-            android:fontFamily="sans-serif-condensed"
+            android:background="@drawable/button_white"
+            android:fontFamily="sans-serif-condensed-medium"
             android:text="Submit"
-            android:textColor="@color/white"
+            android:textColor="@color/mainorange"
             android:textSize="20dp" />
 
 
