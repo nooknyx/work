@@ -216,7 +216,7 @@ class Search: Fragment(),View.OnClickListener
                 binding.editTextTextPersonName.setText(intentResult.contents) //return value that QR read to
             }
             else{
-                Toast.makeText(context, "Not Found",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Barcode Not Found",Toast.LENGTH_SHORT).show()
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

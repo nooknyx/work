@@ -172,53 +172,53 @@
                     android:textAlignment="viewStart" />
 
             </RelativeLayout>
+            <RelativeLayout
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scoll"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:padding="5dp"
+                    android:text="Comment"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/addCommnetBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="35dp"
+                    android:background="@android:color/transparent"
+                    android:backgroundTint="#00FFFFFF"
+                    app:srcCompat="@drawable/ic_baseline_add_comment_24" />\
+
+                <!--Recycleview for comment-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/commentRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/addCommnetBtn"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/row_comment" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
     </ScrollView>
     <!--comment section-->
 
-    <RelativeLayout
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/scoll"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:padding="5dp"
-            android:text="Comment"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/addCommnetBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="35dp"
-            android:background="@android:color/transparent"
-            android:backgroundTint="#00FFFFFF"
-            app:srcCompat="@drawable/ic_baseline_add_comment_24" />\
-
-        <!--Recycleview for comment-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/commentRv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/addCommnetBtn"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/row_comment" />
-
-    </RelativeLayout>
 
 
 
