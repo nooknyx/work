@@ -40,13 +40,17 @@ class Favourite:Fragment(R.layout.fragment_fav)
 
         binding = FragmentFavBinding.inflate(layoutInflater)
         firebaseAuth = FirebaseAuth.getInstance()
+        if(firebaseAuth.uid == null) {
 
-        favRecyclerView = binding.favRv
-        favRecyclerView.layoutManager = LinearLayoutManager(context)
-        favRecyclerView.setHasFixedSize(true)
-        booksArrayList = ArrayList()
-        booksArrayList.clear()
-        loadFavouriteBooks()
+        } else {
+            favRecyclerView = binding.favRv
+            favRecyclerView.layoutManager = LinearLayoutManager(context)
+            favRecyclerView.setHasFixedSize(true)
+            booksArrayList = ArrayList()
+            booksArrayList.clear()
+            loadFavouriteBooks()
+        }
+
 
 
         return binding.root

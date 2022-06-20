@@ -76,7 +76,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         //init firebase
         firebaseAuth = FirebaseAuth.getInstance()
         if(firebaseAuth.currentUser != null){
-            //check for faveourtie for logged in user
+            //check for bookmark for logged in user
             checkIsBookmark(model)
         }
 

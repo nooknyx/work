@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.work.Adapter.AdapterComment
@@ -61,35 +62,44 @@ class User:Fragment(R.layout.fragment_user)
 
 
 
-        binding.userUsername
-        binding.userProfile
-        binding.userEmail
+        //binding.userUsername
+        //binding.userProfile
+        //binding.userEmail
 
 
         firebaseAuth = FirebaseAuth.getInstance()
         val userid = firebaseAuth.uid
-        loadUserInfo(userid.toString())
+
 
         if (firebaseAuth.currentUser != null) {
+            loadUserInfo(userid.toString())
             binding.logoutBtn.setOnClickListener {
                 firebaseAuth.signOut()
                 startActivity(Intent(activity, login::class.java))
                 activity?.finish()
             }
-        } else if (firebaseAuth.currentUser!!.isAnonymous)
+            showuserComments()
+            //edit button setting (click to go to edit page)
+            binding.userEditbtn.setOnClickListener()
+            {
+                startActivity(Intent(activity, EditUser::class.java))
+                activity?.finish()
+            }
+        } else if (firebaseAuth.currentUser == null)
         {
+            binding.logoutBtn.setOnClickListener {
+                startActivity(Intent(activity, login::class.java))
+                activity?.finish()
+            }
             binding.userUsername.text = "Guest"
-            binding.userEmail.text = ""
-        }
-        showuserComments()
+            binding.userEmail.text = "You're not logged in"
 
-        //edit button setting (click to go to edit page)
-        binding.userEditbtn.setOnClickListener()
-        {
-            startActivity(Intent(activity, EditUser::class.java))
-            activity?.finish()
-        }
+            binding.userEditbtn.setOnClickListener()
+            {
+                Toast.makeText(context,"You're not logged in", Toast.LENGTH_SHORT).show()
+            }
 
+        }
 
     }
 

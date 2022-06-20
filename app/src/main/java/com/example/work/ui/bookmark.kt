@@ -40,12 +40,16 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
 
         binding = FragmentBookmarkBinding.inflate(layoutInflater)
         firebaseAuth = FirebaseAuth.getInstance()
+        if(firebaseAuth.uid == null) {
 
-        bookmarkRecyclerView = binding.commentRv
-        bookmarkRecyclerView.layoutManager = LinearLayoutManager(context)
-        bookmarkRecyclerView.setHasFixedSize(true)
-        commentArrayList = ArrayList()
-        loadBookmark()
+        } else {
+            bookmarkRecyclerView = binding.commentRv
+            bookmarkRecyclerView.layoutManager = LinearLayoutManager(context)
+            bookmarkRecyclerView.setHasFixedSize(true)
+            commentArrayList = ArrayList()
+            loadBookmark()
+        }
+
 
         return binding.root
     }

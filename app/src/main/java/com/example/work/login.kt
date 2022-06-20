@@ -85,7 +85,7 @@ class login : AppCompatActivity() {
         }
 
         guestlog.setOnClickListener{
-            auth.signInAnonymously()
+            /*auth.signInAnonymously()
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
@@ -100,7 +100,9 @@ class login : AppCompatActivity() {
                         Toast.makeText(applicationContext, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()
                     }
-                }
+                }*/
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
     //if the user already sign in, go to MainActivity
