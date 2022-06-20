@@ -77,7 +77,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         firebaseAuth = FirebaseAuth.getInstance()
         if(firebaseAuth.currentUser != null){
             //check for faveourtie for logged in user
-            checkIsBookmark(commentId)
+            checkIsBookmark(model)
         }
 
         //set data
@@ -123,13 +123,13 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
     //for bookmark comment
 
-    private fun checkIsBookmark(commentId: String){
+    private fun checkIsBookmark(model: ModelComment){
 
         Log.d(bookdetail.TAG, "checkIsBookmark :Checking if book is in bookmark or not")
 
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("users")
-        ref.child(firebaseAuth.uid!!).child("Bookmark").child(commentId)
+        ref.child(firebaseAuth.uid!!).child("Bookmark").child(model.id)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
 

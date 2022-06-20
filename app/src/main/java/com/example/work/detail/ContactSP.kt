@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
+import com.example.work.MainActivity
 import com.example.work.R
 import com.example.work.databinding.ActivityBookdetailBinding
 import com.example.work.databinding.ActivityContactSpBinding
+import com.example.work.login
 
 class ContactSP : AppCompatActivity() {
 
@@ -31,11 +34,18 @@ class ContactSP : AppCompatActivity() {
         val reMail = findViewById<EditText>(R.id.emailEt)
         val subject = findViewById<EditText>(R.id.topicEt)
         val body = findViewById<EditText>(R.id.detailEt)
-
+        val backBtn = findViewById<ImageButton>(R.id.backBtn)
         val btnsend = findViewById<Button>(R.id.submitbtn)
         reMail.isEnabled = false
 
         val recMail = arrayOf(reMail.text.toString())
+
+
+        backBtn.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
         btnsend.setOnClickListener {
             if (!reMail.toString().isEmpty() && !subject.toString().isEmpty() && !body.toString().isEmpty())
             {
