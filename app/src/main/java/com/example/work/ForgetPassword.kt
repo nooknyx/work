@@ -33,6 +33,11 @@ class ForgetPassword : AppCompatActivity() {
             validateData()
         }
 
+        //handle backbutton click, go back
+        binding.backBtn.setOnClickListener{
+            onBackPressed()
+        }
+
     }
 
     private var email = ""

@@ -134,18 +134,18 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     isInMyBookmark = snapshot.exists()
-                        if(isInMyBookmark){
-                            //available in favourite
-                            binding.bookmarkbtn
-                                .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.bookmarkbtn_yellow,0,0)
-                            //binding.bookmarkbtn.text = "Remove from bookmark"
-                        }
-                        else{
-                            //not available
-                            binding.bookmarkbtn
-                                .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.bookmarkbtn,0,0)
-                            //binding.bookmarkbtn.text = "Add to bookmark"
-                        }
+                    if(isInMyBookmark){
+                        //available in favourite
+                        binding.bookmarkbtn
+                            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.bookmarkbtn_yellow,0,0)
+                        //binding.bookmarkbtn.text = "Remove from bookmark"
+                    }
+                    else{
+                        //not available
+                        binding.bookmarkbtn
+                            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.bookmarkbtn,0,0)
+                        //binding.bookmarkbtn.text = "Add to bookmark"
+                    }
 
 
                 }
