@@ -82,12 +82,10 @@ class Booklist() : Fragment() {
             //load top rating book
             loadMostRatingBooks("AverageRatings")
         }
-        else if (category == "New Books"){
+        else if (category == "Recently Added"){
             loadNewBooks("dateAdded")
         }
-        else if (category == "Psychology" ){
-            loadPsychology("category")
-        }
+
 
         //
         
@@ -242,40 +240,5 @@ class Booklist() : Fragment() {
             })
     }
 
-    private fun loadPsychology(query: String) {
-        booklistArrayList = ArrayList()
-        val bRef = FirebaseDatabase
-            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference("Books")
-        bRef.orderByChild("category").equalTo("Psychology")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (booklistArrayList.count() > 0 )
-                    {
-                        booklistArrayList.clear()
-                    }
-                    if (snapshot.exists()){
-                        for (psybookSnapshot in snapshot.children){
-
-                            val psyBook = psybookSnapshot.getValue(Bookdata::class.java)
-
-
-                            booklistArrayList.add(psyBook!!)
-                        }
-                        activity?.let{
-                            adapter = BookAdapter(it, booklistArrayList)
-                            binding.booksRv.adapter = adapter
-                        }
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-
-
-            })
-
-    }
 
 }
