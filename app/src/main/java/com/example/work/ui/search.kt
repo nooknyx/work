@@ -104,7 +104,8 @@ class Search: Fragment(),View.OnClickListener
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {//called when user type something
+            //called when user type something
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 try {
                     if (binding.editTextTextPersonName.length() == 0) {
                         binding.booksRv.visibility = View.GONE
@@ -133,7 +134,8 @@ class Search: Fragment(),View.OnClickListener
         binding.searchScanbtn.setOnClickListener{
             binding.booksRv.adapter = null
             loadAllBooks()
-            intentIntegrator.setBeepEnabled(true).initiateScan()//when it detected, the device will sound beep.
+            //when it detected, the device will sound beep.
+            intentIntegrator.setBeepEnabled(true).initiateScan()
         }
 
         intentIntegrator = IntentIntegrator.forSupportFragment(this@Search)
@@ -220,6 +222,5 @@ class Search: Fragment(),View.OnClickListener
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
-        //pull back to search fragment to prevent sending to Main page
     }
 }
