@@ -62,8 +62,12 @@ class Search: Fragment(),View.OnClickListener
         val categoryArrayList = arrayListOf("Select Category","All","History","Philosophy","Psychology")
         val categoryAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,categoryArrayList)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+
+
         binding.categorymenu.adapter = categoryAdapter
         binding.categorymenu.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
@@ -128,7 +132,9 @@ class Search: Fragment(),View.OnClickListener
             binding.booksRv.visibility = View.GONE
         }
 
+        binding.cleardata.setOnClickListener{
 
+        }
 
         //handle click, scan
         binding.searchScanbtn.setOnClickListener{

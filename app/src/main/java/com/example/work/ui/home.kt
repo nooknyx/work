@@ -132,13 +132,6 @@ class Home:Fragment(R.layout.fragment_home)
                     ), modelTopRating.category
                 )
 
-                viewPagerAdapter.addFragment(
-                    Booklist.newInstance(
-                        "${modelPsyBook.id}",
-                        "${modelPsyBook.category}",
-                        "${modelPsyBook.uid}"
-                    ), modelPsyBook.category
-                )
 
                 //refresh list
                 viewPagerAdapter.notifyDataSetChanged()

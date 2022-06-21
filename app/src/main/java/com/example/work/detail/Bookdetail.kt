@@ -147,7 +147,7 @@ class bookdetail : AppCompatActivity() {
                     val dateAdded = "${snapshot.child("dateAdded").value}".toLong()
                     val avgRatings = "${snapshot.child("AverageRatings").value}".toFloat()
                     val bookSummary = "${snapshot.child("bookSummary").value}"
-                    //val numUserRated = "${snapshot.child("numUserRated").value}".toLong()
+                    val numUserRated = "${snapshot.child("numUserRated").value}"
 
                     //set data
                     binding.authors.text = Author
@@ -158,7 +158,7 @@ class bookdetail : AppCompatActivity() {
                     binding.viewcount.text = viewCount
                     binding.booknameHead.text = BookTitle
                     binding.bookdes.text = bookSummary
-                    //binding.numUserRated.text = numUserRated
+                    binding.numUserRated.text = numUserRated
 
                     Glide.with(this@bookdetail).load(Image).into(binding.bookcovers)
 
