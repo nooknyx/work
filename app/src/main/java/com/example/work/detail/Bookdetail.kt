@@ -234,7 +234,12 @@ class bookdetail : AppCompatActivity() {
             else{
                 alertDialog.dismiss()
                 addComment()
-                totalRatings()
+                if (userrating == 0.0) {
+
+                } else {
+                    totalRatings()
+                }
+
             }
         }
 

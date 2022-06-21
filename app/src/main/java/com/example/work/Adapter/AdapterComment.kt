@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -87,7 +88,11 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         //set data
         holder.dateTv.text = date
         holder.commentTv.text = comment
-        binding.commentRating.rating = userRating!!.toFloat()
+        if (userRating == 0.0) {
+            binding.commentRating.visibility = View.GONE
+        } else {
+            binding.commentRating.rating = userRating!!.toFloat()
+        }
 
         //
         loadUserDetails(model, holder)
