@@ -88,9 +88,9 @@ class Home:Fragment(R.layout.fragment_home)
                 //load static category
                 val modelAll = ModelCategory("01", "All", 1, "")
                 val modelMostView = ModelCategory("01", "Most Viewed", 1, "")
-                val modelNewBook = ModelCategory("01", "New Books", 1, "")
+                val modelNewBook = ModelCategory("01", "Recently Added", 1, "")
                 val modelTopRating = ModelCategory("01", "Top Rating", 1, "")
-                val modelPsyBook = ModelCategory("01","Psychology",1,"")
+
 
 
                 //added to lo list
@@ -98,7 +98,7 @@ class Home:Fragment(R.layout.fragment_home)
                 categoryArrayList.add(modelMostView)
                 categoryArrayList.add(modelNewBook)
                 categoryArrayList.add(modelTopRating)
-                categoryArrayList.add(modelPsyBook)
+
 
                 viewPagerAdapter.addFragment(
                     Booklist.newInstance(
@@ -131,7 +131,6 @@ class Home:Fragment(R.layout.fragment_home)
                         "${modelTopRating.uid}"
                     ), modelTopRating.category
                 )
-
 
                 //refresh list
                 viewPagerAdapter.notifyDataSetChanged()

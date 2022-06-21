@@ -82,7 +82,7 @@ class Booklist() : Fragment() {
             //load top rating book
             loadMostRatingBooks("AverageRatings")
         }
-        else if (category == "Recentley Added"){
+        else if (category == "Recently Added"){
             loadNewBooks("dateAdded")
         }
 
@@ -239,7 +239,6 @@ class Booklist() : Fragment() {
 
             })
     }
-
 
 
 }
