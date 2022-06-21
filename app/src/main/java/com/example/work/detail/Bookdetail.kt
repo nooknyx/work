@@ -147,7 +147,7 @@ class bookdetail : AppCompatActivity() {
                     val dateAdded = "${snapshot.child("dateAdded").value}".toLong()
                     val avgRatings = "${snapshot.child("AverageRatings").value}".toFloat()
                     val bookSummary = "${snapshot.child("bookSummary").value}"
-
+                    //val numUserRated = "${snapshot.child("numUserRated").value}".toLong()
 
                     //set data
                     binding.authors.text = Author
@@ -158,6 +158,7 @@ class bookdetail : AppCompatActivity() {
                     binding.viewcount.text = viewCount
                     binding.booknameHead.text = BookTitle
                     binding.bookdes.text = bookSummary
+                    //binding.numUserRated.text = numUserRated
 
                     Glide.with(this@bookdetail).load(Image).into(binding.bookcovers)
 
@@ -238,6 +239,7 @@ class bookdetail : AppCompatActivity() {
 
                 } else {
                     totalRatings()
+                    totalUserGiveRate()
                 }
 
             }
@@ -308,6 +310,37 @@ class bookdetail : AppCompatActivity() {
                     }
                     val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
                     ref.child(bookId).child("AverageRatings").setValue(avgRatings)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+    }
+
+    private fun totalUserGiveRate(){
+        var total = 0
+        var allUserRateCount = 0
+
+        //path to db, get ratings
+
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+
+        ref.child(bookId)
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                        val totalUserGiveRate = "${snapshot.child("numUserRated").value}".toInt()
+                        total = total.plus(totalUserGiveRate)
+                        allUserRateCount = total.plus(1)
+
+                    val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    ref.child(bookId).child("numUserRated").setValue(allUserRateCount.toLong())
 
                 }
 

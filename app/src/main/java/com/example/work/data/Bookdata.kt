@@ -15,6 +15,7 @@ class Bookdata
     var viewCount: Long? = 0
     var isFavourite = false
     var Barcode: Long? = 0
+    var numUserRated: Long? = 0
 
     //empty constructor
     constructor()
@@ -30,7 +31,8 @@ class Bookdata
         personalRate : Double?,
         viewCount: Long?,
         isFavourite: Boolean,
-        Barcode: Long?
+        Barcode: Long?,
+        numUserRated: Long?
     ) {
         this.BookTitle = BookTitle
         this.Author = Author
@@ -43,6 +45,7 @@ class Bookdata
         this.viewCount = viewCount
         this.isFavourite = isFavourite
         this.Barcode = Barcode
+        this.numUserRated = numUserRated
     }
 
 }

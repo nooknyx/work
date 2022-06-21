@@ -285,6 +285,11 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
             }
             .show()
         totalRatings(model.bookId)
+        if (model.userRating == 0.0) {
+
+        } else {
+            totalUserGiveRate(model.bookId)
+        }
 
     }
 
@@ -310,6 +315,38 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                     }
                     val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
                     ref.child(bookId).child("AverageRatings").setValue(avgRatings)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+    }
+
+    private fun totalUserGiveRate(bookId: String){
+        var total = 0
+        var count = 0
+        var allUserRateCount = 0
+
+        //path to db, get ratings
+
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+
+        ref.child(bookId)
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    val totalUserGiveRate = "${snapshot.child("numUserRated").value}".toInt()
+                    total = total.plus(totalUserGiveRate)
+                    allUserRateCount = total.minus(1)
+
+                    val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    ref.child(bookId).child("numUserRated").setValue(allUserRateCount.toLong())
 
                 }
 
