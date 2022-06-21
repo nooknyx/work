@@ -131,6 +131,7 @@ class AdminDashboard : AppCompatActivity() {
         val Barcode = 0
         val timestamp = "${System.currentTimeMillis()}"
         val AverageRatings = 0.0
+        val numUserRated = 0
         //setting up data to add comment in database
         val hashMap = HashMap<String, Any>()
         hashMap["Author"] = Author.text.toString().trim()
@@ -143,6 +144,7 @@ class AdminDashboard : AppCompatActivity() {
         hashMap["Image"] = ""
         hashMap["dateAdded"] = timestamp.toLong()
         hashMap["viewCount"] = viewCount.toLong()
+        hashMap["numUserRated"] = numUserRated.toLong()
         //add data into the the database
         //path book > bookid > comment > commentId > commentdata
 
