@@ -31,9 +31,8 @@
 
         <TextView
             android:id="@+id/bookname_head"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:text="Bookname"
             android:textColor="@color/white"
@@ -47,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbarRl"
-        android:padding="10dp">
+        android:padding="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,6 +79,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:layout_toEndOf="@id/bookcovers"
+
                     android:numStars="5"
                     android:rating="1.5"
                     android:stepSize="0.5" />
@@ -139,10 +139,10 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
-                    android:fontFamily="sans-serif-condensed-medium"
                     android:layout_toEndOf="@id/bookcovers"
                     android:drawableStart="@drawable/ratingstar"
                     android:drawablePadding="5dp"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:text="Rating Count:" />
 
                 <TextView
@@ -166,9 +166,9 @@
                     android:layout_below="@id/bookdes"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="10dp"
-                    android:textStyle="bold"
                     android:fontFamily="sans-serif-condensed-medium"
-                    android:text="Added date:" />
+                    android:text="Added date:"
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -188,11 +188,12 @@
 
                 <Button
                     android:id="@+id/favebtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/bookdetail_rating"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="40dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_toEndOf="@id/bookcovers"
                     android:background="@drawable/shape_button"
                     android:drawableEnd="@drawable/favourite_white"
@@ -214,6 +215,7 @@
                     android:textAlignment="viewStart" />
 
             </RelativeLayout>
+
             <RelativeLayout
 
                 android:layout_width="match_parent"
@@ -247,9 +249,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/addCommnetBtn"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/row_comment" />
 
