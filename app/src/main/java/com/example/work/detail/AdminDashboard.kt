@@ -148,11 +148,11 @@ class AdminDashboard : AppCompatActivity() {
         val hashMap = HashMap<String, Any>()
         hashMap["Author"] = Author.text.toString().trim()
         hashMap["AverageRatings"] = AverageRatings.toFloat()
-        hashMap["Barcode"] = Barcode.toString().toLong()
+        hashMap["Barcode"] = Barcode.text.toString().toLong()
         hashMap["BookTitle"] = BookTitle.text.toString().trim()
         hashMap["bookId"] = IdBook.text.toString().trim()
         hashMap["bookSummary"] = Detail.text.toString().trim()
-        hashMap["Category"] = Category.text.toString().trim()
+        hashMap["category"] = Category.text.toString().trim()
         hashMap["Image"] = ""
         hashMap["dateAdded"] = timestamp.toLong()
         hashMap["viewCount"] = viewCount.toLong()
@@ -169,7 +169,12 @@ class AdminDashboard : AppCompatActivity() {
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 Toast.makeText(this,"Book added", Toast.LENGTH_SHORT).show()
-
+                BookTitle.text = null
+                IdBook.text = null
+                Author.text = null
+                Category.text = null
+                Detail.text = null
+                Barcode.text = null
             }
             .addOnFailureListener{ e->
                 progressDialog.dismiss()

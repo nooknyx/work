@@ -59,7 +59,7 @@ class Search: Fragment(),View.OnClickListener
 
         auth = FirebaseAuth.getInstance()
 
-        val categoryArrayList = arrayListOf("Select Category","All","History","Philosophy","Psychology")
+        val categoryArrayList = arrayListOf("Select Category","All","Biography","History","Horror","Music","Self-Help","Sci-Fi","Science")
         val categoryAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,categoryArrayList)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
 
@@ -86,17 +86,37 @@ class Search: Fragment(),View.OnClickListener
                 if(binding.categorymenu.selectedItemPosition == 2) {
                     //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
-                    loadBooksCategory("History")
+                    loadBooksCategory("Biography")
                 }
                 if(binding.categorymenu.selectedItemPosition == 3) {
                     //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
-                    loadBooksCategory("Philosophy")
+                    loadBooksCategory("History")
                 }
                 if(binding.categorymenu.selectedItemPosition == 4) {
                     //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
-                    loadBooksCategory("Psychology")
+                    loadBooksCategory("Horror")
+                }
+                if(binding.categorymenu.selectedItemPosition == 5) {
+                    //binding.booksRv.visibility = View.VISIBLE
+                    binding.booksRv.adapter = null
+                    loadBooksCategory("Music")
+                }
+                if(binding.categorymenu.selectedItemPosition == 6) {
+                    //binding.booksRv.visibility = View.VISIBLE
+                    binding.booksRv.adapter = null
+                    loadBooksCategory("Self-Help")
+                }
+                if(binding.categorymenu.selectedItemPosition == 7) {
+                    //binding.booksRv.visibility = View.VISIBLE
+                    binding.booksRv.adapter = null
+                    loadBooksCategory("Sci-Fi")
+                }
+                if(binding.categorymenu.selectedItemPosition == 8) {
+                    //binding.booksRv.visibility = View.VISIBLE
+                    binding.booksRv.adapter = null
+                    loadBooksCategory("Science")
                 }
             }
 
@@ -191,7 +211,7 @@ class Search: Fragment(),View.OnClickListener
                     //get data
                     val model = ds.getValue(Bookdata::class.java)
                     //add to list
-                    bookdatalist.add(model!!)
+                        bookdatalist.add(model!!)
                 }
 
                 activity?.let{
