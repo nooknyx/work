@@ -153,7 +153,7 @@ class bookdetail : AppCompatActivity() {
                     binding.authors.text = Author
                     binding.bookname.text = BookTitle
                     binding.bookdetailRating.rating = avgRatings
-                    val date = MainActivity.formatTimeStampT(dateAdded)
+                    val date = MainActivity.formatTimeStamp(dateAdded)
                     binding.dateadded.text = date
                     binding.viewcount.text = viewCount
                     binding.booknameHead.text = BookTitle
