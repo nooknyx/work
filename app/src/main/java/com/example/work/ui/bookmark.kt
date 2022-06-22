@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.work.Adapter.AdapterBookmark
 import com.example.work.Adapter.AdapterComment
 import com.example.work.Adapter.AdapterFavourite
 import com.example.work.Model.ModelComment
@@ -25,8 +26,7 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
-    private lateinit var adapterBookmarkComment: AdapterComment
-
+    private lateinit var adapterBookmarkComment: AdapterBookmark
     //arraylist holding books
     private lateinit var commentArrayList: ArrayList<ModelComment>
     private lateinit var bookmarkRecyclerView: RecyclerView
@@ -76,7 +76,7 @@ class Bookmark : Fragment(R.layout.fragment_bookmark) {
                     }
                     
                     activity?.let{
-                        adapterBookmarkComment = AdapterComment(it, commentArrayList)
+                        adapterBookmarkComment = AdapterBookmark(it, commentArrayList)
                         binding.commentRv.adapter = adapterBookmarkComment
                     }
                 }

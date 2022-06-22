@@ -27,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.lang.Exception
 
-class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
+class AdapterBookmark: RecyclerView.Adapter<AdapterBookmark.HolderComment> {
 
     //context
     val context: Context
@@ -100,9 +100,9 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
 
         holder.itemView.setOnClickListener{
             //user can delete their own comment
-            if(firebaseAuth.currentUser != null && firebaseAuth.uid == uid){
-                deleteCommentDialog(model, holder)
-            }
+            val intent = Intent(context, bookdetail::class.java)
+            intent.putExtra("bookId", model.bookId)
+            context.startActivity(intent)
         }
 
 
@@ -359,7 +359,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
             })
     }
 
-    private fun loadUserDetails(model: ModelComment, holder: AdapterComment.HolderComment)
+    private fun loadUserDetails(model: ModelComment, holder: AdapterBookmark.HolderComment)
     {
         val uid = model.uid
         val ref = FirebaseDatabase

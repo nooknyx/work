@@ -91,10 +91,13 @@ class username : AppCompatActivity() {
                 progressDialog.setMessage("Creating User Account...")
                 progressDialog.show()
                 auth.createUserWithEmailAndPassword(emailsign.text.toString(),passforsign.text.toString()).addOnSuccessListener {
+                    progressDialog.dismiss()
                     Toast.makeText(applicationContext, "Sign Up Successful!", Toast.LENGTH_SHORT)
                         .show()
                     updateUserInfo()
+
                 }.addOnFailureListener {
+                    progressDialog.dismiss()
                     Toast.makeText(applicationContext, "Sign Up Failed!", Toast.LENGTH_SHORT).show()
                 }
             }

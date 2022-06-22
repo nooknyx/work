@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_edittextbox"
                     android:hint="Email"
-                    android:inputType="textPassword"
+                    android:inputType="textEmailAddress"
                     android:padding="10dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
