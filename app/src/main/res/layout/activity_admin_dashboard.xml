@@ -34,8 +34,8 @@
 
         <ImageView
             android:id="@+id/book_profile"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:background="@color/white"
@@ -54,7 +54,7 @@
             android:id="@+id/nameTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="210dp"
+            android:layout_marginTop="180dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
             app:startIconDrawable="@drawable/book">
@@ -95,12 +95,35 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/barcodeTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookidTil"
+            android:layout_marginTop="20dp"
+            app:boxBackgroundMode="none"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/barcode">
+
+            <EditText
+                android:id="@+id/barcodeEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_edittextbox"
+                android:hint="ฺBarcode number"
+                android:inputType="textPersonName|textCapWords"
+                android:padding="10dp"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <!--email input-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bookidTil"
+            android:layout_below="@+id/barcodeTil"
             android:layout_marginTop="20dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
