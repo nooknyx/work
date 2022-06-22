@@ -28,6 +28,7 @@ class AdminDashboard : AppCompatActivity() {
         val Author = findViewById<EditText>(R.id.authorEt)
         val Category = findViewById<EditText>(R.id.categoryEt)
         val Detail = findViewById<EditText>(R.id.detailEt)
+        val Barcode = findViewById<EditText>(R.id.barcodeEt)
         backBtn.setOnClickListener {
             firebaseAuth.signOut()
             startActivity(Intent(this, login::class.java))
@@ -97,6 +98,16 @@ class AdminDashboard : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (Barcode.text.toString().isEmpty())
+            {
+                Toast.makeText(
+                    applicationContext,
+                    "Pleas fill Book barcode", Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+
             //if input properly, will create new book and send to firebase
             else {
                 progressDialog.setMessage("Creating New Book...")
@@ -112,6 +123,7 @@ class AdminDashboard : AppCompatActivity() {
             Author.text = null
             Category.text = null
             Detail.text = null
+            Barcode.text = null
         }
 
     }
@@ -125,18 +137,18 @@ class AdminDashboard : AppCompatActivity() {
         val IdBook = findViewById<EditText>(R.id.bookidEt)
         val Author = findViewById<EditText>(R.id.authorEt)
         val Category = findViewById<EditText>(R.id.categoryEt)
-
         val Detail = findViewById<EditText>(R.id.detailEt)
         val viewCount = 0
-        val Barcode = 0
+        val Barcode = findViewById<EditText>(R.id.barcodeEt)
         val timestamp = "${System.currentTimeMillis()}"
         val AverageRatings = 0.0
         val numUserRated = 0
         //setting up data to add comment in database
+
         val hashMap = HashMap<String, Any>()
         hashMap["Author"] = Author.text.toString().trim()
         hashMap["AverageRatings"] = AverageRatings.toFloat()
-        hashMap["Barcode"] = Barcode.toLong()
+        hashMap["Barcode"] = Barcode.toString().toLong()
         hashMap["BookTitle"] = BookTitle.text.toString().trim()
         hashMap["bookId"] = IdBook.text.toString().trim()
         hashMap["bookSummary"] = Detail.text.toString().trim()
