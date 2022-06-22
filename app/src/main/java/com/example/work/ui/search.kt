@@ -133,7 +133,7 @@ class Search: Fragment(),View.OnClickListener
         }
 
         binding.cleardata.setOnClickListener{
-
+            binding.editTextTextPersonName.text.clear()
         }
 
         //handle click, scan
