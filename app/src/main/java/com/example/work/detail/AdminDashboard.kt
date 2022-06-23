@@ -98,7 +98,7 @@ class AdminDashboard : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (Barcode.text.toString().isEmpty())
+            if (Barcode.text.toString().isEmpty() || Barcode.text.length < 13)
             {
                 Toast.makeText(
                     applicationContext,

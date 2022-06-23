@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.example.work.Adapter.AdapterComment
+import com.example.work.Adapter.AdapterFavourite
 import com.example.work.MainActivity
 import com.example.work.R
 import com.example.work.data.Bookdata
@@ -221,6 +222,10 @@ class bookdetail : AppCompatActivity() {
         val alertDialog = builder.create()
         alertDialog.show()
 
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books").child(bookId).child("Comments")
+
         commentAddBinding.backBtn.setOnClickListener{
             alertDialog.dismiss()
         }
@@ -229,18 +234,34 @@ class bookdetail : AppCompatActivity() {
             userrating = commentAddBinding.addRating.rating.toDouble()
             comment = commentAddBinding.commentEt.text.toString().trim()
 
-            if(comment.isEmpty()){
-                Toast.makeText(this,"Enter comment", Toast.LENGTH_SHORT).show()
+            if(comment.isEmpty() && userrating == 0.0){
+                Toast.makeText(this,"Please enter comment or give rating", Toast.LENGTH_SHORT).show()
             }
             else{
-                alertDialog.dismiss()
-                addComment()
-                if (userrating == 0.0) {
 
-                } else {
-                    totalRatings()
-                    totalUserGiveRate()
-                }
+                ref.orderByChild("uid").equalTo(firebaseAuth.uid.toString()).addListenerForSingleValueEvent(object : ValueEventListener{
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            commentAddBinding.commentEt.text!!.clear()
+                            commentAddBinding.addRating.rating = 0F
+                            alertDialog.dismiss()
+                            Toast.makeText(this@bookdetail,"You already added comment to this book!",Toast.LENGTH_SHORT).show()
+                        }
+                        else {
+                            alertDialog.dismiss()
+                            addComment()
+
+                                totalRatings()
+                                totalUserGiveRate()
+
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                })
 
             }
         }
@@ -266,11 +287,11 @@ class bookdetail : AppCompatActivity() {
         //add data into the the database
         //path book > bookid > comment > commentId > commentdata
 
-        val ref = FirebaseDatabase
+        val aref = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books")
 
-        ref.child(bookId).child("Comments").child(timestamp)
+        aref.child(bookId).child("Comments").child(timestamp)
             .setValue(hashMap)
             .addOnSuccessListener {
                 //progressDialog.dismiss()
@@ -293,21 +314,28 @@ class bookdetail : AppCompatActivity() {
 
         //path to db, get ratings
 
-        val ref = FirebaseDatabase
+        val rref = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books")
 
-        ref.child(bookId).child("Comments")
+        rref.child(bookId).child("Comments")
             .addValueEventListener(object : ValueEventListener{
 
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     for (ds in snapshot.children){
                         val avgrate = ds.child("userRating").value.toString()
-                        total = total.plus(avgrate.toDouble())
-                        count = count.plus(1)
-                        avgRatings = total.div(count)
+                        if (avgrate.toDouble() == 0.0) {
+
+                        } else {
+                            total = total.plus(avgrate.toDouble())
+                            count = count.plus(1)
+                            avgRatings = total.div(count)
+                        }
+
+
                     }
+
                     val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
                     ref.child(bookId).child("AverageRatings").setValue(avgRatings)
 
@@ -326,11 +354,11 @@ class bookdetail : AppCompatActivity() {
 
         //path to db, get ratings
 
-        val ref = FirebaseDatabase
+        val urref = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books")
 
-        ref.child(bookId)
+        urref.child(bookId)
             .addListenerForSingleValueEvent(object : ValueEventListener{
 
                 override fun onDataChange(snapshot: DataSnapshot) {

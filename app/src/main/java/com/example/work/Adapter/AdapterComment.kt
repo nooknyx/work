@@ -74,18 +74,14 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         val commentId = model.id
         val userRating = model.userRating
 
+        val selectedposition = -1
         //timestamp format
         val date = MainActivity.formatTimeStamp(timestamp.toLong())
         //init firebase
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if(firebaseAuth.currentUser != null){
-            //check for bookmark for logged in user
-            checkIsBookmark(model)
-        }
-        isInMyBookmark = false
-        binding.bookmarkbtn
-            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.bookmarkbtn_yellow,0,0)
+
+        //isInMyBookmark = false
         //set data
         holder.dateTv.text = date
         holder.commentTv.text = comment
@@ -95,6 +91,11 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
             binding.commentRating.rating = userRating!!.toFloat()
         }
 
+        if (comment == "") {
+            binding.bookmarkbtn.visibility = View.GONE
+        } else {
+            binding.bookmarkbtn.visibility = View.VISIBLE
+        }
         //
         loadUserDetails(model, holder)
 
@@ -102,8 +103,10 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
             //user can delete their own comment
             if(firebaseAuth.currentUser != null && firebaseAuth.uid == uid){
                 deleteCommentDialog(model, holder)
+
             }
         }
+
 
 
         binding.bookmarkbtn.setOnClickListener(){
@@ -120,15 +123,24 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 if(isInMyBookmark){
                     //already in remove
                     removeFromBookmark(commentId)
+
                 }
                 else{
                     //add to fav
+
                     addToBookmark(model)
+
                 }
 
             }
 
         }
+
+        if(firebaseAuth.currentUser != null){
+            //check for bookmark for logged in user
+            checkIsBookmark(model)
+        }
+
     }
 
     //for bookmark comment
@@ -138,18 +150,18 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
         Log.d(bookdetail.TAG, "checkIsBookmark :Checking if book is in bookmark or not")
 
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference("users")
+            .getReference("users").child(firebaseAuth.uid!!).child("Bookmark")
 
 
 
-        ref.child(firebaseAuth.uid!!).child("Bookmark").child(model.id)
+        ref.orderByChild("id").equalTo(model.id)
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     isInMyBookmark = snapshot.exists()
-
                     if(isInMyBookmark){
                         //available in favourite
+
                         binding.bookmarkbtn
                             .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.bookmarkbtn_yellow,0,0)
                         //binding.bookmarkbtn.text = "Remove from bookmark"
@@ -232,6 +244,7 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                 val commentId = model.id
 
 
+
                 val bref  = FirebaseDatabase
                     .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
                     .getReference("users")
@@ -280,18 +293,16 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                     }
 
                 //uref.child("Bookmark").child(commentId).removeValue()
+                    totalRatings(model.bookId)
+                    totalUserGiveRate(model.bookId)
+
 
             }
             .setNegativeButton("Cancel"){d,e->
                 d.dismiss()
             }
             .show()
-        totalRatings(model.bookId)
-        if (model.userRating == 0.0) {
 
-        } else {
-            totalUserGiveRate(model.bookId)
-        }
 
     }
 
@@ -314,8 +325,10 @@ class AdapterComment: RecyclerView.Adapter<AdapterComment.HolderComment> {
                         total = total.plus(avgrate.toDouble())
                         count = count.plus(1)
                         avgRatings = total.div(count)
+
                     }
                     val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+
                     ref.child(bookId).child("AverageRatings").setValue(avgRatings)
 
                 }
