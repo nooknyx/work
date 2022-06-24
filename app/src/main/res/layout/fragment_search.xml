@@ -93,8 +93,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/booksRv"
         android:layout_width="match_parent"
-        android:layout_height="409dp"
+        android:layout_height="350dp"
         android:layout_gravity="bottom"
+        android:layout_marginTop="450dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/booklist" />
 
