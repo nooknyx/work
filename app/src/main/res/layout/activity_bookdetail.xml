@@ -186,7 +186,7 @@
                     android:textSize="12sp"
                     android:textStyle="italic" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/favebtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

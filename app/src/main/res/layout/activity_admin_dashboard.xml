@@ -72,11 +72,12 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!--Bookid-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/bookidTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/nameTil"
+            android:layout_below="@+id/topicTil"
             android:layout_marginTop="20dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
@@ -95,11 +96,12 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!--Barcode-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/barcodeTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bookidTil"
+            android:layout_below="@+id/emailTil"
             android:layout_marginTop="20dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
@@ -118,12 +120,12 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--email input-->
+        <!--Author input-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/barcodeTil"
+            android:layout_below="@+id/nameTil"
             android:layout_marginTop="20dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
@@ -142,12 +144,12 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--topic input-->
+        <!--Category input-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/topicTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/emailTil"
+            android:layout_below="@+id/barcodeTil"
             android:layout_marginTop="20dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
@@ -166,15 +168,12 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
         <!--detail input-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/detailTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/topicTil"
+            android:layout_below="@+id/bookidTil"
             android:layout_marginTop="20dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false">
@@ -192,6 +191,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!--detail-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/submitbtn"
             android:layout_width="match_parent"
@@ -213,9 +213,9 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
-            android:textAlignment="center"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="Clear Data"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="15dp" />
 
