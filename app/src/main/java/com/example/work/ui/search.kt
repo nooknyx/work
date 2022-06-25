@@ -31,20 +31,10 @@ class Search: Fragment(),View.OnClickListener
     private lateinit var auth: FirebaseAuth//firebase auth
     private lateinit var intentIntegrator: IntentIntegrator
 
-/*
-    override fun onResume() {
-        super.onResume()
-
-        //set dropdown menu
-        /*val category = resources.getStringArray(R.array.category)
-        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdpwn_item,category)
-        binding.categorymenu.setAdapter(arrayAdapter)*/
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }*/
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,6 +63,7 @@ class Search: Fragment(),View.OnClickListener
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
                 if(binding.categorymenu.selectedItemPosition == 0) {
                     binding.booksRv.visibility = View.GONE
                     binding.booksRv.adapter = null

@@ -53,6 +53,7 @@ class ForgetPassword : AppCompatActivity() {
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             Toast.makeText(this, "Invalid email",Toast.LENGTH_SHORT).show()
+
         }
         else{
             recoverPassword()
@@ -65,6 +66,7 @@ class ForgetPassword : AppCompatActivity() {
         firebaseAuth.sendPasswordResetEmail(email)
             .addOnSuccessListener {
                 Toast.makeText(this, "Instruction send to email", Toast.LENGTH_SHORT).show()
+                binding.emailEt.text.clear()
             }
             .addOnFailureListener{
                 Toast.makeText(this,"Failed to send", Toast.LENGTH_SHORT).show()
