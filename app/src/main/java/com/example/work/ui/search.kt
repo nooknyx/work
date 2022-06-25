@@ -59,7 +59,7 @@ class Search: Fragment(),View.OnClickListener
 
         auth = FirebaseAuth.getInstance()
 
-        val categoryArrayList = arrayListOf("All","Art","Biography","History","Horror","Music","Self-Help","Sci-Fi","Science")
+        val categoryArrayList = arrayListOf("Select Category","All","Biography","History","Horror","Music","Self-Help","Sci-Fi","Science")
         val categoryAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,categoryArrayList)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
 
@@ -73,53 +73,49 @@ class Search: Fragment(),View.OnClickListener
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                /*if(binding.categorymenu.selectedItemPosition == 0) {
+                if(binding.categorymenu.selectedItemPosition == 0) {
                     binding.booksRv.visibility = View.GONE
                     binding.booksRv.adapter = null
                 } else {
                     binding.booksRv.visibility = View.VISIBLE
-                }*/
-                if(binding.categorymenu.selectedItemPosition == 0) {
+                }
+                if(binding.categorymenu.selectedItemPosition == 1) {
                     binding.booksRv.adapter = null
                     loadAllBooks()
                 }
-                if(binding.categorymenu.selectedItemPosition == 1) {
-                    binding.booksRv.visibility = View.VISIBLE
-                    binding.booksRv.adapter = null
-                    loadBooksCategory("Art")
-                }
+
                 if(binding.categorymenu.selectedItemPosition == 2) {
-                    binding.booksRv.visibility = View.VISIBLE
+                    //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
                     loadBooksCategory("Biography")
                 }
                 if(binding.categorymenu.selectedItemPosition == 3) {
-                    binding.booksRv.visibility = View.VISIBLE
+                    //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
                     loadBooksCategory("History")
                 }
                 if(binding.categorymenu.selectedItemPosition == 4) {
-                    binding.booksRv.visibility = View.VISIBLE
+                    //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
                     loadBooksCategory("Horror")
                 }
                 if(binding.categorymenu.selectedItemPosition == 5) {
-                    binding.booksRv.visibility = View.VISIBLE
+                    //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
                     loadBooksCategory("Music")
                 }
                 if(binding.categorymenu.selectedItemPosition == 6) {
-                    binding.booksRv.visibility = View.VISIBLE
+                    //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
                     loadBooksCategory("Self-Help")
                 }
                 if(binding.categorymenu.selectedItemPosition == 7) {
-                    binding.booksRv.visibility = View.VISIBLE
+                    //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
                     loadBooksCategory("Sci-Fi")
                 }
                 if(binding.categorymenu.selectedItemPosition == 8) {
-                    binding.booksRv.visibility = View.VISIBLE
+                    //binding.booksRv.visibility = View.VISIBLE
                     binding.booksRv.adapter = null
                     loadBooksCategory("Science")
                 }
@@ -137,12 +133,16 @@ class Search: Fragment(),View.OnClickListener
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 try {
                     if (binding.editTextTextPersonName.length() == 0) {
-                        binding.booksRv.visibility = View.GONE
+                        //binding.booksRv.visibility = View.GONE
                     } else {
                         binding.booksRv.visibility = View.VISIBLE
                         bookAdapter.filter.filter(s)
                     }
 
+                    binding.cleardata.setOnClickListener{
+                        binding.editTextTextPersonName.text.clear()
+                        bookAdapter.filter.filter(s)
+                    }
                 }
                 catch (e: Exception){
                 }
@@ -182,7 +182,7 @@ class Search: Fragment(),View.OnClickListener
         bRef.orderByChild("category").equalTo(Category)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                        bookdatalist.clear()
+                    bookdatalist.clear()
                     if (snapshot.exists()){
                         for (categorybookSnapshot in snapshot.children){
 
@@ -216,7 +216,7 @@ class Search: Fragment(),View.OnClickListener
                     //get data
                     val model = ds.getValue(Bookdata::class.java)
                     //add to list
-                        bookdatalist.add(model!!)
+                    bookdatalist.add(model!!)
                 }
 
                 activity?.let{

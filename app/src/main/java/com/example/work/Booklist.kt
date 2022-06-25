@@ -108,8 +108,6 @@ class Booklist() : Fragment() {
                 if (snapshot.exists()) {
                     for (allBookSnapshot in snapshot.children) {
                         val allBook = allBookSnapshot.getValue(Bookdata::class.java)
-
-
                         booklistArrayList.add(allBook!!)
                     }
                     activity?.let{
