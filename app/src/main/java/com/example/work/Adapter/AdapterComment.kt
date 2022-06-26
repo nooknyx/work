@@ -241,7 +241,11 @@ class AdapterComment : RecyclerView.Adapter<AdapterComment.HolderComment> {
 
                 //uref.child("Bookmark").child(commentId).removeValue()
                 totalRatings(model.bookId)
-                totalUserGiveRate(model.bookId)
+                if(model.userRating != 0.0)
+                {
+                    totalUserGiveRate(model.bookId)
+                }
+
 
 
             }
@@ -308,8 +312,13 @@ class AdapterComment : RecyclerView.Adapter<AdapterComment.HolderComment> {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     val totalUserGiveRate = "${snapshot.child("numUserRated").value}".toInt()
-                    total = total.plus(totalUserGiveRate)
-                    allUserRateCount = total.minus(1)
+                    if (totalUserGiveRate == 0)
+                    {
+                        allUserRateCount = 0
+                    } else {
+                        total = total.plus(totalUserGiveRate)
+                        allUserRateCount = total.minus(1)
+                    }
 
                     val ref =
                         FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")

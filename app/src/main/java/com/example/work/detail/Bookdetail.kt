@@ -305,9 +305,11 @@ class bookdetail : AppCompatActivity(), Listener {
                             } else {
                                 alertDialog.dismiss()
                                 addComment()
-
                                 totalRatings()
-                                totalUserGiveRate()
+                                if (userrating != 0.0) {
+                                    totalUserGiveRate()
+                                }
+
 
                             }
                         }
