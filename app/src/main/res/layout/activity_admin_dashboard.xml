@@ -6,223 +6,230 @@
     android:layout_height="match_parent"
     tools:context=".detail.AdminDashboard">
 
-    <!--Toolbar-->
-    <RelativeLayout
-        android:id="@+id/toolbarRl"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/mainorange">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/backbtn" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="Add books"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/bookpic"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
-            android:background="@color/white"
-            android:src="@drawable/user_person" />
-
-
+        <!--Toolbar-->
         <RelativeLayout
-            android:id="@+id/adddata"
+            android:id="@+id/toolbarRl"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="180dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp">
+            android:layout_height="match_parent"
+            android:background="@color/mainorange">
 
-            <!--name input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundMode="none"
-                app:hintEnabled="false"
-                app:startIconDrawable="@drawable/book">
-
-                <EditText
-                    android:id="@+id/booknameEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/shape_edittextbox"
-                    android:hint="Book Title"
-                    android:inputType="textPersonName|textCapWords"
-                    android:padding="10dp"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--Bookid-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/bookidTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/topicTil"
+            <ImageButton
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
                 android:layout_marginTop="20dp"
-                app:boxBackgroundMode="none"
-                app:hintEnabled="false"
-                app:startIconDrawable="@drawable/bookid">
-
-                <EditText
-                    android:id="@+id/bookidEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_edittextbox"
-                    android:hint="Book id"
-                    android:inputType="textPersonName|textCapWords"
-                    android:padding="10dp"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--Barcode-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/barcodeTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/emailTil"
-                android:layout_marginTop="20dp"
-                app:boxBackgroundMode="none"
-                app:hintEnabled="false"
-                app:startIconDrawable="@drawable/barcode">
-
-                <EditText
-                    android:id="@+id/barcodeEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_edittextbox"
-                    android:hint="ฺBarcode number"
-                    android:inputType="textPersonName|textCapWords"
-                    android:padding="10dp"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--Author input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/nameTil"
-                android:layout_marginTop="20dp"
-                app:boxBackgroundMode="none"
-                app:hintEnabled="false"
-                app:startIconDrawable="@drawable/user_person">
-
-                <EditText
-                    android:id="@+id/authorEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_edittextbox"
-                    android:hint="Author"
-                    android:inputType="textPersonName|textCapWords"
-                    android:padding="10dp"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--Category input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/topicTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/barcodeTil"
-                android:layout_marginTop="20dp"
-                app:boxBackgroundMode="none"
-                app:hintEnabled="false"
-                app:startIconDrawable="@drawable/ic_baseline_category_24">
-
-                <EditText
-                    android:id="@+id/categoryEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_edittextbox"
-                    android:hint="Category"
-                    android:inputType="textPersonName|textCapWords"
-                    android:padding="10dp"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--detail input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/detailTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/bookidTil"
-                android:layout_marginTop="20dp"
-                app:boxBackgroundMode="none"
-                app:hintEnabled="false">
-
-                <EditText
-                    android:id="@+id/detailEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_textbox"
-                    android:hint="detail"
-                    android:inputType="textMultiLine"
-                    android:padding="10dp"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--detail-->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/submitbtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/detailTil"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_white"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Submit"
-                android:textColor="@color/mainorange"
-                android:textSize="20dp" />
+                android:layout_marginStart="20dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/backbtn" />
 
             <TextView
-                android:id="@+id/cleardata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Add books"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/bookpic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:background="@color/white"
+                android:src="@drawable/user_person" />
+
+
+            <RelativeLayout
+                android:id="@+id/adddata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/submitbtn"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="50dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Clear Data"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="180dp"
+                android:layout_marginEnd="30dp">
 
+                <!--name input-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nameTil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundMode="none"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/book">
+
+                    <EditText
+                        android:id="@+id/booknameEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/shape_edittextbox"
+                        android:hint="Book Title"
+                        android:inputType="textPersonName|textCapWords"
+                        android:padding="10dp"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Bookid-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/bookidTil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/topicTil"
+                    android:layout_marginTop="20dp"
+                    app:boxBackgroundMode="none"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/bookid">
+
+                    <EditText
+                        android:id="@+id/bookidEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/shape_edittextbox"
+                        android:hint="Book id"
+                        android:inputType="textPersonName|textCapWords"
+                        android:padding="10dp"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Barcode-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/barcodeTil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/emailTil"
+                    android:layout_marginTop="20dp"
+                    app:boxBackgroundMode="none"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/barcode">
+
+                    <EditText
+                        android:id="@+id/barcodeEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/shape_edittextbox"
+                        android:hint="ฺBarcode number"
+                        android:inputType="textPersonName|textCapWords"
+                        android:padding="10dp"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Author input-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailTil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nameTil"
+                    android:layout_marginTop="20dp"
+                    app:boxBackgroundMode="none"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/user_person">
+
+                    <EditText
+                        android:id="@+id/authorEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/shape_edittextbox"
+                        android:hint="Author"
+                        android:inputType="textPersonName|textCapWords"
+                        android:padding="10dp"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Category input-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/topicTil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/barcodeTil"
+                    android:layout_marginTop="20dp"
+                    app:boxBackgroundMode="none"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/ic_baseline_category_24">
+
+                    <EditText
+                        android:id="@+id/categoryEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/shape_edittextbox"
+                        android:hint="Category"
+                        android:inputType="textPersonName|textCapWords"
+                        android:padding="10dp"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--detail input-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/detailTil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bookidTil"
+                    android:layout_marginTop="20dp"
+                    app:boxBackgroundMode="none"
+                    app:hintEnabled="false">
+
+                    <EditText
+                        android:id="@+id/detailEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/shape_textbox"
+                        android:hint="detail"
+                        android:inputType="textMultiLine"
+                        android:padding="10dp"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--detail-->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/submitbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/detailTil"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_white"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Submit"
+                    android:textColor="@color/mainorange"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/cleardata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/submitbtn"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="50dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Clear Data"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-    </RelativeLayout>
+    </ScrollView>
+
 
 
 </RelativeLayout>
