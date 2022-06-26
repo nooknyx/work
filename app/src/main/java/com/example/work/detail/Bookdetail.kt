@@ -1,18 +1,17 @@
 package com.example.work.detail
 
 import android.app.ProgressDialog
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.example.work.Adapter.AdapterComment
-import com.example.work.Adapter.AdapterFavourite
+import com.example.work.Listener
 import com.example.work.MainActivity
+import com.example.work.Model.Comments
 import com.example.work.R
 import com.example.work.data.Bookdata
 import com.example.work.Model.ModelComment
@@ -24,10 +23,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import org.w3c.dom.Comment
 
 
-class bookdetail : AppCompatActivity() {
-
+class bookdetail : AppCompatActivity(), Listener {
 
     lateinit var bookReference: FirebaseFirestore
     lateinit var bookList: MutableList<Bookdata>
@@ -40,9 +39,12 @@ class bookdetail : AppCompatActivity() {
 
     //arraylist holding comment
     private lateinit var commentArrayList: ArrayList<ModelComment>
+    private var commentsArray: ArrayList<Comments> = ArrayList()
+
+    var listsBookmark = ArrayList<ModelComment>()
 
     //adapter to set comment into recycleview
-    private lateinit var adapterComment: AdapterComment
+    private var adapterComment: AdapterComment? = null
 
     //hold boolean for favourtie value
     private var isInMyFavourite = false
@@ -56,7 +58,7 @@ class bookdetail : AppCompatActivity() {
     //getting view count whenever user access this page
 
 
-    companion object{
+    companion object {
         //TAG
         const val TAG = "BOOK_DETAIL_TAG"
     }
@@ -74,7 +76,7 @@ class bookdetail : AppCompatActivity() {
         //get bookid from intent
         bookId = intent.getStringExtra("bookId")!!
 
-        if(firebaseAuth.currentUser != null){
+        if (firebaseAuth.currentUser != null) {
             //check for faveourtie for logged in user
             checkIsFavourite(bookId)
         }
@@ -83,42 +85,38 @@ class bookdetail : AppCompatActivity() {
         incrementBookViewCount(bookId)
         //load book detail
         loadBookDetails()
-
         //handle backbutton click, go back
-        binding.backBtn.setOnClickListener{
+        binding.backBtn.setOnClickListener {
             onBackPressed()
         }
 
         showComments()
 
-        binding.addCommnetBtn.setOnClickListener{
+        binding.addCommnetBtn.setOnClickListener {
 
             //check if the user login or not when adding comment
 
-            if(firebaseAuth.currentUser == null){
-                Toast.makeText(this,"You're not logged in", Toast.LENGTH_SHORT).show()
-            }
-            else{
+            if (firebaseAuth.currentUser == null) {
+                Toast.makeText(this, "You're not logged in", Toast.LENGTH_SHORT).show()
+            } else {
                 addCommentDialog()
             }
         }
 
         //handle click, add/remove favourite
-        binding.favebtn.setOnClickListener(){
+        binding.favebtn.setOnClickListener() {
             //only login user can add favourite
 
             //checking if user is login or not
-            if(firebaseAuth.currentUser == null){
+            if (firebaseAuth.currentUser == null) {
                 //not login, user can't do fav
-                Toast.makeText(this,"You are not logged in",Toast.LENGTH_SHORT).show()
-            }
-            else{
+                Toast.makeText(this, "You are not logged in", Toast.LENGTH_SHORT).show()
+            } else {
                 // login user can fave function
-                if(isInMyFavourite){
+                if (isInMyFavourite) {
                     //already in remove
                     removeFromFavourite(bookId)
-                }
-                else{
+                } else {
                     //add to fav
                     addToFavourite(bookId)
                 }
@@ -128,7 +126,7 @@ class bookdetail : AppCompatActivity() {
         }
     }
 
-    private fun loadBookDetails(){
+    private fun loadBookDetails() {
 
         //Books > bookId > Detail
         val ref = FirebaseDatabase
@@ -136,7 +134,7 @@ class bookdetail : AppCompatActivity() {
             .getReference("Books")
 
         ref.child(bookId)
-            .addListenerForSingleValueEvent(object: ValueEventListener{
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     //get data
@@ -176,6 +174,7 @@ class bookdetail : AppCompatActivity() {
 
         //init arraylist
         commentArrayList = ArrayList()
+        commentsArray = ArrayList()
 
         //path to db, loading comment
         val ref = FirebaseDatabase
@@ -183,21 +182,30 @@ class bookdetail : AppCompatActivity() {
             .getReference("Books")
 
         ref.child(bookId).child("Comments")
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    //clear list
                     commentArrayList.clear()
-                    for (ds in snapshot.children){
+                    commentsArray = ArrayList()
+                    for (ds in snapshot.children) {
                         //get data ss model
                         val model = ds.getValue(ModelComment::class.java)
                         //add to list
                         commentArrayList.add(model!!)
+                        commentsArray.add(
+                            Comments(
+                                bookId = model.bookId,
+                                comment = model.comment,
+                                id = model.id,
+                                timestamp = model.timestamp,
+                                uid = model.uid,
+                                userRating = model.userRating,
+                                isBookmark = false
+                            )
+                        )
                     }
-                    //setup adapter
-                    adapterComment = AdapterComment(this@bookdetail, commentArrayList)
-                    //set adapter to recycleview
-                    binding.commentRv.adapter = adapterComment
+                    loadBookmark()
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -210,13 +218,13 @@ class bookdetail : AppCompatActivity() {
     private var comment = ""
     private var userrating = 0.0
 
-    private fun addCommentDialog(){
+    private fun addCommentDialog() {
 
         //Inflate/bind view for dialog (add_comment.xml)
 
         val commentAddBinding = AddCommentBinding.inflate(LayoutInflater.from(this))
 
-        val builder = AlertDialog.Builder(this,R.style.CustomDialog)
+        val builder = AlertDialog.Builder(this, R.style.CustomDialog)
         builder.setView(commentAddBinding.root)
 
         val alertDialog = builder.create()
@@ -226,49 +234,53 @@ class bookdetail : AppCompatActivity() {
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books").child(bookId).child("Comments")
 
-        commentAddBinding.backBtn.setOnClickListener{
+        commentAddBinding.backBtn.setOnClickListener {
             alertDialog.dismiss()
         }
 
-        commentAddBinding.submitbtn.setOnClickListener{
+        commentAddBinding.submitbtn.setOnClickListener {
             userrating = commentAddBinding.addRating.rating.toDouble()
             comment = commentAddBinding.commentEt.text.toString().trim()
 
-            if(comment.isEmpty() && userrating == 0.0){
-                Toast.makeText(this,"Please enter comment or give rating", Toast.LENGTH_SHORT).show()
-            }
-            else{
+            if (comment.isEmpty() && userrating == 0.0) {
+                Toast.makeText(this, "Please enter comment or give rating", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
 
-                ref.orderByChild("uid").equalTo(firebaseAuth.uid.toString()).addListenerForSingleValueEvent(object : ValueEventListener{
+                ref.orderByChild("uid").equalTo(firebaseAuth.uid.toString())
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
 
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()) {
-                            commentAddBinding.commentEt.text!!.clear()
-                            commentAddBinding.addRating.rating = 0F
-                            alertDialog.dismiss()
-                            Toast.makeText(this@bookdetail,"You already added comment to this book!",Toast.LENGTH_SHORT).show()
-                        }
-                        else {
-                            alertDialog.dismiss()
-                            addComment()
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                commentAddBinding.commentEt.text!!.clear()
+                                commentAddBinding.addRating.rating = 0F
+                                alertDialog.dismiss()
+                                Toast.makeText(
+                                    this@bookdetail,
+                                    "You already added comment to this book!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                alertDialog.dismiss()
+                                addComment()
 
                                 totalRatings()
                                 totalUserGiveRate()
 
+                            }
                         }
-                    }
 
-                    override fun onCancelled(error: DatabaseError) {
-                    }
+                        override fun onCancelled(error: DatabaseError) {
+                        }
 
-                })
+                    })
 
             }
         }
 
     }
 
-    private fun addComment(){
+    private fun addComment() {
         // showing progress
         //progressDialog.setMessage("Adding Comment")
         //progressDialog.show()
@@ -295,19 +307,21 @@ class bookdetail : AppCompatActivity() {
             .setValue(hashMap)
             .addOnSuccessListener {
                 //progressDialog.dismiss()
-                Toast.makeText(this,"Comment added",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Comment added", Toast.LENGTH_SHORT).show()
             }
-            .addOnFailureListener{ e->
+            .addOnFailureListener { e ->
                 //progressDialog.dismiss()
-                Toast.makeText(this,"Failed to add comment", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to add comment", Toast.LENGTH_SHORT).show()
             }
-        val uref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        val uref =
+            FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("users")
         uref.child(firebaseAuth.uid!!).child("Comments").child(timestamp)
             .setValue(hashMap)
 
     }
 
-    private fun totalRatings(){
+    private fun totalRatings() {
         var total = 0.0
         var count = 0
         var avgRatings = 0.0
@@ -319,11 +333,11 @@ class bookdetail : AppCompatActivity() {
             .getReference("Books")
 
         rref.child(bookId).child("Comments")
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
 
-                    for (ds in snapshot.children){
+                    for (ds in snapshot.children) {
                         val avgrate = ds.child("userRating").value.toString()
                         if (avgrate.toDouble() == 0.0) {
 
@@ -336,7 +350,9 @@ class bookdetail : AppCompatActivity() {
 
                     }
 
-                    val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    val ref =
+                        FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                            .getReference("Books")
                     ref.child(bookId).child("AverageRatings").setValue(avgRatings)
 
                 }
@@ -348,7 +364,7 @@ class bookdetail : AppCompatActivity() {
             })
     }
 
-    private fun totalUserGiveRate(){
+    private fun totalUserGiveRate() {
         var total = 0
         var allUserRateCount = 0
 
@@ -359,15 +375,17 @@ class bookdetail : AppCompatActivity() {
             .getReference("Books")
 
         urref.child(bookId)
-            .addListenerForSingleValueEvent(object : ValueEventListener{
+            .addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
 
-                        val totalUserGiveRate = "${snapshot.child("numUserRated").value}".toInt()
-                        total = total.plus(totalUserGiveRate)
-                        allUserRateCount = total.plus(1)
+                    val totalUserGiveRate = "${snapshot.child("numUserRated").value}".toInt()
+                    total = total.plus(totalUserGiveRate)
+                    allUserRateCount = total.plus(1)
 
-                    val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Books")
+                    val ref =
+                        FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                            .getReference("Books")
                     ref.child(bookId).child("numUserRated").setValue(allUserRateCount.toLong())
 
                 }
@@ -379,7 +397,7 @@ class bookdetail : AppCompatActivity() {
             })
     }
 
-    private fun checkIsFavourite(bookId: String){
+    private fun checkIsFavourite(bookId: String) {
 
         Log.d(TAG, "checkIsFavourite :Checking if book is in fav or not")
 
@@ -388,23 +406,32 @@ class bookdetail : AppCompatActivity() {
             .getReference("users")
 
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
-            .addValueEventListener(object :ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     isInMyFavourite = snapshot.exists()
 
-                    if(isInMyFavourite){
+                    if (isInMyFavourite) {
                         //available in favourite
                         binding.favebtn
-                            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_red,0,0)
+                            .setCompoundDrawablesRelativeWithIntrinsicBounds(
+                                0,
+                                R.drawable.favourite_red,
+                                0,
+                                0
+                            )
 
                         binding.favebtn.text = "Remove from favourite"
-                    }
-                    else{
+                    } else {
                         //not available
                         binding.favebtn
-                            .setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.favourite_white,0,0)
+                            .setCompoundDrawablesRelativeWithIntrinsicBounds(
+                                0,
+                                R.drawable.favourite_white,
+                                0,
+                                0
+                            )
 
                         binding.favebtn.text = "Add to favourite"
 
@@ -418,12 +445,12 @@ class bookdetail : AppCompatActivity() {
 
     }
 
-    private fun addToFavourite(bookId: String){
+    private fun addToFavourite(bookId: String) {
 
         val timestamp = System.currentTimeMillis()
 
         //set up data to add in db
-        val hashMap = HashMap<String,Any>()
+        val hashMap = HashMap<String, Any>()
 
         hashMap["bookId"] = bookId
         hashMap["timestamp"] = timestamp
@@ -439,18 +466,18 @@ class bookdetail : AppCompatActivity() {
                 //add to fav
                 Log.d(TAG, "addToFavourite: Added to fav")
             }
-            .addOnFailureListener{ e->
+            .addOnFailureListener { e ->
                 //failed to add
                 Log.d(TAG, "addToFavourite: Failed to add to fav")
-                Toast.makeText(this,"Failed to add to fave",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to add to fave", Toast.LENGTH_SHORT).show()
             }
 
 
     }
 
-    private fun removeFromFavourite(bookId: String){
+    private fun removeFromFavourite(bookId: String) {
 
-        Log.d(TAG,"removeFromFavourite: Removing from fav")
+        Log.d(TAG, "removeFromFavourite: Removing from fav")
 
         //database ref
         val ref = FirebaseDatabase
@@ -460,26 +487,25 @@ class bookdetail : AppCompatActivity() {
         ref.child(firebaseAuth.uid!!).child("Favourite").child(bookId)
             .removeValue()
             .addOnSuccessListener {
-                Log.d(TAG,"Removed from favourite")
+                Log.d(TAG, "Removed from favourite")
             }
-            .addOnFailureListener{  e->
+            .addOnFailureListener { e ->
                 Log.d(TAG, "removeFromFavourite: Failed to remove")
                 Toast.makeText(this, "Failed to remove from favourite", Toast.LENGTH_LONG).show()
             }
     }
 
-    fun incrementBookViewCount(bookId: String)
-    {
+    fun incrementBookViewCount(bookId: String) {
         val ref = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books")
 
         ref.child(bookId)
-            .addListenerForSingleValueEvent(object: ValueEventListener {
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //get view, check if there is no view assign, will assign new view here
                     var viewCount = "${snapshot.child("viewCount").value}"
-                    if (viewCount=="" || viewCount == null){
+                    if (viewCount == "" || viewCount == null) {
                         viewCount = "0"
                     }
                     //increment the view count here
@@ -502,4 +528,83 @@ class bookdetail : AppCompatActivity() {
             })
     }
 
+    override fun onClickBookmark(comments: Comments, position: Int) {
+        comments.isBookmark?.let {
+            commentsArray[position].isBookmark = !it
+            adapterComment?.commentArrayList = commentsArray
+            adapterComment?.notifyItemChanged(position)
+        }
+    }
+
+    private fun getComments(): ArrayList<ModelComment> {
+        return commentArrayList
+    }
+
+    private fun loadBookmark() {
+        listsBookmark = ArrayList()
+
+        firebaseAuth.uid?.let { uid ->
+            val ref = FirebaseDatabase
+                .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("users")
+            ref.child(uid).child("Bookmark")
+                .addValueEventListener(object : ValueEventListener {
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (ds in snapshot.children) {
+                            //get bookid
+                            val allComment = ds.getValue(ModelComment::class.java)
+                            listsBookmark.add(allComment!!)
+
+                        }
+                        mapCommentWithBookmark()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.d(TAG, "onCancelled: ${error.details}")
+                    }
+                })
+        }
+    }
+
+    private fun mapCommentWithBookmark() {
+        val comments = getComments()
+        val bookmarks = listsBookmark
+
+        val bookmarkList = ArrayList<Comments>()
+        bookmarks.forEach { it ->
+            if (it.bookId == bookId) {
+                bookmarkList.add(
+                    Comments(
+                        bookId = it.bookId,
+                        comment = it.comment,
+                        id = it.id,
+                        timestamp = it.timestamp,
+                        uid = it.uid,
+                        userRating = it.userRating
+                    )
+                )
+            }
+        }
+
+        for (indexBM in 0 until bookmarkList.size) {
+            for (indexCM in 0 until commentsArray.size) {
+                if (bookmarkList[indexBM].comment == commentsArray[indexCM].comment) {
+                    commentsArray[indexCM].isBookmark = true
+                }
+            }
+        }
+
+        //setup adapter
+        adapterComment = AdapterComment(this, this@bookdetail, commentsArray)
+        //set adapter to recycleview
+        binding.commentRv.adapter = adapterComment
+        adapterComment?.notifyDataSetChanged()
+    }
+
+    override fun onLoading(isLoading: Boolean) {
+        if (!isLoading) {
+            showComments()
+        }
+    }
 }

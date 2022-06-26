@@ -11,7 +11,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.work.Adapter.AdapterComment
+import com.example.work.Listener
 import com.example.work.MainActivity
+import com.example.work.Model.Comments
 import com.example.work.Model.ModelComment
 import com.example.work.R
 import com.example.work.databinding.ActivityBookdetailBinding
@@ -36,7 +38,7 @@ class User:Fragment(R.layout.fragment_user)
     private lateinit var firebaseAuth: FirebaseAuth
 
     //arraylist holding comment
-    private lateinit var commentArrayList: ArrayList<ModelComment>
+    private lateinit var commentArrayList: ArrayList<Comments>
 
     //adapter to set comment into recycleview
     private lateinit var adapterComment: AdapterComment
@@ -146,7 +148,7 @@ class User:Fragment(R.layout.fragment_user)
         //path to db, loading comment
         val ref = FirebaseDatabase.getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
         ref.child(firebaseAuth.uid!!).child("Comments")
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener, Listener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //clear list
@@ -154,13 +156,23 @@ class User:Fragment(R.layout.fragment_user)
 
                     for (ds in snapshot.children){
                         //get data ss model
-                        val model = ds.getValue(ModelComment::class.java)
-                        //add to list
-                        commentArrayList.add(model!!)
+                        val model = ds.getValue(ModelComment::class.java)?.let {
+                            commentArrayList.add(
+                                Comments(
+                                    bookId = it.bookId,
+                                    comment = it.comment,
+                                    id = it.id,
+                                    timestamp = it.timestamp,
+                                    uid = it.uid,
+                                    userRating = it.userRating
+                                )
+                            )
+                        }
+
                     }
                     activity?.let{
                         //setup adapter
-                        adapterComment = AdapterComment(context!!, commentArrayList)
+                        adapterComment = AdapterComment(this,context!!, commentArrayList)
                         //set adapter to recycleview
                         binding.userComment.adapter = adapterComment
                     }
