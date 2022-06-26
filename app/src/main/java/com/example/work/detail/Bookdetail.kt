@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.example.work.Adapter.AdapterComment
+import com.example.work.Adapter.AdapterCommentGuest
 import com.example.work.Listener
 import com.example.work.MainActivity
 import com.example.work.Model.Comments
@@ -46,6 +48,7 @@ class bookdetail : AppCompatActivity(), Listener {
     //adapter to set comment into recycleview
     private var adapterComment: AdapterComment? = null
 
+    private var adapterCommentGuest: AdapterCommentGuest? = null
     //hold boolean for favourtie value
     private var isInMyFavourite = false
 
@@ -76,10 +79,7 @@ class bookdetail : AppCompatActivity(), Listener {
         //get bookid from intent
         bookId = intent.getStringExtra("bookId")!!
 
-        if (firebaseAuth.currentUser != null) {
-            //check for faveourtie for logged in user
-            checkIsFavourite(bookId)
-        }
+
 
         //get view count + getting view count whenever user access this page
         incrementBookViewCount(bookId)
@@ -90,7 +90,15 @@ class bookdetail : AppCompatActivity(), Listener {
             onBackPressed()
         }
 
-        showComments()
+        if (firebaseAuth.currentUser != null) {
+            //check for faveourtie for logged in user
+            checkIsFavourite(bookId)
+            showComments()
+
+        } else {
+            binding.favebtn.visibility = View.INVISIBLE
+            showCommmentsGuest()
+        }
 
         binding.addCommnetBtn.setOnClickListener {
 
@@ -161,6 +169,40 @@ class bookdetail : AppCompatActivity(), Listener {
 
                     Glide.with(this@bookdetail).load(Image).into(binding.bookcovers)
 
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+    }
+
+    private fun showCommmentsGuest() {
+        //init arraylist
+        commentArrayList = ArrayList()
+
+        //path to db, loading comment
+        val ref = FirebaseDatabase
+            .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("Books")
+
+        ref.child(bookId).child("Comments")
+            .addValueEventListener(object : ValueEventListener{
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //clear list
+                    commentArrayList.clear()
+                    for (ds in snapshot.children){
+                        //get data ss model
+                        val model = ds.getValue(ModelComment::class.java)
+                        //add to list
+                        commentArrayList.add(model!!)
+                    }
+                    //setup adapter
+                    adapterCommentGuest = AdapterCommentGuest(this@bookdetail,commentArrayList)
+                    //set adapter to recycleview
+                    binding.commentRv.adapter = adapterCommentGuest
                 }
 
                 override fun onCancelled(error: DatabaseError) {
