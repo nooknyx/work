@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -230,7 +231,7 @@ class EditUser: AppCompatActivity()
         val popupMenu = PopupMenu(this,binding.userProfile)
 
         popupMenu.menu.add(Menu.NONE,0,0,"Camera")
-        popupMenu.menu.add(Menu.NONE,0,0,"Gallery")
+        popupMenu.menu.add(Menu.NONE,1,1,"Gallery")
         popupMenu.show()
 
         //handle popup menu item click
@@ -238,20 +239,19 @@ class EditUser: AppCompatActivity()
         popupMenu.setOnMenuItemClickListener{item->
 
             //get id of clicked item
-            val id = item.itemId
-            if(id==0){
-                //camera click
-                pickImageCamera()
-            }
-
-            else{
-                //gallery click
-                pickImageGallery()
-            }
-
+            onOptionsItemSelected(item)
             true
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId){
+            0 -> pickImageCamera()
+            1 -> pickImageGallery()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun pickImageCamera(){
