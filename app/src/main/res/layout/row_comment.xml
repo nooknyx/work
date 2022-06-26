@@ -89,8 +89,7 @@
             android:layout_toEndOf="@+id/profileIv"
             android:text="user comment"
             android:textColor="@color/black"
-            android:textSize="12dp"
-            android:layout_toStartOf="@+id/comment_rating"/>
+            android:textSize="12dp" />
 
     </RelativeLayout>
 
