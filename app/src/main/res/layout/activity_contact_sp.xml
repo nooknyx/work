@@ -47,36 +47,13 @@
             android:layout_height="wrap_content"
             android:src="@drawable/group_3"/>
 
-        <!--name input-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nameTil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            app:boxBackgroundMode="none"
-            app:hintEnabled="false"
-            app:startIconDrawable="@drawable/user_person">
-
-            <EditText
-                android:id="@+id/nameEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/shape_edittextbox"
-                android:hint="Name"
-                android:inputType="textPersonName|textCapWords"
-                android:padding="10dp"
-                android:textColor="@color/black" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <!--email input-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/nameTil"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="200dp"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
             app:startIconDrawable="@drawable/email">
@@ -90,6 +67,8 @@
                 android:hint="Email"
                 android:inputType="textPersonName|textCapWords"
                 android:padding="10dp"
+                android:text="adminstoryteller@gmail.com"
+
                 android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
