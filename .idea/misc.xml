@@ -85,7 +85,7 @@
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/shape_toolbar_01.xml" value="0.257" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/shape_toolbar_02.xml" value="0.257" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/drawable/spinner_background.xml" value="0.2155" />
-        <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_admin_dashboard.xml" value="0.4528302049755674" />
+        <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_admin_dashboard.xml" value="0.34705882352941175" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_bookdetail.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_contact_sp.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/activity_forget_password.xml" value="0.3098958333333333" />
@@ -95,6 +95,7 @@
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/allbook.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/booklist.xml" value="0.17572463768115942" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/dropdpwn_item.xml" value="0.3098958333333333" />
+        <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/edituser.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/fragment_home.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="..\:/Users/nicky/AndroidStudioProjects/work/app/src/main/res/layout/fragment_user.xml" value="0.3098958333333333" />

@@ -96,6 +96,7 @@ class EditUser: AppCompatActivity()
 
 
     private var name = ""
+
     private fun validateData() {
         //get data
         name = binding.nameEt.text.toString().trim()

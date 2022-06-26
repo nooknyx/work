@@ -85,6 +85,7 @@
             android:layout_below="@id/nameTv"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:layout_toStartOf="@+id/comment_rating"
             android:layout_toEndOf="@+id/profileIv"
             android:text="user comment"
             android:textColor="@color/black"
