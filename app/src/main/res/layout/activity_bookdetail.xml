@@ -197,7 +197,7 @@
                     android:layout_toEndOf="@id/bookcovers"
                     android:background="@drawable/shape_button"
                     android:drawablePadding="5dp"
-                    android:drawableTint="@drawable/favourite_white"
+                    android:drawableEnd="@drawable/favourite_white"
                     android:fontFamily="sans-serif-condensed"
                     android:src="@drawable/bookmark"
                     android:text="Add to Favourite"

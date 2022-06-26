@@ -192,9 +192,11 @@ class AdminDashboard : AppCompatActivity() {
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books")
 
+
         ref.child(IdBook.text.toString().trim())
             .setValue(hashMap)
             .addOnSuccessListener {
+                uploadImage(Category.text.toString(), IdBook.text.toString().trim())
                 progressDialog.dismiss()
                 Toast.makeText(this,"Book added", Toast.LENGTH_SHORT).show()
                 BookTitle.text = null
@@ -209,46 +211,45 @@ class AdminDashboard : AppCompatActivity() {
                 Toast.makeText(this,"Failed to add book", Toast.LENGTH_SHORT).show()
             }
 
+
+
     }
 
-    private fun updateBookcover(uploadImageUrl: String) {
+    private fun updateBookcover(uploadImageUrl: String,bookId: String) {
 
         progressDialog.setMessage("Update Book cover...")
 
         //setup info to update to the db
         val hashMap: HashMap<String, Any> = HashMap()
 
+        hashMap["Image"] = uploadImageUrl
 
-        if(imageUri!=null){
-            hashMap["profileImage"] = uploadImageUrl
-        }
 
         //update to db
         val reference = FirebaseDatabase
             .getInstance("https://storytellerdb-2ff7a-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Books")
-        reference.child(firebaseAuth.uid!!)
+        reference.child(bookId)
             .updateChildren(hashMap)
             .addOnSuccessListener {
                 //profile update
                 progressDialog.dismiss()
-                Toast.makeText(this,"Bookcover update",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Book cover updated",Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener{
                 //failed to upload image
                 progressDialog.dismiss()
-                Toast.makeText(this, "Failed to update bookcover", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to update book cover", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun uploadImage(){
+    private fun uploadImage(Category: String, bookId: String){
 
         progressDialog.setMessage("Upload profile image")
         progressDialog.show()
 
         //image path and name
-        val filePathAndName = "ProfileImages/"+firebaseAuth.uid
-
+        val filePathAndName = "Book Images/"+ Category + "/" + bookId
         //storage ref
         val reference = FirebaseStorage
             .getInstance("gs://storytellerdb-2ff7a.appspot.com")
@@ -262,7 +263,7 @@ class AdminDashboard : AppCompatActivity() {
                 while (!uriTask.isSuccessful);
                 val uploadedImageUrl = "${uriTask.result}"
 
-                updateBookcover(uploadedImageUrl)
+                updateBookcover(uploadedImageUrl, bookId)
 
             }
             .addOnFailureListener{ e->
