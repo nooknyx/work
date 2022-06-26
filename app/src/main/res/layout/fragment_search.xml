@@ -32,26 +32,28 @@
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="30dp">
+    android:layout_marginVertical="30dp"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="30dp">
 
     <Spinner
         android:id="@+id/categorymenu"
-        android:layout_width="313dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="70dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_weight="1"
         android:padding="5dp"
         android:spinnerMode="dropdown" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editText"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:boxStrokeColor="@color/textgrey"
         app:boxStrokeWidth="1dp"
         app:startIconDrawable="@drawable/search">
@@ -72,7 +74,7 @@
         android:id="@+id/search_scanbtn"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="220dp"
         android:background="@drawable/shape_button"
         android:text="Scan"
@@ -82,15 +84,15 @@
 
     <TextView
         android:id="@+id/cleardata"
-        android:layout_below="@+id/editText"
-        android:layout_toEndOf="@+id/search_scanbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp"
-        android:text="Clear data"
+        android:layout_below="@+id/editText"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"/>
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="50dp"
+        android:text="Clear data"
+        android:textColor="@color/textgrey" />
 
 
 </RelativeLayout>
